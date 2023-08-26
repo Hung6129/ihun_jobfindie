@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
-import '../../configuration/styles/text_styles.dart';
-
-PreferredSizeWidget buildPreferredSizeWidget(
-  String title,
-) =>
-    AppBar(
+PreferredSizeWidget buildPreferredSizeWidget() => AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: IconButton(
         onPressed: () {},
         icon: const Icon(
-          Icons.person_2,
+          AntDesign.menuunfold,
           color: Colors.black,
         ),
       ),
-      title: Text(title, style: TextStyles.customStyle.bold),
+      // title: Text(title, style: TextStyles.customStyle.bold),
       actions: [
         IconButton(
           onPressed: () {},

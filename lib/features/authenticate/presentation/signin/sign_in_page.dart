@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/core/app_asset.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/signup/sign_up_page.dart';
+import 'package:ihun_jobfindie/features/course/presentation/home/views/home_page.dart';
 
 import '../../../../configuration/styles/palettes.dart';
 import '../../../../core/widgets/app_btn_label.dart';
@@ -29,7 +31,7 @@ class _SignInPageState extends State<SignInPage> {
         body: Stack(
       children: [
         Image.asset(
-          'assets/bg-1.png',
+          AppAsset.bg1,
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
@@ -43,6 +45,7 @@ class _SignInPageState extends State<SignInPage> {
                 lblText: 'Type in your email',
                 iconData: Icons.email,
                 onChange: (value) {},
+                keyboardType: TextInputType.emailAddress,
               ),
               AppTextFeild(
                 controller: passwordController,
@@ -50,6 +53,7 @@ class _SignInPageState extends State<SignInPage> {
                 lblText: 'Type in your password',
                 iconData: Icons.password_rounded,
                 onChange: (value) {},
+                keyboardType: TextInputType.visiblePassword,
               ),
               AppBtnLabel(
                 label: 'Log in',
@@ -60,7 +64,15 @@ class _SignInPageState extends State<SignInPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                    (route) => false,
+                  );
+                },
               ),
               SizedBox(height: 20.h),
               Row(

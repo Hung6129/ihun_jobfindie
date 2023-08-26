@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'features/splash/presentation/views/splash_page.dart';
+import 'features/course/presentation/home/views/home_page.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => const MaterialApp(
         title: 'iHun Jobfinde',
         debugShowCheckedModeBanner: false,
-        home: SplashPage(),
+        home: HomePage(),
       ),
     );
   }

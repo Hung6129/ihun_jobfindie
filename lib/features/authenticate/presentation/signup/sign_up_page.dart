@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/core/app_asset.dart';
 
 import '../../../../configuration/styles/palettes.dart';
 import '../../../../core/widgets/app_btn_label.dart';
@@ -30,7 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
         body: Stack(
       children: [
         Image.asset(
-          'assets/bg-2.png',
+          AppAsset.bg2,
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
@@ -44,12 +45,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 lblText: 'Type in your name',
                 iconData: Icons.person,
                 onChange: (value) {},
+                keyboardType: TextInputType.name,
               ),
               AppTextFeild(
                 controller: emailController,
                 lblText: 'Type in your email',
                 iconData: Icons.email,
                 onChange: (value) {},
+                keyboardType: TextInputType.emailAddress,
               ),
               AppTextFeild(
                 controller: passwordController,
@@ -57,13 +60,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 lblText: 'Type in your password',
                 iconData: Icons.password_rounded,
                 onChange: (value) {},
+                keyboardType: TextInputType.visiblePassword,
               ),
               AppBtnLabel(
                 label: 'Sign up',
-                labelColor: Palettes.textWhite,
-                bgColor: Palettes.textBlack,
+                labelColor: Palettes.textBlack,
+                bgColor: Palettes.p4,
                 iconData: Icons.app_registration_rounded,
-                iconColor: Palettes.textWhite,
+                iconColor: Palettes.textBlack,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
                 ),

@@ -11,12 +11,14 @@ class AppTextFeild extends StatefulWidget {
     required this.iconData,
     this.txtfType = 'text',
     required this.onChange,
+    required this.keyboardType,
   });
   final Function(String value) onChange;
   final String txtfType;
   final TextEditingController controller;
   final String lblText;
   final IconData iconData;
+  final TextInputType keyboardType;
 
   @override
   State<AppTextFeild> createState() => _AppTextFeildState();
@@ -32,6 +34,7 @@ class _AppTextFeildState extends State<AppTextFeild> {
         onChanged: widget.onChange,
         controller: widget.controller,
         obscureText: widget.txtfType == 'password' ? _passVisibility : false,
+        keyboardType: widget.keyboardType,
         decoration: InputDecoration(
           prefixIcon: Icon(widget.iconData),
           suffixIcon: widget.txtfType == 'password'

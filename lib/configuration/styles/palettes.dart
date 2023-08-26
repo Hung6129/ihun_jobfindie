@@ -19,6 +19,22 @@ class Palettes {
   static const Color p8 = Color(0xFFF5EEDC);
   static const Color p9 = Color(0xFFC0D8C0);
 
-
+ /// Random color
+  static const List color = [
+    Color(0xffB85252),
+    Color(0xffB4C6A6),
+    Color(0xffF4ABC4),
+    Color(0xff346751),
+    Color(0xffFFC947),
+    Color(0xff3282B8),
+    Palettes.p1,
+    Palettes.p2,
+    Palettes.p3,
+    Palettes.p4,
+    Palettes.p7,
+    Palettes.p9,
+    Palettes.textWhite,
+  ];
+  static getRandomColor() => (Palettes.color.toList()..shuffle()).first;
 
 }
