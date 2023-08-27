@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:ihun_jobfindie/configuration/styles/palettes.dart';
 import 'package:ihun_jobfindie/configuration/styles/text_styles.dart';
-import 'package:ihun_jobfindie/core/widgets/app_btn_label.dart';
+import 'package:ihun_jobfindie/core/widgets/app_btn_lbl_icon.dart';
 
 import '../../../../core/widgets/app_icon_btn.dart';
 import '../../../authenticate/presentation/signin/sign_in_page.dart';
@@ -70,7 +70,7 @@ class _SplashPageState extends State<SplashPage> {
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 150),
-                    child: AppBtnLabel(
+                    child: AppBtnLabelWithIcon(
                         label: 'Get Started',
                         labelColor: Palettes.textBlack,
                         bgColor: Palettes.p5,

@@ -20,7 +20,7 @@ class RecentJobList extends StatelessWidget {
             margin: EdgeInsets.only(left: 25.w, bottom: 20.h),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Palettes.textWhite,
+              color: Palettes.p8,
               border: Border.all(
                 color: Palettes.textBlack,
                 width: 0.2,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ihun_jobfindie/features/course/presentation/home/widgets/recent_job_list.dart';
-import 'package:ihun_jobfindie/features/course/presentation/home/widgets/suggested_job_carousel_list.dart';
-
+import 'package:ihun_jobfindie/configuration/styles/palettes.dart';
 import '../../../../../core/widgets/app_appbar.dart';
-import '../widgets/search_with_filter.dart';
+import '../../../../../core/widgets/app_title_with_more.dart';
+import '../widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,13 +16,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: buildPreferredSizeWidget(),
-        body: const SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
             children: [
-              SearchWithFilter(),
-              SuggestedJobCarouselList(),
-              
-              RecentJobList()
+              const SearchWithFilter(),
+              AppTitleWithMore(
+                title: 'Suggested Jobs for You',
+                onPressed: () {},
+              ),
+              const SuggestedJobCarouselList(),
+              AppTitleWithMore(
+                title: 'Recent Jobs',
+                onPressed: () {},
+              ),
+              const RecentJobList()
             ],
           ),
         ));

@@ -10,7 +10,7 @@ extension ExtendedTextStyle on TextStyle {
       copyWith(fontSize: 25.sp, color: Palettes.textBlack);
 
   TextStyle get appBarTitle => copyWith(
-      fontSize: 22.sp, color: Palettes.textBlack, fontWeight: FontWeight.bold);
+      fontSize: 20.sp, color: Palettes.textBlack, fontWeight: FontWeight.bold);
 
   TextStyle get italic =>
       copyWith(fontWeight: FontWeight.normal, fontStyle: FontStyle.italic);

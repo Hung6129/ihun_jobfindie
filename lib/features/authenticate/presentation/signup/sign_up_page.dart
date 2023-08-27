@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ihun_jobfindie/core/app_asset.dart';
 
 import '../../../../configuration/styles/palettes.dart';
-import '../../../../core/widgets/app_btn_label.dart';
+import '../../../../core/widgets/app_btn_lbl_icon.dart';
 import '../../../authenticate/presentation/widgets/app_txtfield.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -62,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 onChange: (value) {},
                 keyboardType: TextInputType.visiblePassword,
               ),
-              AppBtnLabel(
+              AppBtnLabelWithIcon(
                 label: 'Sign up',
                 labelColor: Palettes.textBlack,
                 bgColor: Palettes.p4,

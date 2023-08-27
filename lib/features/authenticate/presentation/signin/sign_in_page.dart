@@ -5,7 +5,7 @@ import 'package:ihun_jobfindie/features/authenticate/presentation/signup/sign_up
 import 'package:ihun_jobfindie/features/course/presentation/home/views/home_page.dart';
 
 import '../../../../configuration/styles/palettes.dart';
-import '../../../../core/widgets/app_btn_label.dart';
+import '../../../../core/widgets/app_btn_lbl_icon.dart';
 import '../../../authenticate/presentation/widgets/app_txtfield.dart';
 
 class SignInPage extends StatefulWidget {
@@ -55,7 +55,7 @@ class _SignInPageState extends State<SignInPage> {
                 onChange: (value) {},
                 keyboardType: TextInputType.visiblePassword,
               ),
-              AppBtnLabel(
+              AppBtnLabelWithIcon(
                 label: 'Log in',
                 labelColor: Palettes.textWhite,
                 bgColor: Palettes.p2,

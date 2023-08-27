@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../configuration/styles/text_styles.dart';
 
-class AppBtnLabel extends StatelessWidget {
-  const AppBtnLabel({
+class AppBtnLabelWithIcon extends StatelessWidget {
+  const AppBtnLabelWithIcon({
     super.key,
     required this.label,
     required this.labelColor,
@@ -29,19 +29,18 @@ class AppBtnLabel extends StatelessWidget {
         backgroundColor: bgColor,
         shape: shape,
         elevation: 0,
-        padding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 20,
-        ),
+        maximumSize: const Size(120, 50),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       ),
       onPressed: onPressed,
       icon: Icon(
         iconData,
         color: iconColor,
+        size: 20,
       ),
       label: Text(
         label,
-        style: TextStyles.defaultStyle.bold.setColor(labelColor),
+        style: TextStyles.customStyle.bold.setColor(labelColor),
       ),
     );
   }
