@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ihun_jobfindie/core/app_asset.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/signup/sign_up_page.dart';
-import 'package:ihun_jobfindie/features/course/presentation/home/views/home_page.dart';
+
+import 'package:ihun_jobfindie/features/drawer/main_page.dart';
 
 import '../../../../configuration/styles/palettes.dart';
 import '../../../../core/widgets/app_btn_lbl_icon.dart';
@@ -68,7 +69,7 @@ class _SignInPageState extends State<SignInPage> {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) => const MainPage(),
                     ),
                     (route) => false,
                   );

@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildPreferredSizeWidget(),
+        appBar: buildPreferredSizeWidget(context),
         body: SingleChildScrollView(
           child: Column(
             children: [

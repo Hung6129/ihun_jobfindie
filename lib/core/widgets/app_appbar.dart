@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
-PreferredSizeWidget buildPreferredSizeWidget() => AppBar(
+PreferredSizeWidget buildPreferredSizeWidget(BuildContext context) => AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          ZoomDrawer.of(context)!.open();
+        },
         icon: const Icon(
           AntDesign.menuunfold,
           color: Colors.black,
