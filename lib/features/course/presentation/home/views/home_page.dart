@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ihun_jobfindie/configuration/styles/palettes.dart';
 import '../../../../../core/widgets/app_appbar.dart';
 import '../../../../../core/widgets/app_title_with_more.dart';
 import '../widgets/widgets.dart';

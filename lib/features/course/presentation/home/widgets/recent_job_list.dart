@@ -4,6 +4,8 @@ import 'package:ihun_jobfindie/configuration/styles/palettes.dart';
 import 'package:ihun_jobfindie/configuration/styles/text_styles.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
+import '../../detail/views/job_detail_page.dart';
+
 class RecentJobList extends StatelessWidget {
   const RecentJobList({super.key});
 
@@ -15,7 +17,14 @@ class RecentJobList extends StatelessWidget {
       itemCount: 3,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const JobDetailPage(),
+              ),
+            );
+          },
           child: Container(
             margin: EdgeInsets.only(left: 25.w, bottom: 20.h),
             padding: const EdgeInsets.all(10),
