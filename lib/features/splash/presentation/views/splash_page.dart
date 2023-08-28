@@ -1,8 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ihun_jobfindie/configuration/styles/palettes.dart';
 import 'package:ihun_jobfindie/configuration/styles/text_styles.dart';
-import 'package:ihun_jobfindie/core/widgets/app_btn_lbl_icon.dart';
 
 import '../../../../core/widgets/app_icon_btn.dart';
 import '../../../authenticate/presentation/signin/sign_in_page.dart';
@@ -69,26 +69,34 @@ class _SplashPageState extends State<SplashPage> {
               ? Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 150),
-                    child: AppBtnLabelWithIcon(
-                        label: 'Get Started',
-                        labelColor: Palettes.textBlack,
-                        bgColor: Palettes.p5,
-                        iconData: Icons.arrow_forward,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
+                    padding: EdgeInsets.only(bottom: 200.h),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Palettes.p2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SignInPage(),
-                              ),
-                              (route) => false);
-                        },
-                        iconColor: Palettes.textBlack),
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                      ),
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignInPage(),
+                            ),
+                            (route) => false);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        color: Palettes.textWhite,
+                      ),
+                      label: Text(
+                        'Let\'s go!',
+                        style: TextStyles.customStyle2.bold.whiteText,
+                      ),
+                    ),
                   ),
                 )
               : Align(

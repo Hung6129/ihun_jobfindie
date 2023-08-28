@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ihun_jobfindie/core/app_asset.dart';
+
 import 'package:lottie/lottie.dart';
 
+import '../../../../configuration/constants/app_asset.dart';
 import '../../../../configuration/styles/palettes.dart';
 import '../../../../configuration/styles/text_styles.dart';
 
@@ -116,22 +117,28 @@ class Screen3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palettes.p6,
+      // backgroundColor: Palettes.p6,
       body: Stack(
         children: [
+          Image.asset(
+            AppAsset.splash3b,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
           Padding(
             padding: EdgeInsets.only(top: 150.h),
-            child: Lottie.asset(AppAsset.splash3),
+            child: Lottie.asset(AppAsset.splash3a),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin: EdgeInsets.only(bottom: 200.h, left: 20.w, right: 20.w),
+              margin: EdgeInsets.only(bottom: 250.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                'Let\'s get started now!',
+                'Begin your journey with us now',
                 textAlign: TextAlign.center,
                 style: TextStyles.defaultStyle.appBarTitle.blackText,
               ),

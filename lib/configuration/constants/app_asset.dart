@@ -2,7 +2,8 @@ class AppAsset {
   // splash screen image
   static const String splash1 = 'assets/images/splash-1.jpg';
   static const String splash2 = 'assets/lottie_json/splash-2.json';
-  static const String splash3 = 'assets/lottie_json/splash-3.json';
+  static const String splash3a = 'assets/lottie_json/splash-3a.json';
+  static const String splash3b = 'assets/images/splash-3b.png';
   static const String bg1 = 'assets/images/bg-1.png';
   static const String bg2 = 'assets/images/bg-2.png';
 
