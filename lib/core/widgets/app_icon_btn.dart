@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 
 class AppIconButton extends StatelessWidget {
   const AppIconButton({
@@ -21,8 +22,8 @@ class AppIconButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         backgroundColor: bgColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r),
+        shape: const RoundedRectangleBorder(
+          borderRadius: borderRadius12,
         ),
       ),
       onPressed: onPressed,

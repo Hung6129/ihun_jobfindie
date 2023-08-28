@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 
 /// Shimmer widget with simple fade animation
 class Shimmer extends StatefulWidget {
@@ -55,9 +56,9 @@ class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
       child: Container(
         width: widget.width,
         height: widget.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: borderRadius12,
         ),
       ),
     );

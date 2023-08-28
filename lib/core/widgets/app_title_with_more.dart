@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/styles/text_styles.dart';
 
 class AppTitleWithMore extends StatelessWidget {
@@ -13,7 +15,7 @@ class AppTitleWithMore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: allPadding12,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -22,7 +24,7 @@ class AppTitleWithMore extends StatelessWidget {
             style: TextStyles.customStyle.appBarTitle.bold,
           ),
           Text(
-            'see more',
+            homeViewAll,
             style: TextStyles.customStyle.smallText.underLine,
           ),
         ],

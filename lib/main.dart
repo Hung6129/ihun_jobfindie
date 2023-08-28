@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'configuration/constants/app_strings.dart';
 import 'features/splash/presentation/views/splash_page.dart';
 
 void main() async {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => const MaterialApp(
-        title: 'iHun Jobfinde',
+        title: appTitle,
         debugShowCheckedModeBanner: false,
         home: SplashPage(),
       ),

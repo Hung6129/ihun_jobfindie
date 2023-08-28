@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 
 import '../../configuration/styles/palettes.dart';
 import '../../configuration/styles/text_styles.dart';
@@ -51,30 +52,34 @@ class MenuPage extends StatelessWidget {
         );
 
     return Scaffold(
-      backgroundColor: Palettes.textBlack,
+      backgroundColor: Palettes.p2,
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 40.h),
+            verticalMargin48,
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                backgroundColor: Colors.white,
+                shadowColor: Colors.white,
+              ),
               onPressed: () {
                 ZoomDrawer.of(context)!.close();
               },
-              child: const Icon(Icons.close),
+              child: const Icon(
+                Icons.close,
+                color: Palettes.textBlack,
+              ),
             ),
             SizedBox(height: 120.h),
             ...MenuItems.listItems.map(buildMenuItem).toList(),
-            const Divider(
-              thickness: 1,
-              indent: 5,
-            ),
           ],
         ),
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 30.h, left: 20.w),
         child: Text(
-          "Version 1.0.0",
+          "Version 1.0.0 by iHun",
           style: TextStyles.customStyle.whiteText,
         ),
       ),

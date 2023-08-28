@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ihun_jobfindie/core/app_asset.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/signup/sign_up_page.dart';
 
-import 'package:ihun_jobfindie/features/drawer/main_page.dart';
+import 'package:ihun_jobfindie/features/zoom_drawer/main_page.dart';
 
 import '../../../../configuration/styles/palettes.dart';
 import '../../../../core/widgets/app_btn_lbl_icon.dart';

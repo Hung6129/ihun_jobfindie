@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 
 import '../../configuration/styles/text_styles.dart';
 
@@ -21,9 +22,9 @@ class AppTextBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+      padding: allPadding4,
+      decoration: const BoxDecoration(
+        borderRadius: borderRadius12,
         color: bgColor,
       ),
       child: Row(
