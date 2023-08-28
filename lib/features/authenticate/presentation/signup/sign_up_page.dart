@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ihun_jobfindie/core/app_asset.dart';
 
+import '../../../../configuration/constants/app_asset.dart';
 import '../../../../configuration/styles/palettes.dart';
 import '../../../../core/widgets/app_btn_lbl_icon.dart';
 import '../../../authenticate/presentation/widgets/app_txtfield.dart';

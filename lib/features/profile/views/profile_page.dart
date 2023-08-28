@@ -14,9 +14,11 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildPreferredSizeWidget(context),
-      body: Center(
-        child: Text('Profile Page'),
-      ),
+      body: Column(
+        children: [
+          
+        ],
+      )
     );
   }
 }

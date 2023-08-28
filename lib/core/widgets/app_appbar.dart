@@ -3,7 +3,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 PreferredSizeWidget buildPreferredSizeWidget(BuildContext context) => AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
         onPressed: () {

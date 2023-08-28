@@ -4,8 +4,9 @@ const String appTitle = 'iHun Jobfinde';
 const String splashTitle1 = 'Welcome to';
 const String splashTitle2a = 'We help you find your dream job';
 const String splashTitle2b = 'With more than 1000 jobs available';
-const String splashTitle3a = 'Let\'s get started now!';
-const String splashTitle3b = 'Get started';
+const String splashTitle3a = 'Begin your journey with us now';
+const String splashTitle3b = 'Let\'s go!';
+
 const String skipBtn = 'Skip';
 
 

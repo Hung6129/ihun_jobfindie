@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 
 class AppIconButton extends StatelessWidget {

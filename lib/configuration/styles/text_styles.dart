@@ -61,6 +61,11 @@ class TextStyles {
     color: Palettes.textBlack,
     letterSpacing: 0.3,
   );
+
+  static TextStyle customStyle2 = GoogleFonts.openSans(
+    color: Palettes.textBlack,
+    letterSpacing: 0.3,
+  );
 }
 
 // How to use?

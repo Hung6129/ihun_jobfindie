@@ -27,14 +27,11 @@ class RecentJobList extends StatelessWidget {
             );
           },
           child: Container(
-            margin: EdgeInsets.only(left: 25.w, bottom: 20.h),
-            padding: allPadding12,
+            margin: EdgeInsets.only(left: 20.w, bottom: 15.h),
+            padding: allPadding8,
             decoration: BoxDecoration(
               color: Palettes.p8,
-              border: Border.all(
-                color: Palettes.textBlack,
-                width: 0.2,
-              ),
+              border: borderAllBlackThin,
               borderRadius: const BorderRadius.only(
                   topLeft: radius12, bottomLeft: radius12),
             ),
@@ -42,7 +39,7 @@ class RecentJobList extends StatelessWidget {
               leading: const SizedBox(
                 child: Icon(
                   AntDesign.linkedin_square,
-                  size: 40,
+                  size: 30,
                 ),
               ),
               title: Text(

@@ -111,13 +111,13 @@ class _JobDetailPageState extends State<JobDetailPage>
             ),
           ),
           SliverToBoxAdapter(
-            child: SizedBox(height: 60.h),
+            child: SizedBox(height: 30.h),
           )
         ],
       ),
       floatingActionButton: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
-          elevation: 1,
+          elevation: 0,
           backgroundColor: Palettes.p2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.r),
