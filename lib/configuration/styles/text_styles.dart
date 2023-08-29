@@ -28,10 +28,10 @@ extension ExtendedTextStyle on TextStyle {
   TextStyle get greyText => copyWith(color: Palettes.textGrey);
 
   TextStyle get largeText =>
-      copyWith(fontSize: 20.sp, fontWeight: FontWeight.w600);
+      copyWith(fontSize: 20.sp, fontWeight: FontWeight.w300);
 
   TextStyle get mediumText =>
-      copyWith(fontSize: 16.sp, fontWeight: FontWeight.w600);
+      copyWith(fontSize: 16.sp, fontWeight: FontWeight.w300);
 
   TextStyle get smallText =>
       copyWith(fontSize: 12.sp, fontWeight: FontWeight.w300);

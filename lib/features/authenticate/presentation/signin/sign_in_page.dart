@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
+import 'package:ihun_jobfindie/configuration/styles/text_styles.dart';
 
 import 'package:ihun_jobfindie/features/authenticate/presentation/signup/sign_up_page.dart';
 
@@ -42,6 +44,14 @@ class _SignInPageState extends State<SignInPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                'Hey, Welcome back! 👋 ',
+                style: TextStyles.customStyle
+                    .setTextSize(35)
+                    .setFontWeight(FontWeight.w500),
+                textAlign: TextAlign.center,
+              ),
+              verticalMargin48,
               AppTextFeild(
                 controller: emailController,
                 lblText: 'Type in your email',

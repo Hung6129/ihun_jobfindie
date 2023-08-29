@@ -29,7 +29,7 @@ class AppBtnLabelWithIcon extends StatelessWidget {
         backgroundColor: bgColor,
         shape: shape,
         elevation: 0,
-        maximumSize: const Size(120, 50),
+        // maximumSize: const Size(120, 50),
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       ),
       onPressed: onPressed,

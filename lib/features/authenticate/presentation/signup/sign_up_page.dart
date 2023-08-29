@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../configuration/constants/app_asset.dart';
+import '../../../../configuration/constants/app_spacing.dart';
 import '../../../../configuration/styles/palettes.dart';
+import '../../../../configuration/styles/text_styles.dart';
 import '../../../../core/widgets/app_btn_lbl_icon.dart';
 import '../../../authenticate/presentation/widgets/app_txtfield.dart';
 
@@ -40,6 +42,14 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                'Create an account to get started! 🤌',
+                style: TextStyles.customStyle
+                    .setTextSize(35)
+                    .setFontWeight(FontWeight.w500),
+                textAlign: TextAlign.center,
+              ),
+              verticalMargin24,
               AppTextFeild(
                 controller: nameController,
                 lblText: 'Type in your name',
