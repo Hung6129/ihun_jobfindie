@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
-import '../../../../../configuration/constants/app_spacing.dart';
-import '../../../../../core/widgets/app_appbar.dart';
-import '../../../../../core/widgets/app_title_with_more.dart';
-import '../widgets/widgets.dart';
+
+import 'package:ihun_jobfindie/features/jobs/presentation/home/widgets/widgets.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_appbar.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_title_with_more.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

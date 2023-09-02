@@ -5,7 +5,7 @@ import 'package:ihun_jobfindie/features/jobs/presentation/bookmark/views/bookmar
 import 'package:ihun_jobfindie/features/jobs/presentation/home/views/home_page.dart';
 import 'package:ihun_jobfindie/features/profile/views/profile_page.dart';
 
-import '../../configuration/styles/palettes.dart';
+import '../../shared/theme/palettes.dart';
 import '../jobs/presentation/search/views/search_page.dart';
 import 'drawer_items.dart';
 
@@ -44,14 +44,19 @@ class _MainPageState extends State<MainPage> {
       borderRadius: 30,
       disableDragGesture: true,
       mainScreenTapClose: true,
-      openCurve: Curves.fastOutSlowIn,
       slideWidth: MediaQuery.sizeOf(context).width * 0.65,
       duration: const Duration(milliseconds: 500),
-      angle: -5,
       drawerShadowsBackgroundColor: Palettes.p2,
       menuScreenOverlayColor: Palettes.p2,
       menuBackgroundColor: Palettes.p2,
       mainScreen: getPages(),
+      showShadow: true,
+      angle: 0.0,
+      shadowLayer1Color: Palettes.textWhite.withOpacity(0.5),
+      shadowLayer2Color: Palettes.textWhite.withOpacity(0.7),
+      androidCloseOnBackTap: true,
+      openCurve: Curves.easeInOutCubic,
+      closeCurve: Curves.easeInOutCubic,
       menuScreen: Builder(
         builder: (context) {
           return MenuPage(

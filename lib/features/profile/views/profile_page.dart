@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
-import 'package:ihun_jobfindie/configuration/styles/palettes.dart';
-import 'package:ihun_jobfindie/configuration/styles/text_styles.dart';
-
-import '../../../core/widgets/app_appbar.dart';
+import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_appbar.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

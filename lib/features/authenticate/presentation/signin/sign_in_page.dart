@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
-import 'package:ihun_jobfindie/configuration/styles/text_styles.dart';
+import 'package:ihun_jobfindie/features/authenticate/presentation/widgets/app_txtfield.dart';
+import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 
 import 'package:ihun_jobfindie/features/authenticate/presentation/signup/sign_up_page.dart';
 
 import 'package:ihun_jobfindie/features/zoom_drawer/main_page.dart';
-
-import '../../../../configuration/constants/app_asset.dart';
-import '../../../../configuration/styles/palettes.dart';
-import '../../../../core/widgets/app_btn_lbl_icon.dart';
-import '../../../authenticate/presentation/widgets/app_txtfield.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_btn_lbl_icon.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

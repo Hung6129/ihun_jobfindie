@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/widgets/app_appbar.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_appbar.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});

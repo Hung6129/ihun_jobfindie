@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:ihun_jobfindie/configuration/styles/palettes.dart';
-import 'package:ihun_jobfindie/configuration/styles/text_styles.dart';
+import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 
 import '../widgets/widgets.dart';
 

@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../configuration/constants/app_asset.dart';
-import '../../../../configuration/styles/palettes.dart';
-import '../../../../configuration/styles/text_styles.dart';
+import '../../../../shared/theme/palettes.dart';
+import '../../../../shared/theme/text_styles.dart';
 
 class Screen1 extends StatelessWidget {
   const Screen1({super.key});

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_btn_lbl_icon.dart';
 
 import '../../../../configuration/constants/app_asset.dart';
 import '../../../../configuration/constants/app_spacing.dart';
-import '../../../../configuration/styles/palettes.dart';
-import '../../../../configuration/styles/text_styles.dart';
-import '../../../../core/widgets/app_btn_lbl_icon.dart';
+import '../../../../shared/theme/palettes.dart';
+import '../../../../shared/theme/text_styles.dart';
+
 import '../../../authenticate/presentation/widgets/app_txtfield.dart';
 
 class SignUpPage extends StatefulWidget {

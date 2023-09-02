@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../configuration/styles/text_styles.dart';
+import '../../../../shared/theme/text_styles.dart';
 
 class AppTextFeild extends StatefulWidget {
   const AppTextFeild({

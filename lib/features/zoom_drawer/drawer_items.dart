@@ -4,8 +4,8 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 
-import '../../configuration/styles/palettes.dart';
-import '../../configuration/styles/text_styles.dart';
+import '../../shared/theme/palettes.dart';
+import '../../shared/theme/text_styles.dart';
 
 class MenuItems {
   static const home = DrawerThings("Home", MaterialIcons.work);
