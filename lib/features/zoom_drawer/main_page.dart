@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:ihun_jobfindie/features/chatting/presentation/chat/views/chat_page.dart';
-import 'package:ihun_jobfindie/features/jobs/presentation/bookmark/views/bookmark_page.dart';
-import 'package:ihun_jobfindie/features/jobs/presentation/home/views/home_page.dart';
-import 'package:ihun_jobfindie/features/profile/views/profile_page.dart';
+import 'package:ihun_jobfindie/features/chatting/chat/views/chat_page.dart';
+import 'package:ihun_jobfindie/features/jobs/bookmark/views/bookmark_page.dart';
+import 'package:ihun_jobfindie/features/jobs/home/views/home_page.dart';
+import 'package:ihun_jobfindie/features/jobs/search/views/search_page.dart';
 
-import '../../shared/theme/palettes.dart';
-import '../jobs/presentation/search/views/search_page.dart';
+import 'package:ihun_jobfindie/features/profile/views/profile_page.dart';
+import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+
 import 'drawer_items.dart';
 
 class MainPage extends StatefulWidget {

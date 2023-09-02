@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/features/splash/views/splash_page.dart';
 
 import 'configuration/constants/app_strings.dart';
-import 'features/splash/presentation/views/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

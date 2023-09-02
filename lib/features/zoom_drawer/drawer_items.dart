@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
+import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
 
 import '../../shared/theme/palettes.dart';
 import '../../shared/theme/text_styles.dart';
@@ -73,6 +74,33 @@ class MenuPage extends StatelessWidget {
             ),
             SizedBox(height: 120.h),
             ...MenuItems.listItems.map(buildMenuItem).toList(),
+            Divider(
+              color: Palettes.textWhite,
+              thickness: 0.5,
+              indent: 20.w,
+              endIndent: 20.w,
+            ),
+            ListTile(
+              minLeadingWidth: 20,
+              leading: const Icon(
+                Icons.logout,
+                color: Palettes.textWhite,
+              ),
+              title: Text(
+                "Logout",
+                style: TextStyles.defaultStyle.setColor(Palettes.textWhite),
+              ),
+              onTap: () async {
+                await Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignInPage(),
+                    ),
+                    (route) => false);
+                if (!context.mounted) return;
+                ZoomDrawer.of(context)!.close();
+              },
+            ),
           ],
         ),
       ),
