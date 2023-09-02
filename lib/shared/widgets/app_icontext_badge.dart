@@ -23,7 +23,7 @@ class AppTextBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: allPadding4,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         borderRadius: borderRadius12,
         color: bgColor,
       ),
