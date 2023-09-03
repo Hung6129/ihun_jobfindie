@@ -3,10 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
-import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
-
-import '../../shared/theme/palettes.dart';
-import '../../shared/theme/text_styles.dart';
+import 'package:ihun_jobfindie/shared/services/helpers/authenticate_helper.dart';
+import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 
 class MenuItems {
   static const home = DrawerThings("Home", MaterialIcons.work);
@@ -91,14 +90,7 @@ class MenuPage extends StatelessWidget {
                 style: TextStyles.defaultStyle.setColor(Palettes.textWhite),
               ),
               onTap: () async {
-                await Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignInPage(),
-                    ),
-                    (route) => false);
-                if (!context.mounted) return;
-                ZoomDrawer.of(context)!.close();
+                await AuthenticateHelper().signOut(context);
               },
             ),
           ],

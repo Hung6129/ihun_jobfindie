@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ihun_jobfindie/features/splash/views/splash_page.dart';
+import 'package:ihun_jobfindie/app.dart';
+import 'package:ihun_jobfindie/configuration/global.dart';
 
 import 'configuration/constants/app_strings.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  await Global.init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then(
@@ -24,10 +25,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => const MaterialApp(
-        title: appTitle,
-        debugShowCheckedModeBanner: false,
-        home: SplashPage(),
-      ),
+          title: appTitle,
+          debugShowCheckedModeBanner: false,
+          home: IHunJobFindeApp()),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
+import 'package:ihun_jobfindie/configuration/global.dart';
 import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
 import 'package:ihun_jobfindie/features/splash/widgets/list_splash_page.dart';
 
@@ -81,6 +83,8 @@ class _SplashPageState extends State<SplashPage> {
                             horizontal: 10, vertical: 10),
                       ),
                       onPressed: () {
+                        Global.storageServices
+                            .setBool(AppAsset.firstTimeOpen, false);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -109,6 +113,8 @@ class _SplashPageState extends State<SplashPage> {
                       iconColor: Palettes.textBlack,
                       onPressed: () {
                         if (currentIndexPage == 2) {
+                          Global.storageServices
+                              .setBool(AppAsset.firstTimeOpen, false);
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
@@ -134,6 +140,8 @@ class _SplashPageState extends State<SplashPage> {
                     padding: const EdgeInsets.only(left: 10, bottom: 50),
                     child: TextButton(
                       onPressed: () {
+                        Global.storageServices
+                            .setBool(AppAsset.firstTimeOpen, false);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

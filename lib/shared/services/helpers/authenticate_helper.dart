@@ -1,8 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_urls.dart';
+import 'package:ihun_jobfindie/configuration/global.dart';
+import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
 import 'package:ihun_jobfindie/features/zoom_drawer/main_page.dart';
-// import 'package:ihun_jobfindie/shared/models/user_model.dart';
+import 'package:ihun_jobfindie/shared/models/user_model.dart';
+
 import 'package:ihun_jobfindie/shared/widgets/flutter_toast.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,9 +39,16 @@ class AuthenticateHelper {
       );
       if (response.statusCode == 200) {
         toastInfor(text: "Login Success");
-        // final res = response.data;
-        // final userData = UserModel.fromJson(res);
-
+        final res = response.data;
+        final userData = UserModel.fromJson(res);
+        await Global.storageServices.setString(
+          AppAsset.userProfileKey,
+          userData.id,
+        );
+        await Global.storageServices.setString(
+          AppAsset.userTokenKey,
+          userData.token,
+        );
         if (!context.mounted) return false;
         Navigator.pushAndRemoveUntil(
           context,
@@ -97,6 +109,24 @@ class AuthenticateHelper {
     } on DioException catch (e) {
       toastInfor(text: e.toString());
       return false;
+    }
+  }
+
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await Global.storageServices.remove(AppAsset.userTokenKey);
+      await Global.storageServices.remove(AppAsset.userProfileKey);
+      if (!context.mounted) return;
+      await Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SignInPage(),
+          ),
+          (route) => false);
+      if (!context.mounted) return;
+      ZoomDrawer.of(context)!.close();
+    } on DioException catch (e) {
+      toastInfor(text: e.toString());
     }
   }
 }
