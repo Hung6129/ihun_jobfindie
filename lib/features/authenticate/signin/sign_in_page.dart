@@ -9,9 +9,7 @@ import 'package:ihun_jobfindie/shared/services/helpers/authenticate_helper.dart'
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 
-import 'package:ihun_jobfindie/features/zoom_drawer/main_page.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_btn_lbl_icon.dart';
-import 'package:ihun_jobfindie/shared/widgets/flutter_toast.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -78,7 +76,7 @@ class _SignInPageState extends State<SignInPage> {
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 onPressed: () async {
-                  await AuthenticateHelper().login(
+                  await AuthenticateHelper().signIn(
                     context,
                     emailController.text,
                     passwordController.text,

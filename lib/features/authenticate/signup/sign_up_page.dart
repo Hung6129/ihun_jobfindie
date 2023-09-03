@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/features/authenticate/widgets/app_txtfield.dart';
+import 'package:ihun_jobfindie/shared/services/helpers/authenticate_helper.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_btn_lbl_icon.dart';
@@ -80,7 +81,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  await AuthenticateHelper().signUp(
+                    context,
+                    nameController.text,
+                    emailController.text,
+                    passwordController.text,
+                  );
+                },
               ),
               SizedBox(height: 20.h),
               Row(
