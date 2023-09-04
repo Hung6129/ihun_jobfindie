@@ -1,26 +1,37 @@
-// {
-//     "_id": "64f19a45f2526bcb4cb9f680",
-//     "title": "Backend Developer",
-//     "location": "Seattle",
-//     "company": "Facebook, Inc.",
-//     "description": "We are seeking an experienced Backend Developer to join our team. The ideal candidate should have expertise in server-side development, API design, and database management, and be passionate about building scalable and efficient backend systems. Additionally, candidates should have experience in microservices architecture and containerization technologies.",
-//     "salary": "160k",
-//     "period": "year",
-//     "contract": "Full time",
-//     "requirement": [
-//         "4 years experience in backend development",
-//         "Expertise in API design",
-//         "Experience with microservices architecture",
-//         "Knowledge of containerization technologies"
-//     ],
-//     "status": "Open",
-//     "imageUrl": "https://img.freepik.com/premium-vector/blue-social-media-logo_197792-1759.jpg",
-//     "agentId": "64f0310e387a1bf97bdc9869",
-//     "date": "2023-09-01T08:01:09.467Z",
-//     "createdAt": "2023-09-01T08:01:09.468Z",
-//     "updatedAt": "2023-09-01T08:01:09.468Z",
-//     "__v": 0
-// },
+//  {
+//         "_id": "64f19a45f2526bcb4cb9f680",
+//         "title": "Backend Developer",
+//         "location": "Seattle",
+//         "company": "Facebook, Inc.",
+//         "description": "We are seeking an experienced Backend Developer to join our team. The ideal candidate should have expertise in server-side development, API design, and database management, and be passionate about building scalable and efficient backend systems. Additionally, candidates should have experience in microservices architecture and containerization technologies.",
+//         "salary": "160k",
+//         "period": "year",
+//         "contract": "Full time",
+//         "requirement": [
+//             "4 years experience in backend development",
+//             "Expertise in API design",
+//             "Experience with microservices architecture",
+//             "Knowledge of containerization technologies"
+//         ],
+//         "skills": [
+//             "Java",
+//             "Python",
+//             "C++"
+//         ],
+//         "modality": "Remote",
+//         "qualification": [
+//             "Bachelor's degree in Computer Science or related field",
+//             "Strong communication skills",
+//             "Ability to work in a team environment"
+//         ],
+//         "status": "Open",
+//         "imageUrl": "https://img.freepik.com/premium-vector/blue-social-media-logo_197792-1759.jpg",
+//         "agentId": "64f0310e387a1bf97bdc9869",
+//         "date": "2023-09-01T08:01:09.467Z",
+//         "createdAt": "2023-09-01T08:01:09.468Z",
+//         "updatedAt": "2023-09-01T08:01:09.468Z",
+//         "__v": 0
+//     },
 
 import 'package:equatable/equatable.dart';
 
@@ -34,6 +45,10 @@ class JobModel extends Equatable {
   final String period;
   final String contract;
   final List<String> requirement;
+  final List<String> skills;
+  final String modality;
+  final List<String> qualification;
+  final List<String> responsability;
   final String status;
   final String imageUrl;
   final String agentId;
@@ -53,6 +68,10 @@ class JobModel extends Equatable {
     this.imageUrl,
     this.agentId,
     this.date,
+    this.skills,
+    this.modality,
+    this.qualification,
+    this.responsability,
   );
 
   factory JobModel.fromJson(Map<String, dynamic> json) {
@@ -70,6 +89,10 @@ class JobModel extends Equatable {
       json['imageUrl'],
       json['agentId'],
       json['date'],
+      json['skills'].cast<String>(),
+      json['modality'],
+      json['qualification'].cast<String>(),
+      json['responsability'].cast<String>(),
     );
   }
 
@@ -88,6 +111,10 @@ class JobModel extends Equatable {
       'imageUrl': imageUrl,
       'agentId': agentId,
       'date': date,
+      'skills': skills,
+      'modality': modality,
+      'qualification': qualification,
+      'responsability': responsability,
     };
   }
 
@@ -106,5 +133,9 @@ class JobModel extends Equatable {
         imageUrl,
         agentId,
         date,
+        skills,
+        modality,
+        qualification,
+        responsability,
       ];
 }

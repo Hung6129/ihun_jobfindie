@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 
 class JobDetailDescription extends StatelessWidget {
-  const JobDetailDescription({super.key});
+  const JobDetailDescription({
+    super.key,
+    required this.description,
+    required this.responsibilities,
+  });
+  final String description;
+  final List<String> responsibilities;
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
-          Padding(
+          const SizedBox(height: 20),
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               'Job Description',
@@ -20,19 +28,19 @@ class JobDetailDescription extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Text(
-              'We are looking for a Flutter Developer who will be responsible for creating multi-platform apps for iOS and Android using Google\'s Flutter development framework. The primary focus will be on creating new experiences and maintaining the acclaimed app.',
-              style: TextStyle(
+              description,
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
             ),
           ),
-          SizedBox(height: 20),
-          Padding(
+          const SizedBox(height: 10),
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               'Responsibilities',
@@ -42,105 +50,17 @@ class JobDetailDescription extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Develop new components and features for our mobile app using Flutter',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+          const SizedBox(height: 10),
+          ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: responsibilities.length,
+            itemBuilder: (context, index) {
+              return Text('- ${responsibilities[index]}',
+                  style: TextStyles.customStyle);
+            },
           ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Translate and implement the UI/UX design wireframes to code that will produce visual elements of the mobile application',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Work closely with UX/UI designers and backend engineers to implement frontend interfaces, and participate in code reviews',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Work closely with UX/UI designers and backend engineers to implement frontend interfaces, and participate in code reviews',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Work closely with UX/UI designers and backend engineers to implement frontend interfaces, and participate in code reviews',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Work closely with UX/UI designers and backend engineers to implement frontend interfaces, and participate in code reviews',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Work closely with UX/UI designers and backend engineers to implement frontend interfaces, and participate in code reviews',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Requirements',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'At least 2 years of mobile development experience using Flutter (mandatory) and Dart (preferred)',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          )
         ],
       ),
     );

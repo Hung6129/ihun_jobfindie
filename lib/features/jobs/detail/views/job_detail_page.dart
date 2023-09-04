@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:ihun_jobfindie/shared/models/job_model.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_cached_image_widget.dart';
 
 import '../widgets/widgets.dart';
 
 class JobDetailPage extends StatefulWidget {
-  const JobDetailPage({super.key});
+  const JobDetailPage({
+    super.key,
+    required this.jobModel,
+  });
+
+  final JobModel jobModel;
 
   @override
   State<JobDetailPage> createState() => _JobDetailPageState();
@@ -19,7 +26,7 @@ class _JobDetailPageState extends State<JobDetailPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -30,9 +37,10 @@ class _JobDetailPageState extends State<JobDetailPage>
 
   @override
   Widget build(BuildContext context) {
+    final job = widget.jobModel;
     return Scaffold(
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         slivers: [
           SliverAppBar(
             floating: true,
@@ -43,16 +51,18 @@ class _JobDetailPageState extends State<JobDetailPage>
               background: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    AntDesign.linkedin_square,
-                    size: 60,
+                  AppCachedNetworkImage(
+                    imageUrl: job.imageUrl,
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
                   ),
                   Text(
-                    'LinkedIn',
+                    job.company,
                     style: TextStyles.customStyle.bold.mediumText,
                   ),
                   Text(
-                    'Senior Flutter Engineer',
+                    job.title,
                     style: TextStyles.customStyle.bold.largeText,
                     // textAlign: TextAlign.center,
                   ),
@@ -78,6 +88,7 @@ class _JobDetailPageState extends State<JobDetailPage>
             bottom: TabBar(
               labelStyle: TextStyles.defaultStyle.bold,
               labelColor: Colors.black,
+              dividerColor: Colors.transparent,
               unselectedLabelColor: Colors.grey[400],
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
@@ -93,24 +104,28 @@ class _JobDetailPageState extends State<JobDetailPage>
                 Tab(
                   text: 'Company',
                 ),
-                Tab(
-                  text: 'Reviews',
-                ),
+                // Tab(
+                //   text: 'Reviews',
+                // ),
               ],
             ),
           ),
           SliverFillRemaining(
+            fillOverscroll: true,
             child: TabBarView(
               controller: _tabController,
-              children: const [
-                JobDetailDescription(),
-                JobDetailAboutCompany(),
-                JobDetailReview(),
+              children: [
+                JobDetailDescription(
+                  description: job.description,
+                  responsibilities: job.responsability,
+                ),
+                const JobDetailAboutCompany(),
+                // JobDetailReview(),
               ],
             ),
           ),
           SliverToBoxAdapter(
-            child: SizedBox(height: 30.h),
+            child: SizedBox(height: 20.h),
           )
         ],
       ),

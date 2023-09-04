@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => MaterialApp.router(
+        theme: ThemeData(useMaterial3: true),
         title: appTitle,
         debugShowCheckedModeBanner: false,
         routerConfig: route,
