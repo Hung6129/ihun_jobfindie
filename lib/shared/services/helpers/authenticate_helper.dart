@@ -5,8 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_urls.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
-import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
-import 'package:ihun_jobfindie/features/zoom_drawer/main_page.dart';
+
 import 'package:ihun_jobfindie/shared/models/user_model.dart';
 
 import 'package:ihun_jobfindie/shared/widgets/flutter_toast.dart';
@@ -51,13 +50,6 @@ class AuthenticateHelper {
           userData.token,
         );
         if (!context.mounted) return false;
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => const MainPage(),
-        //   ),
-        //   (route) => false,
-        // );
         context.pushReplacementNamed('main');
         return true;
       } else {
@@ -65,7 +57,15 @@ class AuthenticateHelper {
         return false;
       }
     } on DioException catch (e) {
-      toastInfor(text: e.toString());
+      if (e.response!.statusCode == 401 &&
+          e.response!.data == "Wrong password") {
+        toastInfor(text: "Your password is wrong");
+      } else if (e.response!.statusCode == 400 &&
+          e.response!.data['error'] == "Invalid email address") {
+        toastInfor(text: "Email is not valid");
+      } else {
+        toastInfor(text: "Email is not registered");
+      }
       return false;
     }
   }
