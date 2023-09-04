@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_urls.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
@@ -50,13 +51,14 @@ class AuthenticateHelper {
           userData.token,
         );
         if (!context.mounted) return false;
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const MainPage(),
-          ),
-          (route) => false,
-        );
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => const MainPage(),
+        //   ),
+        //   (route) => false,
+        // );
+        context.pushReplacementNamed('main');
         return true;
       } else {
         toastInfor(text: "Email or Password is wrong");
@@ -117,12 +119,13 @@ class AuthenticateHelper {
       await Global.storageServices.remove(AppAsset.userTokenKey);
       await Global.storageServices.remove(AppAsset.userProfileKey);
       if (!context.mounted) return;
-      await Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const SignInPage(),
-          ),
-          (route) => false);
+      // await Navigator.pushAndRemoveUntil(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => const SignInPage(),
+      //     ),
+      //     (route) => false);
+      context.pushReplacementNamed('signin');
       if (!context.mounted) return;
       ZoomDrawer.of(context)!.close();
     } on DioException catch (e) {

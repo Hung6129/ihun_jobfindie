@@ -1,9 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
-import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
 import 'package:ihun_jobfindie/features/splash/widgets/list_splash_page.dart';
 
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
@@ -85,12 +85,7 @@ class _SplashPageState extends State<SplashPage> {
                       onPressed: () {
                         Global.storageServices
                             .setBool(AppAsset.firstTimeOpen, false);
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignInPage(),
-                            ),
-                            (route) => false);
+                        context.pushReplacementNamed('signin');
                       },
                       icon: const Icon(
                         Icons.arrow_forward,
@@ -115,12 +110,7 @@ class _SplashPageState extends State<SplashPage> {
                         if (currentIndexPage == 2) {
                           Global.storageServices
                               .setBool(AppAsset.firstTimeOpen, false);
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SignInPage(),
-                              ),
-                              (route) => false);
+                          context.pushReplacementNamed('signin');
                         } else {
                           controller.nextPage(
                             duration: const Duration(milliseconds: 500),
@@ -142,12 +132,7 @@ class _SplashPageState extends State<SplashPage> {
                       onPressed: () {
                         Global.storageServices
                             .setBool(AppAsset.firstTimeOpen, false);
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignInPage(),
-                            ),
-                            (route) => false);
+                        context.pushReplacementNamed('signin');
                       },
                       child: Text(
                         'Skip',
