@@ -1,8 +1,10 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
 import 'package:ihun_jobfindie/features/splash/widgets/list_splash_page.dart';
 
@@ -10,35 +12,33 @@ import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_icon_btn.dart';
 
-class SplashPage extends StatefulWidget {
+/// This provider will be used to track the current page index
+/// And will be used to update the dots indicator
+final indexPageProvider = StateProvider<int>((ref) => 0);
+
+class SplashPage extends ConsumerWidget {
   const SplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<Widget> listScreens = const [
+      Screen1(),
+      Screen2(),
+      Screen3(),
+    ];
+    final PageController controller = PageController();
 
-class _SplashPageState extends State<SplashPage> {
-  final PageController controller = PageController();
-  int currentIndexPage = 0;
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           /// PageView for each splash screen
           PageView(
             onPageChanged: (int index) {
-              setState(() {
-                currentIndexPage = index;
-              });
+              ref.read(indexPageProvider.notifier).state = index;
             },
             controller: controller,
             physics: const NeverScrollableScrollPhysics(),
-            children: const [
-              Screen1(),
-              Screen2(),
-              Screen3(),
-            ],
+            children: listScreens,
           ),
 
           /// Show the dots indicator
@@ -48,8 +48,8 @@ class _SplashPageState extends State<SplashPage> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 50),
               child: DotsIndicator(
-                dotsCount: 3,
-                position: currentIndexPage,
+                dotsCount: listScreens.length,
+                position: ref.watch(indexPageProvider),
                 decorator: DotsDecorator(
                   spacing: const EdgeInsets.all(10),
                   color: Palettes.textWhite.withOpacity(0.5),
@@ -67,7 +67,7 @@ class _SplashPageState extends State<SplashPage> {
           /// and the get started button will be shown
           /// This will be tracked by [currentIndexPage]
           /// Get started button will navigate to sign in page
-          currentIndexPage == 2
+          ref.watch(indexPageProvider) == 2
               ? Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
@@ -92,7 +92,7 @@ class _SplashPageState extends State<SplashPage> {
                         color: Palettes.textWhite,
                       ),
                       label: Text(
-                        'Let\'s go!',
+                        splashTitle3b,
                         style: TextStyles.customStyle2.bold.whiteText,
                       ),
                     ),
@@ -107,7 +107,7 @@ class _SplashPageState extends State<SplashPage> {
                       icon: Icons.arrow_forward,
                       iconColor: Palettes.textBlack,
                       onPressed: () {
-                        if (currentIndexPage == 2) {
+                        if (ref.watch(indexPageProvider) == 2) {
                           Global.storageServices
                               .setBool(AppAsset.firstTimeOpen, false);
                           context.pushReplacementNamed('signin');
@@ -122,7 +122,7 @@ class _SplashPageState extends State<SplashPage> {
                   ),
                 ),
 
-          currentIndexPage == 2
+          ref.watch(indexPageProvider) == 2
               ? const SizedBox.shrink()
               : Align(
                   alignment: Alignment.bottomLeft,
@@ -135,7 +135,7 @@ class _SplashPageState extends State<SplashPage> {
                         context.pushReplacementNamed('signin');
                       },
                       child: Text(
-                        'Skip',
+                        skipBtn,
                         style: TextStyles.defaultStyle.largeText.whiteText,
                       ),
                     ),
