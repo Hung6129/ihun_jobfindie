@@ -6,18 +6,15 @@ import 'package:go_router/go_router.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
-import 'package:ihun_jobfindie/features/splash/widgets/list_splash_page.dart';
+import 'package:ihun_jobfindie/features/welcome/provider/welcome_provider.dart';
+import 'package:ihun_jobfindie/features/welcome/widgets/list_splash_page.dart';
 
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_icon_btn.dart';
 
-/// This provider will be used to track the current page index
-/// And will be used to update the dots indicator
-final indexPageProvider = StateProvider<int>((ref) => 0);
-
-class SplashPage extends ConsumerWidget {
-  const SplashPage({super.key});
+class WelcomePage extends ConsumerWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,7 +34,6 @@ class SplashPage extends ConsumerWidget {
               ref.read(indexPageProvider.notifier).state = index;
             },
             controller: controller,
-            physics: const NeverScrollableScrollPhysics(),
             children: listScreens,
           ),
 

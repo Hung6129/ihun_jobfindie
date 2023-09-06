@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ihun_jobfindie/app.dart';
 import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
 import 'package:ihun_jobfindie/features/authenticate/signup/sign_up_page.dart';
-import 'package:ihun_jobfindie/features/splash/views/splash_page.dart';
+import 'package:ihun_jobfindie/features/welcome/views/welcome_page.dart';
 
 import 'package:ihun_jobfindie/features/zoom_drawer/main_page.dart';
 
@@ -20,7 +20,7 @@ final GoRouter route = GoRouter(
           GoRoute(
             path: 'splash',
             builder: (BuildContext context, GoRouterState state) {
-              return const SplashPage();
+              return const WelcomePage();
             },
           ),
           GoRoute(
