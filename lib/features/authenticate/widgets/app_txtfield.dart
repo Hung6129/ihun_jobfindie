@@ -35,7 +35,18 @@ class _AppTextFeildState extends State<AppTextFeild> {
         controller: widget.controller,
         obscureText: widget.txtfType == 'password' ? _passVisibility : false,
         keyboardType: widget.keyboardType,
+        maxLines: 1,
+        autocorrect: false,
         decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black),
+          ),
+          disabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black),
+          ),
           prefixIcon: Icon(widget.iconData),
           suffixIcon: widget.txtfType == 'password'
               ? IconButton(

@@ -3,13 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
-
+import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/features/authenticate/widgets/app_txtfield.dart';
 import 'package:ihun_jobfindie/shared/services/helpers/authenticate_helper.dart';
-
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
-
 import 'package:ihun_jobfindie/shared/widgets/app_btn_lbl_icon.dart';
 
 class SignInPage extends StatefulWidget {
@@ -45,16 +43,16 @@ class _SignInPageState extends State<SignInPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Hey, Welcome back! 👋 ',
+                signInGreeting,
                 style: TextStyles.customStyle
                     .setTextSize(35)
                     .setFontWeight(FontWeight.w500),
                 textAlign: TextAlign.center,
               ),
-              verticalMargin48,
+              verticalMargin24,
               AppTextFeild(
                 controller: emailController,
-                lblText: 'Type in your email',
+                lblText: signInEmailHint,
                 iconData: Icons.email,
                 onChange: (value) {},
                 keyboardType: TextInputType.emailAddress,
@@ -62,13 +60,13 @@ class _SignInPageState extends State<SignInPage> {
               AppTextFeild(
                 controller: passwordController,
                 txtfType: 'password',
-                lblText: 'Type in your password',
+                lblText: signInPasswordHint,
                 iconData: Icons.password_rounded,
                 onChange: (value) {},
                 keyboardType: TextInputType.visiblePassword,
               ),
               AppBtnLabelWithIcon(
-                label: 'Sign in',
+                label: signInTitle,
                 labelColor: Palettes.textWhite,
                 bgColor: Palettes.p2,
                 iconData: Icons.login,
@@ -84,32 +82,66 @@ class _SignInPageState extends State<SignInPage> {
                   );
                 },
               ),
-              SizedBox(height: 20.h),
+              verticalMargin12,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    'Don\'t have an account?',
-                    style: TextStyle(
-                      color: Palettes.textBlack,
-                      fontSize: 14.sp,
-                    ),
+                    signInDontHaveAccount,
+                    style: TextStyles.defaultStyle,
                   ),
                   TextButton(
                     onPressed: () {
                       context.go('/signup');
                     },
-                    child: Text(
-                      'Sign up',
-                      style: TextStyle(
-                        color: Palettes.textBlack,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: Text(signUpTitle,
+                        style: TextStyles.defaultStyle.underLine.bold),
                   ),
                 ],
               ),
+              verticalMargin24,
+              const Padding(
+                padding: horizontalPadding24,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(child: Divider()),
+                    Padding(
+                      padding: horizontalPadding12,
+                      child: Text(orSignInWith),
+                    ),
+                    Expanded(child: Divider()),
+                  ],
+                ),
+              ),
+              verticalMargin16,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: Palettes.textGrey.withOpacity(0.2),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: borderRadius64,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Image.asset(AppAsset.google, width: 28.w),
+                  ),
+                  horizontalMargin12,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: Palettes.textGrey.withOpacity(0.2),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: borderRadius64,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Image.asset(AppAsset.call2, width: 28.w),
+                  ),
+                ],
+              )
             ],
           ),
         ),

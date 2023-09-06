@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/features/authenticate/widgets/app_txtfield.dart';
 import 'package:ihun_jobfindie/shared/services/helpers/authenticate_helper.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
@@ -33,18 +34,14 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
         body: Stack(
       children: [
-        Image.asset(
-          AppAsset.bg2,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
-        ),
+        Image.asset(AppAsset.bg2,
+            fit: BoxFit.cover, width: double.infinity, height: double.infinity),
         Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Create an account to get started! 🤌',
+                signUpGreeting,
                 style: TextStyles.customStyle
                     .setTextSize(35)
                     .setFontWeight(FontWeight.w500),
@@ -53,14 +50,14 @@ class _SignUpPageState extends State<SignUpPage> {
               verticalMargin24,
               AppTextFeild(
                 controller: nameController,
-                lblText: 'Type in your name',
+                lblText: signUpNamehint,
                 iconData: Icons.person,
                 onChange: (value) {},
                 keyboardType: TextInputType.name,
               ),
               AppTextFeild(
                 controller: emailController,
-                lblText: 'Type in your email',
+                lblText: signUpEmailHint,
                 iconData: Icons.email,
                 onChange: (value) {},
                 keyboardType: TextInputType.emailAddress,
@@ -68,13 +65,13 @@ class _SignUpPageState extends State<SignUpPage> {
               AppTextFeild(
                 controller: passwordController,
                 txtfType: 'password',
-                lblText: 'Type in your password',
+                lblText: signUpPasswordHint,
                 iconData: Icons.password_rounded,
                 onChange: (value) {},
                 keyboardType: TextInputType.visiblePassword,
               ),
               AppBtnLabelWithIcon(
-                label: 'Sign up',
+                label: signUpTitle,
                 labelColor: Palettes.textBlack,
                 bgColor: Palettes.p4,
                 iconData: Icons.app_registration_rounded,
@@ -95,25 +92,13 @@ class _SignUpPageState extends State<SignUpPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
-                    'Already have an account?',
-                    style: TextStyle(
-                      color: Palettes.textBlack,
-                      fontSize: 14.sp,
-                    ),
-                  ),
+                  Text(signUpAlreadyHaveAccount,
+                      style: TextStyles.defaultStyle),
                   TextButton(
                     onPressed: () {
                       context.pop();
                     },
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(
-                        color: Palettes.textBlack,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: Text(signInTitle, style: TextStyles.defaultStyle),
                   ),
                 ],
               ),

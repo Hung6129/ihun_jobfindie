@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
 import 'package:ihun_jobfindie/features/welcome/provider/welcome_provider.dart';
 import 'package:ihun_jobfindie/features/welcome/widgets/list_splash_page.dart';
-
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_icon_btn.dart';
@@ -80,7 +79,7 @@ class WelcomePage extends ConsumerWidget {
                       ),
                       onPressed: () {
                         Global.storageServices
-                            .setBool(AppAsset.firstTimeOpen, false);
+                            .setBool(AppStorage.firstTimeOpen, false);
                         context.pushReplacementNamed('signin');
                       },
                       icon: const Icon(
@@ -105,7 +104,7 @@ class WelcomePage extends ConsumerWidget {
                       onPressed: () {
                         if (ref.watch(indexPageProvider) == 2) {
                           Global.storageServices
-                              .setBool(AppAsset.firstTimeOpen, false);
+                              .setBool(AppStorage.firstTimeOpen, false);
                           context.pushReplacementNamed('signin');
                         } else {
                           controller.nextPage(
@@ -127,7 +126,7 @@ class WelcomePage extends ConsumerWidget {
                     child: TextButton(
                       onPressed: () {
                         Global.storageServices
-                            .setBool(AppAsset.firstTimeOpen, false);
+                            .setBool(AppStorage.firstTimeOpen, false);
                         context.pushReplacementNamed('signin');
                       },
                       child: Text(
