@@ -1,7 +1,7 @@
 const String appTitle = 'iHun Jobfinde';
 
 // Splash Page
-const String splashTitle1 = 'Welcome to';
+const String splashTitle1 = 'Welcome to\niHun Jobfinde';
 const String splashTitle2a = 'We help you find your dream job';
 const String splashTitle2b = 'With more than 1000 jobs available';
 const String splashTitle3a = 'Begin your journey with us now';

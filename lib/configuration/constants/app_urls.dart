@@ -11,5 +11,5 @@ class AppUrls {
   // for authentication and getting user info
   static const String logIn = "/login";
   static const String register = "/register";
-  static const String getById = "/user/find/";
+  static const String getUserById = "/user/find/";
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
+import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 
 import 'package:lottie/lottie.dart';
-
-import '../../../../configuration/constants/app_asset.dart';
-import '../../../../shared/theme/palettes.dart';
-import '../../../../shared/theme/text_styles.dart';
 
 class Screen1 extends StatelessWidget {
   const Screen1({super.key});
@@ -34,10 +34,8 @@ class Screen1 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Welcome to',
+                Text(splashTitle1,
                     style: TextStyles.customStyle.mediumText.whiteText),
-                Text('iHun Jobfinde',
-                    style: TextStyles.defaultStyle.appBarTitle.whiteText),
               ],
             ),
           ),
@@ -78,7 +76,7 @@ class Screen2 extends StatelessWidget {
                 width: 250.w,
                 child: Center(
                   child: Text(
-                    'We help you find your dream job',
+                    splashTitle2a,
                     style: TextStyles.defaultStyle.appBarTitle.blackText,
                   ),
                 ),
@@ -99,7 +97,7 @@ class Screen2 extends StatelessWidget {
               width: 250.w,
               child: Center(
                 child: Text(
-                  'With more than 1000+ jobs available',
+                  splashTitle2b,
                   style: TextStyles.defaultStyle.appBarTitle.blackText,
                 ),
               ),
@@ -138,7 +136,7 @@ class Screen3 extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                'Begin your journey with us now',
+                splashTitle3a,
                 textAlign: TextAlign.center,
                 style: TextStyles.defaultStyle.appBarTitle.blackText,
               ),
