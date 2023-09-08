@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "211127426949",
+    "project_id": "ihunjobfinde",
+    "storage_bucket": "ihunjobfinde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211127426949:android:25da9cfa382b6505faaeec",
+        "android_client_info": {
+          "package_name": "com.example.ihun_jobfindie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211127426949-3m1qmu5umvbc77bf1d2e8bjcgi8ekm6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABA840aPXcn5RGyWj1oEmWYvxnbYq5GLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211127426949-3m1qmu5umvbc77bf1d2e8bjcgi8ekm6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>211127426949-6ejqat3rbf97ec7uupddpjna1knqp0kf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.211127426949-6ejqat3rbf97ec7uupddpjna1knqp0kf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBDfFl5q46OMezapnbxWFp6GR_F55v7Hus</string>
+	<key>GCM_SENDER_ID</key>
+	<string>211127426949</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.ihunJobfindie</string>
+	<key>PROJECT_ID</key>
+	<string>ihunjobfinde</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ihunjobfinde.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:211127426949:ios:5cdbfe3e35130449faaeec</string>
+</dict>
+</plist>

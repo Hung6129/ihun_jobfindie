@@ -120,9 +120,13 @@ class _SignInPageState extends State<SignInPage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
-                      backgroundColor: Palettes.textGrey.withOpacity(0.2),
+                      backgroundColor: Palettes.textWhite,
                       shape: const RoundedRectangleBorder(
                         borderRadius: borderRadius64,
+                        side: BorderSide(
+                          color: Palettes.textBlack,
+                          width: 0.2,
+                        ),
                       ),
                     ),
                     onPressed: () {},
@@ -132,13 +136,22 @@ class _SignInPageState extends State<SignInPage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
-                      backgroundColor: Palettes.textGrey.withOpacity(0.2),
+                      backgroundColor: Palettes.textWhite,
                       shape: const RoundedRectangleBorder(
                         borderRadius: borderRadius64,
+                        side: BorderSide(
+                          color: Palettes.textBlack,
+                          width: 0.2,
+                        ),
                       ),
                     ),
                     onPressed: () {},
                     child: Image.asset(AppAsset.call2, width: 28.w),
+                  ),
+                  horizontalMargin12,
+                  TextButton(
+                    onPressed: () => throw Exception(),
+                    child: const Text("Throw Test Exception"),
                   ),
                 ],
               )
