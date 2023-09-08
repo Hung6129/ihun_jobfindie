@@ -7,6 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ihun_jobfindie/app.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
 
+
+/// Sets a callback to use for reporting errors to Crashlytics.
+/// This allows you to capture errors from your entire app in one place.
+/// The default behavior is to send uncaught Flutter errors to Crashlytics.
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -18,8 +23,10 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+  // initialize the global variable about shared preferences for storing data
   await Global.init();
 
+  // Set the orientation to portrait only
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]).then(

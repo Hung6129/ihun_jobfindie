@@ -148,11 +148,11 @@ class _SignInPageState extends State<SignInPage> {
                     onPressed: () {},
                     child: Image.asset(AppAsset.call2, width: 28.w),
                   ),
-                  horizontalMargin12,
-                  TextButton(
-                    onPressed: () => throw Exception(),
-                    child: const Text("Throw Test Exception"),
-                  ),
+                  // horizontalMargin12,
+                  // TextButton(
+                  //   onPressed: () => throw Exception(),
+                  //   child: const Text("Throw Test Exception"),
+                  // ),
                 ],
               )
             ],

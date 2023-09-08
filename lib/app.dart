@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_route.dart';
@@ -25,15 +25,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class IHunJobFindeApp extends StatelessWidget {
+class IHunJobFindeApp extends ConsumerWidget {
   const IHunJobFindeApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final isFirstTime = Global.storageServices.getIsFirstTime();
-    return isFirstTime == true
+  Widget build(BuildContext context, WidgetRef ref) {
+    final fristOpen = ref.watch(isFirstTimeOpenProvider);
+    final isSignedIn = ref.watch(isSignedInProvider);
+    return fristOpen == true
         ? const WelcomePage()
-        : Global.storageServices.getIsSignedIn() == true
+        : isSignedIn == true
             ? const MainPage()
             : const SignInPage();
   }
