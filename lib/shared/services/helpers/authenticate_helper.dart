@@ -2,14 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
+
+import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_urls.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
 
-import 'package:ihun_jobfindie/shared/models/user_model.dart';
+import 'package:ihun_jobfindie/shared/models/user_post_model.dart';
+import 'package:ihun_jobfindie/shared/models/user_profile_model.dart';
 
 import 'package:ihun_jobfindie/shared/widgets/flutter_toast.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final authHelperClassProvider = Provider<AuthenticateHelper>((ref) {
+  return AuthenticateHelper();
+});
 
 class AuthenticateHelper {
   Dio dio = Dio();
@@ -40,13 +46,13 @@ class AuthenticateHelper {
       if (response.statusCode == 200) {
         toastInfor(text: "Login Success");
         final res = response.data;
-        final userData = UserModel.fromJson(res);
+        final userData = UserPostModel.fromJson(res);
         await Global.storageServices.setString(
-          AppAsset.userProfileKey,
+          AppStorage.userProfileKey,
           userData.id,
         );
         await Global.storageServices.setString(
-          AppAsset.userTokenKey,
+          AppStorage.userTokenKey,
           userData.token,
         );
         if (!context.mounted) return false;
@@ -116,20 +122,40 @@ class AuthenticateHelper {
 
   Future<void> signOut(BuildContext context) async {
     try {
-      await Global.storageServices.remove(AppAsset.userTokenKey);
-      await Global.storageServices.remove(AppAsset.userProfileKey);
+      await Global.storageServices.remove(AppStorage.userTokenKey);
+      await Global.storageServices.remove(AppStorage.userProfileKey);
       if (!context.mounted) return;
-      // await Navigator.pushAndRemoveUntil(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => const SignInPage(),
-      //     ),
-      //     (route) => false);
       context.pushReplacementNamed('signin');
       if (!context.mounted) return;
       ZoomDrawer.of(context)!.close();
     } on DioException catch (e) {
       toastInfor(text: e.toString());
+    }
+  }
+
+  Future<UserProfileModel> getUserProfile() async {
+    try {
+      final userId =
+          Global.storageServices.getString(AppStorage.userProfileKey);
+      final userToken =
+          Global.storageServices.getString(AppStorage.userTokenKey);
+      Map<String, String> headers = {
+        "Content-Type": "application/json",
+        "token": "Bearer $userToken"
+      };
+      final response = await dio.get(
+        AppUrls.baseUrl + AppUrls.getUserById + userId,
+        options: Options(headers: headers),
+      );
+      if (response.statusCode == 200) {
+        final res = response.data;
+        final userData = UserProfileModel.fromJson(res);
+        return userData;
+      } else {
+        throw Exception("Error");
+      }
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

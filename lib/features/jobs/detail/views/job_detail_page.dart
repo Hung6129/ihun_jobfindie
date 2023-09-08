@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:ihun_jobfindie/shared/models/job_model.dart';
+import 'package:ihun_jobfindie/shared/models/job/job_model.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_cached_image_widget.dart';
@@ -117,7 +117,7 @@ class _JobDetailPageState extends State<JobDetailPage>
               children: [
                 JobDetailDescription(
                   description: job.description,
-                  responsibilities: job.responsability,
+                  responsibilities: job.responsibility,
                 ),
                 const JobDetailAboutCompany(),
                 // JobDetailReview(),

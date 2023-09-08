@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/features/jobs/detail/views/job_detail_page.dart';
-import 'package:ihun_jobfindie/shared/services/providers/job_helper_provider.dart';
+import 'package:ihun_jobfindie/shared/services/providers/jobs_helpers_provider.dart';
 
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
@@ -17,7 +17,7 @@ class SuggestedJobCarouselList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final listAllJob = ref.watch(jobHelperProvider);
+    final listAllJob = ref.watch(allJobsHelperProvider);
 
     return listAllJob.when(
       data: (data) {

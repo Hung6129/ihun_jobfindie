@@ -1,4 +1,4 @@
-import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,13 +25,15 @@ class StorageServices {
   }
 
   bool getIsSignedIn() {
-    return _preferences.getString(AppAsset.userProfileKey) == null
+    return _preferences.getString(AppStorage.userProfileKey) == null
         ? false
         : true;
   }
 
   bool getIsFirstTime() {
-    return _preferences.getBool(AppAsset.firstTimeOpen) == null ? true : false;
+    return _preferences.getBool(AppStorage.firstTimeOpen) == null
+        ? true
+        : false;
   }
 
   Future<bool> remove(String userToken) {

@@ -48,7 +48,7 @@ class JobModel extends Equatable {
   final List<String> skills;
   final String modality;
   final List<String> qualification;
-  final List<String> responsability;
+  final List<String> responsibility;
   final String status;
   final String imageUrl;
   final String agentId;
@@ -71,7 +71,7 @@ class JobModel extends Equatable {
     this.skills,
     this.modality,
     this.qualification,
-    this.responsability,
+    this.responsibility,
   );
 
   factory JobModel.fromJson(Map<String, dynamic> json) {
@@ -92,7 +92,7 @@ class JobModel extends Equatable {
       json['skills'].cast<String>(),
       json['modality'],
       json['qualification'].cast<String>(),
-      json['responsability'].cast<String>(),
+      json['responsibility'].cast<String>(),
     );
   }
 
@@ -114,7 +114,7 @@ class JobModel extends Equatable {
       'skills': skills,
       'modality': modality,
       'qualification': qualification,
-      'responsability': responsability,
+      'responsibility': responsibility,
     };
   }
 
@@ -136,6 +136,6 @@ class JobModel extends Equatable {
         skills,
         modality,
         qualification,
-        responsability,
+        responsibility,
       ];
 }
