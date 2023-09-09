@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_urls.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
+import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
+import 'package:ihun_jobfindie/features/zoom_drawer/main_page.dart';
 
 import 'package:ihun_jobfindie/shared/models/user_post_model.dart';
 import 'package:ihun_jobfindie/shared/models/user_profile_model.dart';
@@ -56,7 +57,12 @@ class AuthenticateHelper {
           userData.token,
         );
         if (!context.mounted) return false;
-        context.pushReplacementNamed('main');
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MainPage(),
+            ),
+            (route) => false);
         return true;
       } else {
         toastInfor(text: "Email or Password is wrong");
@@ -108,7 +114,6 @@ class AuthenticateHelper {
         toastInfor(text: "Register Success");
         if (!context.mounted) return false;
         Navigator.pop(context);
-        signIn(context, email, password);
         return true;
       } else {
         toastInfor(text: "Email or Password is wrong");
@@ -125,7 +130,12 @@ class AuthenticateHelper {
       await Global.storageServices.remove(AppStorage.userTokenKey);
       await Global.storageServices.remove(AppStorage.userProfileKey);
       if (!context.mounted) return;
-      context.pushReplacementNamed('signin');
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SignInPage(),
+          ),
+          (route) => false);
       if (!context.mounted) return;
       ZoomDrawer.of(context)!.close();
     } on DioException catch (e) {

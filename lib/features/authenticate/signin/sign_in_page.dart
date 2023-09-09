@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
+import 'package:ihun_jobfindie/features/authenticate/signup/sign_up_page.dart';
 import 'package:ihun_jobfindie/features/authenticate/widgets/app_txtfield.dart';
 import 'package:ihun_jobfindie/shared/services/helpers/authenticate_helper.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
@@ -92,7 +93,12 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      context.go('/signup');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
+                      );
                     },
                     child: Text(signUpTitle,
                         style: TextStyles.defaultStyle.underLine.bold),

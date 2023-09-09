@@ -2,10 +2,11 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
+import 'package:ihun_jobfindie/features/authenticate/signin/sign_in_page.dart';
 import 'package:ihun_jobfindie/features/welcome/provider/welcome_provider.dart';
 import 'package:ihun_jobfindie/features/welcome/widgets/list_splash_page.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
@@ -80,7 +81,12 @@ class WelcomePage extends ConsumerWidget {
                       onPressed: () {
                         Global.storageServices
                             .setBool(AppStorage.firstTimeOpen, false);
-                        context.pushReplacementNamed('signin');
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignInPage(),
+                            ),
+                            (route) => false);
                       },
                       icon: const Icon(
                         Icons.arrow_forward,
@@ -105,7 +111,12 @@ class WelcomePage extends ConsumerWidget {
                         if (ref.watch(indexPageProvider) == 2) {
                           Global.storageServices
                               .setBool(AppStorage.firstTimeOpen, false);
-                          context.pushReplacementNamed('signin');
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignInPage(),
+                              ),
+                              (route) => false);
                         } else {
                           controller.nextPage(
                             duration: const Duration(milliseconds: 500),
@@ -127,7 +138,12 @@ class WelcomePage extends ConsumerWidget {
                       onPressed: () {
                         Global.storageServices
                             .setBool(AppStorage.firstTimeOpen, false);
-                        context.pushReplacementNamed('signin');
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignInPage(),
+                            ),
+                            (route) => false);
                       },
                       child: Text(
                         skipBtn,

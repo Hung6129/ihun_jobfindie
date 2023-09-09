@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
@@ -96,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyles.defaultStyle),
                   TextButton(
                     onPressed: () {
-                      context.pop();
+                      Navigator.pop(context);
                     },
                     child: Text(signInTitle, style: TextStyles.defaultStyle),
                   ),

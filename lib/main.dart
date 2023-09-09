@@ -6,12 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ihun_jobfindie/app.dart';
 import 'package:ihun_jobfindie/configuration/global.dart';
-
+import 'package:ihun_jobfindie/main/observers.dart';
 
 /// Sets a callback to use for reporting errors to Crashlytics.
 /// This allows you to capture errors from your entire app in one place.
 /// The default behavior is to send uncaught Flutter errors to Crashlytics.
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -32,8 +31,11 @@ Future<void> main() async {
   ]).then(
     (value) {
       runApp(
-        const ProviderScope(
-          child: MyApp(),
+        ProviderScope(
+          observers: [
+            Observers(),
+          ],
+          child: const MyApp(),
         ),
       );
     },
