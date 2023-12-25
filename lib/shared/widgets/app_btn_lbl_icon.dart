@@ -1,46 +1,56 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/theme/text_styles.dart';
+import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+
+import '../styles/text_styles.dart';
 
 class AppBtnLabelWithIcon extends StatelessWidget {
   const AppBtnLabelWithIcon({
     super.key,
     required this.label,
-    required this.labelColor,
+    this.labelColor = Palettes.textBlack,
     required this.bgColor,
     required this.iconData,
-    required this.shape,
+    this.shape,
     required this.onPressed,
     required this.iconColor,
+    this.fontSize = 14,
+    this.iconSize = 20,
   });
 
   final String label;
-  final Color labelColor;
+  final Color? labelColor;
   final Color bgColor;
   final IconData iconData;
   final Color iconColor;
-  final OutlinedBorder shape;
+  final OutlinedBorder? shape;
   final VoidCallback onPressed;
+  final double? fontSize;
+  final double? iconSize;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
         backgroundColor: bgColor,
-        shape: shape,
+        shape: shape ??
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
         elevation: 0,
-        // maximumSize: const Size(120, 50),
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       ),
       onPressed: onPressed,
       icon: Icon(
         iconData,
         color: iconColor,
-        size: 20,
+        size: iconSize ?? 20,
       ),
       label: Text(
         label,
-        style: TextStyles.customStyle.bold.setColor(labelColor),
+        style: TextStyles.customStyle.bold
+            .setColor(labelColor!)
+            .setTextSize(fontSize!),
       ),
     );
   }

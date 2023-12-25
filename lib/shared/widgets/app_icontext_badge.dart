@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 
-import '../../shared/theme/text_styles.dart';
+import '../styles/text_styles.dart';
 
 /// An icon with text badge
 /// We can customize the icon, text, and icon color as we want

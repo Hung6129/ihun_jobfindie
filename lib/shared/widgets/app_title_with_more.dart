@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
-import 'package:ihun_jobfindie/shared/theme/text_styles.dart';
+
+import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 
 class AppTitleWithMore extends StatelessWidget {
   const AppTitleWithMore({
@@ -24,7 +25,7 @@ class AppTitleWithMore extends StatelessWidget {
             style: TextStyles.customStyle.appBarTitle.bold,
           ),
           Text(
-            homeViewAll,
+            AppStrings.homeViewAll,
             style: TextStyles.customStyle.smallText.underLine,
           ),
         ],

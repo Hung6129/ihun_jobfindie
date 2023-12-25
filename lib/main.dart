@@ -3,10 +3,14 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ihun_jobfindie/app.dart';
-import 'package:ihun_jobfindie/configuration/global.dart';
-import 'package:ihun_jobfindie/main/observers.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:ihun_jobfindie/configuration/bindings/app_binding.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
+import 'package:ihun_jobfindie/configuration/services/global.dart';
+import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 
 /// Sets a callback to use for reporting errors to Crashlytics.
 /// This allows you to capture errors from your entire app in one place.
@@ -23,7 +27,7 @@ Future<void> main() async {
     return true;
   };
   // initialize the global variable about shared preferences for storing data
-  await Global.init();
+  await Global.instance.init();
 
   // Set the orientation to portrait only
   SystemChrome.setPreferredOrientations([
@@ -31,13 +35,37 @@ Future<void> main() async {
   ]).then(
     (value) {
       runApp(
-        ProviderScope(
-          observers: [
-            Observers(),
-          ],
-          child: const MyApp(),
-        ),
+        const MyApp(),
       );
     },
   );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+      builder: (context, child) => GetMaterialApp(
+        builder: (context, child) {
+          EasyLoading.init();
+          final mediaQueryData = MediaQuery.of(context);
+          final scale = mediaQueryData.textScaler
+              .clamp(minScaleFactor: 0.8, maxScaleFactor: 1.35);
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: scale),
+            child: FlutterEasyLoading(child: child),
+          );
+        },
+        theme: ThemeData(useMaterial3: true),
+        title: AppStrings.appTitle,
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.init,
+        onGenerateRoute: AppRoutes.generateRoute,
+        initialBinding: AppBinding(),
+      ),
+    );
+  }
 }

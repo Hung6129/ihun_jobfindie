@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/theme/text_styles.dart';
+import '../styles/text_styles.dart';
 
 class AppBtnLabel extends StatelessWidget {
   const AppBtnLabel({
