@@ -1,16 +1,14 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
-import 'package:ihun_jobfindie/configuration/data/network/net/app_exception.dart';
-import 'package:ihun_jobfindie/configuration/data/network/net/app_response.dart';
-import 'package:ihun_jobfindie/configuration/data/network/net/app_result.dart';
 import 'package:logger/logger.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-part 'api_provider.dart';
+import 'nets/app_exception.dart';
+import 'nets/app_response.dart';
+import 'nets/app_result.dart';
 
 part 'client_request.dart';
 
@@ -69,8 +67,11 @@ class NetworkServiceImpl extends NetworkService {
           ? AppResponse.fromJsonToList(response.data)
           : AppResponse.fromJson(response.data);
       return HttpStatus(response.statusCode).isOk
-          ? AppResult.success(appResponse,
-              hasMore: appResponse.hasMore, total: appResponse.total)
+          ? AppResult.success(
+              appResponse,
+              hasMore: appResponse.hasMore,
+              total: appResponse.total,
+            )
           : AppResult.failure(NetworkException(
               code: response.statusCode,
               message: appResponse.meta?.message,
@@ -86,7 +87,6 @@ class NetworkServiceImpl extends NetworkService {
       ));
     } catch (e) {
       _logger.e('Some things wrong: ${e.toString()}');
-
       return AppResult.failure(NetworkException(
         code: ErrorCode.code9999,
         message: 'SomeThingsWrong: ${e.toString()}',

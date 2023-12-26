@@ -1,4 +1,4 @@
-import 'package:ihun_jobfindie/configuration/data/network/net/app_result.dart';
+import 'package:ihun_jobfindie/configuration/network/nets/app_result.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/datasource/authen_datasource_remote.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_post_model.dart';
 

@@ -39,17 +39,19 @@ class AppResponse {
   final bool hasMore;
   final int total;
 
-  AppResponse(
-      {this.meta,
-      this.data,
-      this.page = 1,
-      this.total = 0,
-      this.hasMore = false,
-      this.limit = 20});
+  AppResponse({
+    this.meta,
+    this.data,
+    this.page = 1,
+    this.total = 0,
+    this.hasMore = false,
+    this.limit = 20,
+  });
 
   factory AppResponse.fromJson(Map<String, dynamic>? json) {
     return AppResponse(
-        meta: Metadata.fromJson(json?['meta']), data: json?['data']);
+      data: json,
+    );
   }
 
   static AppResponse fromJsonToList(Map<String, dynamic>? json) {

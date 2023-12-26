@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:ihun_jobfindie/configuration/data/network/network_service.dart';
+
+import 'package:ihun_jobfindie/configuration/network/network_service.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/datasource/authen_datasource_remote.dart';
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
 import 'package:ihun_jobfindie/features/authenticate/domain/repository/authen_repository.dart';
