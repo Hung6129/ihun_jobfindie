@@ -10,8 +10,8 @@ class MainController extends GetxController {
 
   var listScreens = [
     HomePage(),
-    JobPage(),
     ChatPage(),
+    JobPage(),
   ];
 
   List<Widget> destinations = const [
