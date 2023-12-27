@@ -11,6 +11,7 @@ import 'package:ihun_jobfindie/configuration/bindings/app_binding.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 
 /// Sets a callback to use for reporting errors to Crashlytics.
 /// This allows you to capture errors from your entire app in one place.
@@ -49,17 +50,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => GetMaterialApp(
-        builder: (context, child) {
-          EasyLoading.init();
-          final mediaQueryData = MediaQuery.of(context);
-          final scale = mediaQueryData.textScaler
-              .clamp(minScaleFactor: 0.8, maxScaleFactor: 1.35);
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaler: scale),
-            child: FlutterEasyLoading(child: child),
-          );
-        },
-        theme: ThemeData(useMaterial3: true),
+        builder: AppFullScreenLoadingIndicator.init(
+          builder: ((context, child) => MediaQuery(
+                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                child: child!,
+              )),
+        ),
+        // theme: ThemeData(useMaterial3: true),
         title: AppStrings.appTitle,
         debugShowCheckedModeBanner: false,
         initialRoute: AppRoutes.init,

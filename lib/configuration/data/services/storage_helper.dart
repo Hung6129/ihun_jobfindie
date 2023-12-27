@@ -24,16 +24,12 @@ class StorageServices {
     return await _preferences.setString(key, value);
   }
 
-  bool getIsSignedIn() {
-    return _preferences.getString(AppStorage.userProfileKey) == null
-        ? false
-        : true;
+  bool isSavePassword() {
+    return _preferences.getBool(AppStorage.isSavePassword) ?? false;
   }
 
   bool getIsFirstTime() {
-    return _preferences.getBool(AppStorage.firstTimeOpen) == null
-        ? true
-        : false;
+    return _preferences.getBool(AppStorage.firstTimeOpen) == null ? true : false;
   }
 
   Future<bool> remove(String userToken) {

@@ -24,7 +24,6 @@ class AppStrings {
   static const String signInFailed1 = 'Failed to sign in, please try again later';
   static const String signInSuccess = 'Sign in successfully';
 
-
 // Sign Up Page
   static const String signUpTitle = 'Sign Up';
   static const String signUpSubTitle = 'Please sign up to continue';
@@ -33,6 +32,9 @@ class AppStrings {
   static const String signUpNamehint = 'Type in your name';
   static const String signUpAlreadyHaveAccount = 'Already have an account?';
   static const String signUpGreeting = 'Create an account to get started! 🤌';
+  static const String signUpFailed = 'Please fill in all the information';
+  static const String signUpFailed1 = 'Failed to sign up, please try again later';
+  static const String signUpSuccess = 'Sign up successfully';
 
 // Home Page
   static const String homeTitle = 'Home';

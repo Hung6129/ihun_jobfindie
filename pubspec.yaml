@@ -36,6 +36,7 @@ dependencies:
   firebase_crashlytics: ^3.4.8
   flutter_easyloading: ^3.0.5
   flutter_secure_storage: ^9.0.0
+  font_awesome_flutter: ^10.6.0
 
 dev_dependencies:
   flutter_test:

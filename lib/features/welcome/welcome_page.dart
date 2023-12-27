@@ -10,7 +10,7 @@ import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 
 import 'package:ihun_jobfindie/features/welcome/welcome_controller.dart';
-import 'package:ihun_jobfindie/features/welcome/list_splash_page.dart';
+import 'package:ihun_jobfindie/features/welcome/welcome_list_pages.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_icon_btn.dart';

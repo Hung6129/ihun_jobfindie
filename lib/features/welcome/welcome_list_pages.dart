@@ -32,14 +32,13 @@ class Screen1 extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 200.h),
             decoration: BoxDecoration(
               color: Palettes.textBlack.withOpacity(0.7),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.r),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(AppStrings.splashTitle1,
-                    style: TextStyles.customStyle.mediumText.whiteText),
+                Text(AppStrings.splashTitle1, style: TextStyles.customStyle.mediumText.whiteText),
               ],
             ),
           ),
@@ -142,17 +141,14 @@ class Screen3 extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Palettes.p2,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                     elevation: 0,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
                   ),
                   onPressed: () {
-                    Global.storageServices
-                        .setBool(AppStorage.firstTimeOpen, false);
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, AppRoutes.signIn, (route) => false);
+                    Global.storageServices.setBool(AppStorage.firstTimeOpen, false);
+                    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.signIn, (route) => false);
                   },
                   icon: const Icon(
                     Icons.arrow_forward,
@@ -171,7 +167,7 @@ class Screen3 extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.only(bottom: 250.h),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.r),
               ),
               child: Text(
                 AppStrings.splashTitle3a,

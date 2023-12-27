@@ -21,10 +21,8 @@ class AppBinding extends Bindings {
 
     Get.lazyPut<AuthenUseCase>(() => AuthenUseCaseImpl(Get.find()));
 
-    Get.lazyPut<AuthenticateRepository>(
-        () => AuthenticateRepositoryImpl(Get.find()));
+    Get.lazyPut<AuthenticateRepository>(() => AuthenticateRepositoryImpl(Get.find()));
 
-    Get.lazyPut<AuthenDataSourceRemote>(
-        () => AuthenDataSourceRemote(Get.find()));
+    Get.lazyPut<AuthenDataSourceRemote>(() => AuthenDataSourceRemote(Get.find()));
   }
 }

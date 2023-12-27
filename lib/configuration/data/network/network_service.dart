@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_urls.dart';
 
 import 'package:logger/logger.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -19,7 +20,7 @@ abstract class NetworkService extends GetxService {
 
   static Dio newDio() {
     final dio = Dio(BaseOptions(
-      baseUrl: 'https://ihunjobfindebackend-production.up.railway.app',
+      baseUrl: AppUrls.baseUrl,
       connectTimeout: requestTimeOut,
       receiveTimeout: requestTimeOut,
     ));
@@ -31,8 +32,7 @@ abstract class NetworkService extends GetxService {
     return dio;
   }
 
-  Future<AppResult<AppResponse>> request(
-      {required ClientRequest clientRequest});
+  Future<AppResult<AppResponse>> request({required ClientRequest clientRequest});
 }
 
 class NetworkServiceImpl extends NetworkService {
@@ -48,8 +48,7 @@ class NetworkServiceImpl extends NetworkService {
   }
 
   @override
-  Future<AppResult<AppResponse>> request(
-      {required ClientRequest clientRequest}) async {
+  Future<AppResult<AppResponse>> request({required ClientRequest clientRequest}) async {
     try {
       final response = await _dio.request(
         clientRequest.url,
