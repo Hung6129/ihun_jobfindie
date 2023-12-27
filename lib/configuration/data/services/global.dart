@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' show Colors, EdgeInsets;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:ihun_jobfindie/configuration/services/storage_helper.dart';
+import 'package:ihun_jobfindie/configuration/data/services/storage_helper.dart';
 import 'package:logger/logger.dart';
 
 /// Make a global class to store all the global variables
@@ -27,8 +27,7 @@ class Global {
       ..displayDuration = const Duration(milliseconds: 500)
       ..indicatorType = EasyLoadingIndicatorType.spinningCircle
       ..loadingStyle = EasyLoadingStyle.custom
-      ..contentPadding =
-          const EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0)
+      ..contentPadding = const EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0)
       ..indicatorSize = 70.0
       ..radius = 16.0
       ..progressColor = Colors.white

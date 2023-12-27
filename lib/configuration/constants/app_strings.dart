@@ -17,7 +17,13 @@ class AppStrings {
   static const String signInPasswordHint = 'Type in your password';
   static const String signInDontHaveAccount = 'Don\'t have an account?';
   static const String signInGreeting = 'Hey, Welcome! 👋 ';
-  static const String orSignInWith = "Or sign in with";
+  static const String orSignInWith = 'Or sign in with';
+  static const String signInRememberMe = 'Remember me';
+  static const String signInForgotPassword = 'Forgot Password?';
+  static const String signInFailed = 'Please check your email and password, and try again';
+  static const String signInFailed1 = 'Failed to sign in, please try again later';
+  static const String signInSuccess = 'Sign in successfully';
+
 
 // Sign Up Page
   static const String signUpTitle = 'Sign Up';

@@ -4,7 +4,7 @@ import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
-import 'package:ihun_jobfindie/configuration/services/global.dart';
+import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';

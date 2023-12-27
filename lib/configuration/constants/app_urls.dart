@@ -1,7 +1,6 @@
 class AppUrls {
   /// this is the base url of the api
-  static const String baseUrl =
-      "https://ihunjobfindebackend-production.up.railway.app/api";
+  static const String baseUrl = "https://ihunjobfindebackend-production.up.railway.app/api";
 
   // api for getting list of all jobs
   static const String allProducts = "/job/";

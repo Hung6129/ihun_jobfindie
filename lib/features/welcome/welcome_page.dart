@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
-import 'package:ihun_jobfindie/configuration/services/global.dart';
+import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 
 import 'package:ihun_jobfindie/features/welcome/welcome_controller.dart';
@@ -34,7 +34,6 @@ class WelcomePage extends StatelessWidget {
               PageView(
                 onPageChanged: (int index) {
                   controller.indexPage.value = index;
-                  print('onPageChanged: ${controller.indexPage.value}');
                 },
                 controller: controller.pageController,
                 children: listScreens,

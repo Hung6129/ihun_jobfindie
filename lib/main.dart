@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/bindings/app_binding.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
-import 'package:ihun_jobfindie/configuration/services/global.dart';
+import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 
 /// Sets a callback to use for reporting errors to Crashlytics.

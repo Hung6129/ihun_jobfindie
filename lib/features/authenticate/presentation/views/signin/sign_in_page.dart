@@ -49,9 +49,7 @@ class _SignInPageState extends State<SignInPage> {
                 children: [
                   Text(
                     AppStrings.signInGreeting,
-                    style: TextStyles.customStyle
-                        .setTextSize(35)
-                        .setFontWeight(FontWeight.w500),
+                    style: TextStyles.customStyle.setTextSize(35).setFontWeight(FontWeight.w500),
                     textAlign: TextAlign.center,
                   ),
                   verticalMargin24,
@@ -70,6 +68,25 @@ class _SignInPageState extends State<SignInPage> {
                     onChange: (value) {},
                     keyboardType: TextInputType.visiblePassword,
                   ),
+                  Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Checkbox(
+                          value: controller.isSavePassword.value,
+                          onChanged: (value) {
+                            controller.isSavePassword.value = value!;
+                          },
+                        ),
+                        Text(
+                          AppStrings.signInRememberMe,
+                          style: TextStyles.defaultStyle.smallText,
+                        ),
+                        horizontalMargin24,
+                      ],
+                    ),
+                  ),
+                  verticalMargin12,
                   AppBtnLabelWithIcon(
                     label: AppStrings.signInTitle,
                     labelColor: Palettes.textWhite,
@@ -80,14 +97,13 @@ class _SignInPageState extends State<SignInPage> {
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     onPressed: () async {
-                      await controller.executeLoginByAccount(
-                          emailController.text, passwordController.text,context);
+                      await controller.executeLoginByAccount(emailController.text, passwordController.text, context);
                       // Navigator.pushNamed(context, AppRoutes.home);
                     },
                   ),
                   verticalMargin12,
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         AppStrings.signInDontHaveAccount,
@@ -97,8 +113,7 @@ class _SignInPageState extends State<SignInPage> {
                         onPressed: () {
                           Navigator.pushNamed(context, AppRoutes.signUp);
                         },
-                        child: Text(AppStrings.signUpTitle,
-                            style: TextStyles.defaultStyle.underLine.bold),
+                        child: Text(AppStrings.signUpTitle, style: TextStyles.defaultStyle.underLine.bold.mediumText),
                       ),
                     ],
                   ),

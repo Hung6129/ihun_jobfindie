@@ -28,7 +28,7 @@ class _AppTextFeildState extends State<AppTextFeild> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
       child: TextField(
         onChanged: widget.onChange,
         controller: widget.controller,
@@ -50,9 +50,7 @@ class _AppTextFeildState extends State<AppTextFeild> {
           suffixIcon: widget.txtfType == 'password'
               ? IconButton(
                   icon: Icon(
-                    _passVisibility == false
-                        ? Icons.visibility
-                        : Icons.visibility_off,
+                    _passVisibility == false ? Icons.visibility : Icons.visibility_off,
                   ),
                   onPressed: () {
                     _passVisibility = !_passVisibility;

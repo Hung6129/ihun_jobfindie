@@ -5,4 +5,6 @@ class AppStorage {
   static const String userProfileKey = 'user_profile_key';
 
   static const String firstTimeOpen = 'first_time_open';
+
+  static const String isSavePassword = 'is_save_password';
 }
