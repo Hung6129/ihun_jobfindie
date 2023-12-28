@@ -1,6 +1,6 @@
 class AppUrls {
   /// this is the base url of the api
-  // static const String baseUrl = "https://ihunjobfindebackend-production.up.railway.app/api";
+  // static const String baseUrl = "https://ihunjobfindebackend-production.up.railway.app";
 
   /// this is for local host testing
   static const String baseUrl = "http://localhost:3000";

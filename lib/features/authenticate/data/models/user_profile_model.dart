@@ -38,7 +38,7 @@ class UserProfileModel extends Equatable {
       json['username'],
       json['email'],
       json['avatar'],
-      List<String>.from(json['skills']?? []) ,
+      List<String>.from(json['skills'] ?? []),
       json['isAdmin'],
       json['isAgent'],
     );

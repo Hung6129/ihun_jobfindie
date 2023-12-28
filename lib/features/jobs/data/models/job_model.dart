@@ -96,28 +96,6 @@ class JobModel extends Equatable {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'title': title,
-      'location': location,
-      'company': company,
-      'description': description,
-      'salary': salary,
-      'period': period,
-      'contract': contract,
-      'requirement': requirement,
-      'status': status,
-      'imageUrl': imageUrl,
-      'agentId': agentId,
-      'date': date,
-      'skills': skills,
-      'modality': modality,
-      'qualification': qualification,
-      'responsibility': responsibility,
-    };
-  }
-
   @override
   List<Object?> get props => [
         id,

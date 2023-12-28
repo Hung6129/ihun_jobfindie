@@ -3,10 +3,16 @@ import 'app_exception.dart';
 class AppResult<BM> {
   AppResult._();
 
-  factory AppResult.success(BM? netData,
-      {bool hasMore = false, int total = 0}) {
+  factory AppResult.success(
+    BM? netData, {
+    bool hasMore = false,
+    int total = 0,
+  }) {
     return AppResultSuccess<BM>(
-        netData: netData, hasMore: hasMore, total: total);
+      netData: netData,
+      hasMore: hasMore,
+      total: total,
+    );
   }
   factory AppResult.failure(AppException? exception) {
     return AppResultFailure(exception: exception);
@@ -20,8 +26,11 @@ class AppResult<BM> {
 }
 
 class AppResultSuccess<BM> extends AppResult<BM> {
-  AppResultSuccess({required this.netData, this.hasMore = false, this.total})
-      : super._();
+  AppResultSuccess({
+    required this.netData,
+    this.hasMore = false,
+    this.total,
+  }) : super._();
 
   final BM? netData;
   final bool hasMore;

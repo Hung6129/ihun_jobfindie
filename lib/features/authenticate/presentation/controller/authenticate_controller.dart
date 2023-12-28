@@ -49,7 +49,7 @@ class AuthenticateController extends GetxController {
         Get.offAllNamed(AppRoutes.home);
       }
       if (response is AppResultFailure) {
-        toastError(text: AppStrings.signInFailed);
+        toastError(text: (response as AppResultFailure).exception!.message.toString());
       }
     } catch (e) {
       toastError(text: AppStrings.signInFailed1);
@@ -72,7 +72,7 @@ class AuthenticateController extends GetxController {
         Get.offAllNamed(AppRoutes.signIn);
       }
       if (response is AppResultFailure) {
-        toastError(text: AppStrings.signUpFailed1);
+        toastError(text: (response as AppResultFailure).exception!.message.toString());
       }
     } catch (e) {
       toastError(text: AppStrings.signUpFailed1);

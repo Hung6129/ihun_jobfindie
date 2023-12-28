@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ihun_jobfindie/features/jobfinder/presentation/controller/jobfinder_controller.dart';
+import 'package:ihun_jobfindie/features/candidate/presentation/controller/candidate_controller.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -8,7 +8,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: JobFinderController(),
+      init: CandidateController(),
       builder: (controller) => Scaffold(
           appBar: AppBar(
             title: Text('Profile'),

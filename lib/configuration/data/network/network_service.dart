@@ -56,7 +56,9 @@ class NetworkServiceImpl extends NetworkService {
         options: Options(
           method: clientRequest.method.value,
           contentType: clientRequest.contentType,
-          headers: {...clientRequest.headers ?? {}},
+          headers: {
+            ...clientRequest.headers ?? {},
+          },
         ),
         queryParameters: clientRequest.query,
         onSendProgress: clientRequest.onSendProgress,
@@ -68,28 +70,30 @@ class NetworkServiceImpl extends NetworkService {
       return HttpStatus(response.statusCode).isOk
           ? AppResult.success(
               appResponse,
-              hasMore: appResponse.hasMore,
-              total: appResponse.total,
             )
-          : AppResult.failure(NetworkException(
-              code: response.statusCode,
-              message: appResponse.meta?.message,
-              errorCode: appResponse.meta?.errorCode,
-            ));
+          : AppResult.failure(
+              NetworkException(
+                code: response.statusCode,
+                message: appResponse.meta?.message,
+                errorCode: appResponse.meta?.errorMessages,
+              ),
+            );
     } on DioException catch (e) {
       _logger.e('Response: DioError: ${e.response?.data}');
       Metadata? meta = AppResponse.fromJson(e.response?.data).meta;
-      return AppResult.failure(NetworkException(
-        code: e.response?.statusCode,
-        message: meta?.message,
-        errorCode: meta?.errorCode ?? ErrorCode.networkService,
-      ));
+      return AppResult.failure(
+        NetworkException(
+          code: e.response?.statusCode,
+          message: meta?.message,
+          errorCode: meta?.errorMessages ?? 'network_service',
+        ),
+      );
     } catch (e) {
       _logger.e('Some things wrong: ${e.toString()}');
       return AppResult.failure(NetworkException(
-        code: ErrorCode.code9999,
+        code: 999999,
         message: 'SomeThingsWrong: ${e.toString()}',
-        errorCode: ErrorCode.networkService,
+        errorCode: 'network_service',
       ));
     }
   }

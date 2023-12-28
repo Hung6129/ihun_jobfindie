@@ -30,7 +30,9 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
       return AppResult.success(userPost);
     }
     if (response is AppResultFailure) {
-      return AppResult.failure((response as AppResultFailure).exception);
+      return AppResult.failure(
+        (response as AppResultFailure).exception,
+      );
     }
     return AppResult.exceptionEmpty();
   }
@@ -39,24 +41,27 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
   Future<AppResult<UserProfileModel>> getProfile() async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-          url: '/api/user/find/${Global.storageServices.getString(AppStorage.userProfileKey)}',
-          method: HTTPMethod.get,
-          headers: {
-            'token': 'Bearer ${Global.storageServices.getString(AppStorage.userTokenKey)}',
-          }),
+        url: '/api/user/find/${Global.storageServices.getString(AppStorage.userProfileKey)}',
+        method: HTTPMethod.get,
+        headers: {
+          'token': 'Bearer ${Global.storageServices.getString(AppStorage.userTokenKey)}',
+        },
+      ),
     );
     if (response is AppResultSuccess<AppResponse>) {
       final UserProfileModel userPro = UserProfileModel.fromJson(response.netData?.data);
       return AppResult.success(userPro);
     }
     if (response is AppResultFailure) {
-      return AppResult.failure((response as AppResultFailure).exception);
+      return AppResult.failure(
+        (response as AppResultFailure).exception,
+      );
     }
     return AppResult.exceptionEmpty();
   }
 
   @override
-  Future<AppResult<EmptyModel>> signUp(String email, String password, String name)async {
+  Future<AppResult<EmptyModel>> signUp(String email, String password, String name) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
         url: '/api/register',

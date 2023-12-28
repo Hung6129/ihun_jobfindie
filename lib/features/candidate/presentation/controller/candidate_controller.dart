@@ -10,7 +10,7 @@ import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_mo
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 
-class JobFinderController extends GetxController {
+class CandidateController extends GetxController {
   final _authUseCase = Get.find<AuthenUseCase>();
   Rxn<UserProfileModel?> profileModel = Rxn();
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/views/signin/sign_in_page.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/views/signup/sign_up_page.dart';
-import 'package:ihun_jobfindie/features/jobfinder/presentation/views/profile_page.dart';
+import 'package:ihun_jobfindie/features/candidate/presentation/views/profile_page.dart';
 import 'package:ihun_jobfindie/features/main/main_page.dart';
 import 'package:ihun_jobfindie/features/walk_through/walk_through_page.dart';
 
