@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
             ),
             bottomNavigationBar: Obx(
               () => NavigationBar(
-                elevation: 0,
+                elevation: 1,
                 indicatorShape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(5.r),

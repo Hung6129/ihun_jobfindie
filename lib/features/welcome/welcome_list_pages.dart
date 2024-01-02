@@ -8,7 +8,7 @@ import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
-import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 
 import 'package:lottie/lottie.dart';
 

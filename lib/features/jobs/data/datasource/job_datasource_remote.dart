@@ -13,7 +13,7 @@ class JobDataSourceRemote implements JobRepository {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
         isRequestForList: true,
-        url: '/api/job/?limit=18',
+        url: '/api/job/?limit=23',
         method: HTTPMethod.get,
       ),
     );
@@ -58,7 +58,7 @@ class JobDataSourceRemote implements JobRepository {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
         isRequestForList: true,
-        url: '/api/job/?limit=8',
+        url: '/api/job/?limit=10',
         method: HTTPMethod.get,
       ),
     );

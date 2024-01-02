@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 
 import '../styles/text_styles.dart';
 

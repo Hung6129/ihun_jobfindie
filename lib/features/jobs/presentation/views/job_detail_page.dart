@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/features/jobs/presentation/controller/jobs_controller.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
-import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_cached_image_widget.dart';
 
 class JobDetailPage extends StatelessWidget {
@@ -18,14 +19,6 @@ class JobDetailPage extends StatelessWidget {
     return GetBuilder<JobController>(
       init: JobController(Get.find()),
       builder: (controller) => Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Icon(
-            FontAwesome.whatsapp,
-            color: Palettes.textWhite,
-          ),
-          backgroundColor: Palettes.p2,
-        ),
         body: Obx(
           () => CustomScrollView(
             slivers: [
@@ -36,21 +29,21 @@ class JobDetailPage extends StatelessWidget {
                     Get.back();
                   },
                   child: Icon(
-                    FontAwesome.chevron_left,
+                    FontAwesomeIcons.arrowLeft,
                   ),
                 ),
                 actions: [
                   GestureDetector(
                     onTap: () {},
                     child: Icon(
-                      FontAwesome.share,
+                      FontAwesomeIcons.share,
                     ),
                   ),
                   horizontalMargin24,
                   GestureDetector(
                     onTap: () {},
                     child: Icon(
-                      FontAwesome.heart,
+                      FontAwesomeIcons.heart,
                     ),
                   ),
                   horizontalMargin24,
@@ -67,6 +60,7 @@ class JobDetailPage extends StatelessWidget {
                   [
                     Column(
                       children: [
+                        /// company image
                         Center(
                           child: AppCachedNetworkImage(
                             height: 80.h,
@@ -74,6 +68,8 @@ class JobDetailPage extends StatelessWidget {
                           ),
                         ),
                         verticalMargin16,
+
+                        /// tabs description and requirement
                         FlutterToggleTab(
                           width: 80.w,
                           borderRadius: 15.r,
@@ -91,6 +87,8 @@ class JobDetailPage extends StatelessWidget {
                           },
                           isScroll: false,
                         ),
+
+                        /// description and requirement content
                         Obx(() => controller.selectedIndex.value == 0
                             ? Padding(
                                 padding: EdgeInsets.all(16.w),
@@ -111,7 +109,7 @@ class JobDetailPage extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           Icon(
-                                            FontAwesome.check,
+                                            FontAwesomeIcons.check,
                                             color: Palettes.getRandomColor(),
                                           ),
                                           horizontalMargin8,
@@ -134,6 +132,30 @@ class JobDetailPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              heroTag: 'apply',
+              onPressed: () {},
+              child: Icon(
+                FontAwesomeIcons.solidPaperPlane,
+                color: Palettes.textWhite,
+              ),
+              backgroundColor: Palettes.p2,
+            ),
+            verticalMargin16,
+            FloatingActionButton(
+              heroTag: 'call',
+              onPressed: () {},
+              child: Icon(
+                FontAwesomeIcons.message,
+                color: Palettes.textWhite,
+              ),
+              backgroundColor: Palettes.p1,
+            ),
+          ],
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/features/chat/presentation/views/chat_page.dart';
 import 'package:ihun_jobfindie/features/jobs/presentation/views/job_page.dart';
@@ -16,18 +17,18 @@ class MainController extends GetxController {
 
   List<Widget> destinations = const [
     NavigationDestination(
-      selectedIcon: Icon(FontAwesome.home),
-      icon: Icon(FontAwesome.home),
+      selectedIcon: Icon(FontAwesomeIcons.house),
+      icon: Icon(FontAwesomeIcons.house),
       label: 'Home',
     ),
     NavigationDestination(
       icon: Badge(
-        child: Icon(FontAwesome.comment),
+        child: Icon(FontAwesomeIcons.solidComments),
       ),
       label: 'Messages',
     ),
     NavigationDestination(
-      icon: Icon(FontAwesome.briefcase),
+      icon: Icon(FontAwesomeIcons.briefcase),
       label: 'Jobs',
     ),
   ];

@@ -3,6 +3,7 @@ import 'package:ihun_jobfindie/features/authenticate/presentation/views/signin/s
 import 'package:ihun_jobfindie/features/authenticate/presentation/views/signup/sign_up_page.dart';
 import 'package:ihun_jobfindie/features/candidate/presentation/views/profile_page.dart';
 import 'package:ihun_jobfindie/features/jobs/presentation/views/job_detail_page.dart';
+import 'package:ihun_jobfindie/features/main/home/job_trending_viewall_page.dart';
 import 'package:ihun_jobfindie/features/main/main_page.dart';
 import 'package:ihun_jobfindie/features/walk_through/walk_through_page.dart';
 
@@ -16,6 +17,7 @@ class AppRoutes {
   static const String home = '/home';
   static const String jobDetail = '/job-detail';
   static const String profile = '/profile';
+  static const String jobTrendingViewAll = '/job-trending-view-all';
 
   static final routes = [
     GetPage(
@@ -45,6 +47,10 @@ class AppRoutes {
     GetPage(
       name: AppRoutes.profile,
       page: () => const ProfilePage(),
+    ),
+    GetPage(
+      name: AppRoutes.jobTrendingViewAll,
+      page: () => const JobTrendingViewAllPage(),
     ),
   ];
 }

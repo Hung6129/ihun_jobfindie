@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 
 class AppTextFeild extends StatefulWidget {
@@ -50,8 +50,8 @@ class _AppTextFeildState extends State<AppTextFeild> {
           prefixIcon: Icon(widget.iconData),
           suffixIcon: widget.txtfType == 'password'
               ? IconButton(
-                  icon: Icon(
-                    _passVisibility == false ? FontAwesome.eye : FontAwesome.eye_slash,
+                  icon: FaIcon(
+                    _passVisibility == false ? FontAwesomeIcons.eye : FontAwesomeIcons.eyeSlash,
                   ),
                   onPressed: () {
                     _passVisibility = !_passVisibility;

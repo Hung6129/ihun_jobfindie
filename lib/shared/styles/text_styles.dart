@@ -3,17 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import '../theme/palettes.dart';
+import 'palettes.dart';
 
 extension ExtendedTextStyle on TextStyle {
-  TextStyle get appTitle =>
-      copyWith(fontSize: 25.sp, color: Palettes.textBlack);
+  TextStyle get appTitle => copyWith(fontSize: 25.sp, color: Palettes.textBlack);
 
-  TextStyle get appBarTitle => copyWith(
-      fontSize: 20.sp, color: Palettes.textBlack, fontWeight: FontWeight.bold);
+  TextStyle get appBarTitle => copyWith(fontSize: 20.sp, color: Palettes.textBlack, fontWeight: FontWeight.bold);
 
-  TextStyle get italic =>
-      copyWith(fontWeight: FontWeight.normal, fontStyle: FontStyle.italic);
+  TextStyle get italic => copyWith(fontWeight: FontWeight.normal, fontStyle: FontStyle.italic);
 
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
 
@@ -27,25 +24,20 @@ extension ExtendedTextStyle on TextStyle {
 
   TextStyle get greyText => copyWith(color: Palettes.textGrey);
 
-  TextStyle get largeText =>
-      copyWith(fontSize: 20.sp, fontWeight: FontWeight.w300);
+  TextStyle get largeText => copyWith(fontSize: 20.sp, fontWeight: FontWeight.w300);
 
-  TextStyle get mediumText =>
-      copyWith(fontSize: 16.sp, fontWeight: FontWeight.w300);
+  TextStyle get mediumText => copyWith(fontSize: 16.sp, fontWeight: FontWeight.w300);
 
-  TextStyle get smallText =>
-      copyWith(fontSize: 12.sp, fontWeight: FontWeight.w300);
+  TextStyle get smallText => copyWith(fontSize: 12.sp, fontWeight: FontWeight.w300);
 
   // convenience functions
   TextStyle setColor(Color color) => copyWith(color: color);
 
   TextStyle setTextSize(double size) => copyWith(fontSize: size);
 
-  TextStyle setFontWeight(FontWeight fontWeight) =>
-      copyWith(fontWeight: fontWeight);
+  TextStyle setFontWeight(FontWeight fontWeight) => copyWith(fontWeight: fontWeight);
 
-  TextStyle setLetterSpacing(double spacing) =>
-      copyWith(letterSpacing: spacing);
+  TextStyle setLetterSpacing(double spacing) => copyWith(letterSpacing: spacing);
 }
 
 class TextStyles {

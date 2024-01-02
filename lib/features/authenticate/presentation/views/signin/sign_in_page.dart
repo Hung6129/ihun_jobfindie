@@ -10,7 +10,7 @@ import 'package:ihun_jobfindie/features/authenticate/presentation/controller/aut
 
 import 'package:ihun_jobfindie/shared/widgets/app_txtfield.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
-import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_texticonbtn.dart';
 
 class SignInPage extends StatefulWidget {

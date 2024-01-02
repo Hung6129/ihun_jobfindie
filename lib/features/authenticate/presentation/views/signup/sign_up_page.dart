@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:get/get.dart';
 
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
@@ -11,7 +12,7 @@ import 'package:ihun_jobfindie/features/authenticate/presentation/controller/aut
 import 'package:ihun_jobfindie/shared/widgets/app_txtfield.dart';
 
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
-import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_texticonbtn.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -55,14 +56,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     AppTextFeild(
                       controller: nameController,
                       lblText: AppStrings.signUpNamehint,
-                      iconData: FontAwesome.user,
+                      iconData: FontAwesomeIcons.user,
                       onChange: (value) {},
                       keyboardType: TextInputType.name,
                     ),
                     AppTextFeild(
                       controller: emailController,
                       lblText: AppStrings.signUpEmailHint,
-                      iconData: FontAwesome.envelope,
+                      iconData: FontAwesomeIcons.envelope,
                       onChange: (value) {},
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -70,7 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: passwordController,
                       txtfType: 'password',
                       lblText: AppStrings.signUpPasswordHint,
-                      iconData: FontAwesome.key,
+                      iconData: FontAwesomeIcons.key,
                       onChange: (value) {},
                       keyboardType: TextInputType.visiblePassword,
                     ),

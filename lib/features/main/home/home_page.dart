@@ -1,12 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
+import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/features/main/home/home_controller.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
-import 'package:ihun_jobfindie/shared/theme/palettes.dart';
+import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_cached_image_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -27,7 +29,7 @@ class HomePage extends StatelessWidget {
                   onTap: () {},
                   child: Badge(
                     child: Icon(
-                      FontAwesome.bell,
+                      FontAwesomeIcons.bell,
                       color: Colors.white,
                     ),
                   ),
@@ -42,7 +44,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed('/profile');
+                      Get.toNamed(AppRoutes.profile);
                     },
                     child: Obx(() => AppCachedNetworkImage(
                           imageUrl: controller.avatar.value,
@@ -81,7 +83,16 @@ class HomePage extends StatelessWidget {
                       children: [
                         Text('Popular Job', style: TextStyles.defaultStyle.appBarTitle),
                         Spacer(),
-                        Text('See All', style: TextStyles.defaultStyle.smallText.underLine),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.jobTrendingViewAll);
+                            controller.fetchTrendingViewAll();
+                          },
+                          child: Text(
+                            'See All',
+                            style: TextStyles.defaultStyle.smallText.underLine,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -130,8 +141,8 @@ class HomePage extends StatelessWidget {
                                               verticalMargin12,
                                               Row(
                                                 children: [
-                                                  Icon(
-                                                    FontAwesome.money,
+                                                  FaIcon(
+                                                    FontAwesomeIcons.moneyBill,
                                                     color: Palettes.p2,
                                                     size: 16.sp,
                                                   ),
@@ -139,16 +150,16 @@ class HomePage extends StatelessWidget {
                                                   Text(data.salary.toString(),
                                                       style: TextStyles.defaultStyle.smallText),
                                                   horizontalMargin12,
-                                                  Icon(
-                                                    FontAwesome.suitcase,
+                                                  FaIcon(
+                                                    FontAwesomeIcons.suitcase,
                                                     color: Palettes.p2,
                                                     size: 16.sp,
                                                   ),
                                                   horizontalMargin4,
                                                   Text(data.modality, style: TextStyles.defaultStyle.smallText),
                                                   horizontalMargin12,
-                                                  Icon(
-                                                    FontAwesome.clock_o,
+                                                  FaIcon(
+                                                    FontAwesomeIcons.clock,
                                                     color: Palettes.p2,
                                                     size: 16.sp,
                                                   ),
