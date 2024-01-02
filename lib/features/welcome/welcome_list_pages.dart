@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
@@ -38,7 +39,10 @@ class Screen1 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(AppStrings.splashTitle1, style: TextStyles.customStyle.mediumText.whiteText),
+                Text(
+                  AppStrings.splashTitle1,
+                  style: TextStyles.customStyle.mediumText.whiteText.bold,
+                ),
               ],
             ),
           ),
@@ -148,7 +152,7 @@ class Screen3 extends StatelessWidget {
                   ),
                   onPressed: () {
                     Global.storageServices.setBool(AppStorage.firstTimeOpen, false);
-                    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.signIn, (route) => false);
+                    Get.offNamedUntil(AppRoutes.signIn, (route) => false);
                   },
                   icon: const Icon(
                     Icons.arrow_forward,

@@ -26,6 +26,7 @@ class WelcomePage extends StatelessWidget {
       Screen3(),
     ];
     return GetBuilder<WelcomeController>(
+      init: WelcomeController(),
       builder: (controller) {
         return Scaffold(
           body: Stack(
@@ -83,10 +84,8 @@ class WelcomePage extends StatelessWidget {
                               iconColor: Palettes.textBlack,
                               onPressed: () {
                                 if (controller.indexPage.value == 2) {
-                                  Global.storageServices
-                                      .setBool(AppStorage.firstTimeOpen, false);
-                                  Navigator.pushNamedAndRemoveUntil(context,
-                                      AppRoutes.signIn, (route) => false);
+                                  Global.storageServices.setBool(AppStorage.firstTimeOpen, false);
+                                  Get.offNamedUntil(AppRoutes.signIn, (route) => false);
                                 } else {
                                   controller.pageController!.nextPage(
                                     duration: const Duration(milliseconds: 500),
@@ -99,26 +98,26 @@ class WelcomePage extends StatelessWidget {
                         ),
                       ),
               ),
-              Obx(() => controller.indexPage.value == 2
-                  ? const SizedBox.shrink()
-                  : Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 10.w, bottom: 50.h),
-                        child: TextButton(
-                          onPressed: () {
-                            Global.storageServices
-                                .setBool(AppStorage.firstTimeOpen, false);
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, AppRoutes.signIn, (route) => false);
-                          },
-                          child: Text(
-                            AppStrings.skipBtn,
-                            style: TextStyles.defaultStyle.largeText.whiteText,
+              Obx(
+                () => controller.indexPage.value == 2
+                    ? const SizedBox.shrink()
+                    : Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10.w, bottom: 50.h),
+                          child: TextButton(
+                            onPressed: () {
+                              Global.storageServices.setBool(AppStorage.firstTimeOpen, false);
+                              Get.offNamedUntil(AppRoutes.signIn, (route) => false);
+                            },
+                            child: Text(
+                              AppStrings.skipBtn,
+                              style: TextStyles.defaultStyle.largeText.whiteText,
+                            ),
                           ),
                         ),
                       ),
-                    ))
+              ),
             ],
           ),
         );

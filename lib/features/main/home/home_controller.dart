@@ -3,26 +3,25 @@ import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_result.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_model.dart';
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
-import 'package:ihun_jobfindie/features/jobs/data/models/job_model.dart';
+import 'package:ihun_jobfindie/features/jobs/data/models/job_home_model.dart';
 import 'package:ihun_jobfindie/features/jobs/domain/job_usecase/job_usecase.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 
 class HomeController extends GetxController {
   late final JobUseCase _jobsUseCase;
   late final AuthenUseCase _authUseCase;
-  Rxn<List<JobModel>> listJobModel = Rxn();
 
+  Rxn<List<JobHomeModel>> listJobModel = Rxn();
   RxString email = ''.obs;
   RxString name = '--'.obs;
   RxString avatar = 'https://i.pinimg.com/474x/68/e5/d3/68e5d30de3741f077cea06f1b1a12a34.jpg'.obs;
-
 
   HomeController(this._jobsUseCase, this._authUseCase);
 
   @override
   void onInit() async {
     super.onInit();
-    fetchListJob();
+    fetchTrendingJobs();
     getUserInfor();
   }
 
@@ -43,12 +42,12 @@ class HomeController extends GetxController {
     }
   }
 
-  void fetchListJob() async {
+  void fetchTrendingJobs() async {
     AppFullScreenLoadingIndicator.show();
     await Future.delayed(Duration(seconds: 1));
-    final response = await _jobsUseCase.fetchAllJobs();
+    final response = await _jobsUseCase.fetchTrendingJobs();
     AppFullScreenLoadingIndicator.dismiss();
-    if (response is AppResultSuccess<List<JobModel>>) {
+    if (response is AppResultSuccess<List<JobHomeModel>>) {
       listJobModel.value = response.netData;
     }
     if (response is AppResultFailure) {
@@ -56,7 +55,7 @@ class HomeController extends GetxController {
     }
   }
 
-  void onJobItemPressed(JobModel jobModel) {
-    Get.toNamed('/job-detail', arguments: jobModel);
+  void onJobItemPressed(String jobId) {
+    Get.toNamed('/job-detail', arguments: jobId);
   }
 }

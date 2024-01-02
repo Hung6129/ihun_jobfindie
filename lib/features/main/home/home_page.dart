@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
+      autoRemove: false,
       init: HomeController(Get.find(), Get.find()),
       builder: (controller) => Scaffold(
         backgroundColor: Palettes.textWhite,
@@ -95,7 +96,9 @@ class HomePage extends StatelessWidget {
                             itemBuilder: (context, index) {
                               final data = controller.listJobModel.value![index];
                               return GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  controller.onJobItemPressed(data.id);
+                                },
                                 child: Card(
                                   color: Palettes.textWhite,
                                   surfaceTintColor: Palettes.textWhite,
@@ -109,8 +112,7 @@ class HomePage extends StatelessWidget {
                                       children: [
                                         AppCachedNetworkImage(
                                           imageUrl: data.imageUrl,
-                                          width: 80.w,
-                                          // height: 60.h,
+                                          width: 60.w,
                                         ),
                                         horizontalMargin24,
                                         Expanded(
@@ -134,23 +136,24 @@ class HomePage extends StatelessWidget {
                                                     size: 16.sp,
                                                   ),
                                                   horizontalMargin4,
-                                                  Text(data.salary.toString(), style: TextStyles.defaultStyle),
-                                                  horizontalMargin16,
+                                                  Text(data.salary.toString(),
+                                                      style: TextStyles.defaultStyle.smallText),
+                                                  horizontalMargin12,
                                                   Icon(
                                                     FontAwesome.suitcase,
                                                     color: Palettes.p2,
                                                     size: 16.sp,
                                                   ),
                                                   horizontalMargin4,
-                                                  Text(data.modality, style: TextStyles.defaultStyle),
-                                                  horizontalMargin16,
+                                                  Text(data.modality, style: TextStyles.defaultStyle.smallText),
+                                                  horizontalMargin12,
                                                   Icon(
                                                     FontAwesome.clock_o,
                                                     color: Palettes.p2,
                                                     size: 16.sp,
                                                   ),
                                                   horizontalMargin4,
-                                                  Text(data.contract, style: TextStyles.defaultStyle),
+                                                  Text(data.contract, style: TextStyles.defaultStyle.smallText),
                                                 ],
                                               )
                                             ],

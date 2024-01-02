@@ -53,8 +53,9 @@ class MyApp extends StatelessWidget {
         // theme: ThemeData(useMaterial3: true),
         title: AppStrings.appTitle,
         debugShowCheckedModeBanner: false,
+        smartManagement: SmartManagement.onlyBuilder,
+        getPages: AppRoutes.routes,
         initialRoute: AppRoutes.init,
-        onGenerateRoute: AppRoutes.generateRoute,
         initialBinding: AppBinding(),
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/views/signin/sign_in_page.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/views/signup/sign_up_page.dart';
 import 'package:ihun_jobfindie/features/candidate/presentation/views/profile_page.dart';
@@ -17,160 +17,34 @@ class AppRoutes {
   static const String jobDetail = '/job-detail';
   static const String profile = '/profile';
 
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case init:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const WalkThroughPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween = Tween(begin: begin, end: end).chain(
-              CurveTween(
-                curve: curve,
-              ),
-            );
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        );
-
-      case wellcome:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const WelcomePage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween = Tween(begin: begin, end: end).chain(
-              CurveTween(
-                curve: curve,
-              ),
-            );
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        );
-
-      case signIn:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const SignInPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween = Tween(begin: begin, end: end).chain(
-              CurveTween(
-                curve: curve,
-              ),
-            );
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        );
-
-      case signUp:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const SignUpPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween = Tween(begin: begin, end: end).chain(
-              CurveTween(
-                curve: curve,
-              ),
-            );
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        );
-
-      case home:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const MainPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween = Tween(begin: begin, end: end).chain(
-              CurveTween(
-                curve: curve,
-              ),
-            );
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        );
-
-      case jobDetail:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const JobDetailPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(1.0, 0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween = Tween(begin: begin, end: end).chain(
-              CurveTween(
-                curve: curve,
-              ),
-            );
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        );
-      case profile:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const ProfilePage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            const begin = Offset(0.0, 1.0);
-            const end = Offset.zero;
-            const curve = Curves.ease;
-
-            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-            return SlideTransition(
-              position: animation.drive(tween),
-              child: child,
-            );
-          },
-        );
-      default:
-        return PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const Scaffold(
-            body: Center(
-              child: Text('Page not found'),
-            ),
-          ),
-          transitionsBuilder: (_, anim, __, child) {
-            return FadeTransition(opacity: anim, child: child);
-          },
-        );
-    }
-  }
+  static final routes = [
+    GetPage(
+      name: AppRoutes.init,
+      page: () => const WalkThroughPage(),
+    ),
+    GetPage(
+      name: AppRoutes.wellcome,
+      page: () => const WelcomePage(),
+    ),
+    GetPage(
+      name: AppRoutes.signIn,
+      page: () => const SignInPage(),
+    ),
+    GetPage(
+      name: AppRoutes.signUp,
+      page: () => const SignUpPage(),
+    ),
+    GetPage(
+      name: AppRoutes.home,
+      page: () => const MainPage(),
+    ),
+    GetPage(
+      name: AppRoutes.jobDetail,
+      page: () => const JobDetailPage(),
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => const ProfilePage(),
+    ),
+  ];
 }

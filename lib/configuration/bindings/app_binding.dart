@@ -7,18 +7,12 @@ import 'package:ihun_jobfindie/features/authenticate/domain/repository/authen_re
 import 'package:ihun_jobfindie/features/jobs/data/datasource/job_datasource_remote.dart';
 import 'package:ihun_jobfindie/features/jobs/domain/job_usecase/job_usecase.dart';
 import 'package:ihun_jobfindie/features/jobs/domain/repository/job_repository.dart';
-import 'package:ihun_jobfindie/features/main/main_controller.dart';
 
-import 'package:ihun_jobfindie/features/walk_through/walk_through_controller.dart';
-
-import 'package:ihun_jobfindie/features/welcome/welcome_controller.dart';
 
 class AppBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(WalkThroughController());
-    Get.put(MainController());
-    Get.put(WelcomeController());
+
 
     Get.put<NetworkService>(NetworkServiceImpl());
 

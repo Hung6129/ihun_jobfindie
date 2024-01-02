@@ -10,6 +10,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
+      init: MainController(),
       builder: (controller) {
         return Scaffold(
             body: Obx(

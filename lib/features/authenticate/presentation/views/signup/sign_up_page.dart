@@ -8,7 +8,7 @@ import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/controller/authenticate_controller.dart';
 
-import 'package:ihun_jobfindie/features/authenticate/presentation/widgets/app_txtfield.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_txtfield.dart';
 
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
@@ -100,7 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           onPressed: () {
                             Get.back();
                           },
-                          child: Text(AppStrings.signInTitle, style: TextStyles.defaultStyle),
+                          child: Text(AppStrings.signInTitle, style: TextStyles.defaultStyle.underLine.bold.mediumText),
                         ),
                       ],
                     ),

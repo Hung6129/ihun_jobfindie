@@ -65,7 +65,6 @@ class AuthenticateController extends GetxController {
         Get.offAllNamed(AppRoutes.home);
       }
       if (response is AppResultFailure) {
-        // toastError(text: (response as AppResultFailure).exception!.message.toString());
         Get.snackbar(
           'Thông báo',
           (response as AppResultFailure).exception!.message.toString(),

@@ -3,7 +3,9 @@
 //         "title": "Backend Developer",
 //         "location": "Seattle",
 //         "company": "Facebook, Inc.",
-//         "description": "We are seeking an experienced Backend Developer to join our team. The ideal candidate should have expertise in server-side development, API design, and database management, and be passionate about building scalable and efficient backend systems. Additionally, candidates should have experience in microservices architecture and containerization technologies.",
+//         "description": "We are seeking an experienced Backend Developer to join our team. The ideal candidate should
+//          have expertise in server-side development, API design, and database management, and be passionate about building scalable
+//          and efficient backend systems. Additionally, candidates should have experience in microservices architecture and containerization technologies.",
 //         "salary": "160k",
 //         "period": "year",
 //         "contract": "Full time",
@@ -28,9 +30,6 @@
 //         "imageUrl": "https://img.freepik.com/premium-vector/blue-social-media-logo_197792-1759.jpg",
 //         "agentId": "64f0310e387a1bf97bdc9869",
 //         "date": "2023-09-01T08:01:09.467Z",
-//         "createdAt": "2023-09-01T08:01:09.468Z",
-//         "updatedAt": "2023-09-01T08:01:09.468Z",
-//         "__v": 0
 //     },
 
 import 'package:equatable/equatable.dart';

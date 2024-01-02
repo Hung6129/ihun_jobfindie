@@ -19,7 +19,7 @@ class Palettes {
   static const Color p8 = Color(0xFFF5EEDC);
   static const Color p9 = Color(0xFFC0D8C0);
 
- /// Random color
+  /// Random color
   static const List color = [
     Color(0xffB85252),
     Color(0xffB4C6A6),
@@ -33,8 +33,6 @@ class Palettes {
     Palettes.p4,
     Palettes.p7,
     Palettes.p9,
-    Palettes.textWhite,
   ];
   static getRandomColor() => (Palettes.color.toList()..shuffle()).first;
-
 }
