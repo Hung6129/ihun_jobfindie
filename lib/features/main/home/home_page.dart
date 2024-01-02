@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      init: HomeController(Get.find()),
+      init: HomeController(Get.find(), Get.find()),
       builder: (controller) => Scaffold(
         backgroundColor: Palettes.textWhite,
         body: CustomScrollView(
@@ -42,15 +43,19 @@ class HomePage extends StatelessWidget {
                     onTap: () {
                       Get.toNamed('/profile');
                     },
-                    child: CircleAvatar(
-                      radius: 40.r,
-                      backgroundImage: NetworkImage(
-                        'https://i.pinimg.com/474x/68/e5/d3/68e5d30de3741f077cea06f1b1a12a34.jpg',
-                      ),
-                    ),
+                    child: Obx(() => AppCachedNetworkImage(
+                          imageUrl: controller.avatar.value,
+                          width: 60.w,
+                          height: 60.h,
+                        )),
                   ),
                   horizontalMargin12,
-                  Text('Hi, John Doe', style: TextStyles.defaultStyle.appBarTitle.whiteText),
+                  Obx(
+                    () => Text(
+                      'Hi, ${controller.name.value}',
+                      style: TextStyles.defaultStyle.appBarTitle.whiteText,
+                    ),
+                  )
                 ],
               ),
               flexibleSpace: FlexibleSpaceBar(
@@ -69,6 +74,16 @@ class HomePage extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24, left: 24, right: 24),
+                    child: Row(
+                      children: [
+                        Text('Popular Job', style: TextStyles.defaultStyle.appBarTitle),
+                        Spacer(),
+                        Text('See All', style: TextStyles.defaultStyle.smallText.underLine),
+                      ],
+                    ),
+                  ),
                   Obx(
                     () => controller.listJobModel.value?.length == 0
                         ? Center(
@@ -79,32 +94,71 @@ class HomePage extends StatelessWidget {
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               final data = controller.listJobModel.value![index];
-                              return Container(
-                                margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                                decoration: BoxDecoration(
-                                  color: Palettes.p5,
-                                  borderRadius: BorderRadius.circular(20),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      spreadRadius: 1,
-                                      blurRadius: 1,
-                                      offset: Offset(0, 1), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  children: [
-                                    AppCachedNetworkImage(imageUrl: data.imageUrl, width: 80, height: 80),
-                                    horizontalMargin12,
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                              return GestureDetector(
+                                onTap: () {},
+                                child: Card(
+                                  color: Palettes.textWhite,
+                                  surfaceTintColor: Palettes.textWhite,
+                                  elevation: 3,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+                                  margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                                  child: Container(
+                                    margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                                    // padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                                    child: Row(
                                       children: [
-                                        Text(data.company, style: TextStyles.defaultStyle),
+                                        AppCachedNetworkImage(
+                                          imageUrl: data.imageUrl,
+                                          width: 80.w,
+                                          // height: 60.h,
+                                        ),
+                                        horizontalMargin24,
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              AutoSizeText(
+                                                data.title,
+                                                style: TextStyles.defaultStyle.mediumText.bold,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              Text(data.company, style: TextStyles.defaultStyle),
+                                              Text(data.location, style: TextStyles.defaultStyle),
+                                              verticalMargin12,
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    FontAwesome.money,
+                                                    color: Palettes.p2,
+                                                    size: 16.sp,
+                                                  ),
+                                                  horizontalMargin4,
+                                                  Text(data.salary.toString(), style: TextStyles.defaultStyle),
+                                                  horizontalMargin16,
+                                                  Icon(
+                                                    FontAwesome.suitcase,
+                                                    color: Palettes.p2,
+                                                    size: 16.sp,
+                                                  ),
+                                                  horizontalMargin4,
+                                                  Text(data.modality, style: TextStyles.defaultStyle),
+                                                  horizontalMargin16,
+                                                  Icon(
+                                                    FontAwesome.clock_o,
+                                                    color: Palettes.p2,
+                                                    size: 16.sp,
+                                                  ),
+                                                  horizontalMargin4,
+                                                  Text(data.contract, style: TextStyles.defaultStyle),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               );
                             },

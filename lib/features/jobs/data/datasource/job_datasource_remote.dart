@@ -12,7 +12,7 @@ class JobDataSourceRemote implements JobRepository {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
         isRequestForList: true,
-        url: '/api/job/?page=1&limit=5',
+        url: '/api/job/?limit=18',
         method: HTTPMethod.get,
       ),
     );
@@ -23,6 +23,26 @@ class JobDataSourceRemote implements JobRepository {
         listData.add(JobModel.fromJson(element));
       });
       return AppResult.success(listData);
+    }
+    if (response is AppResultFailure) {
+      return AppResult.failure(
+        (response as AppResultFailure).exception,
+      );
+    }
+    return AppResult.exceptionEmpty();
+  }
+
+  @override
+  Future<AppResult<JobModel>> fetchJobDetail(String id) async {
+    final response = await _networkService.request(
+      clientRequest: ClientRequest(
+        url: '/api/job/$id',
+        method: HTTPMethod.get,
+      ),
+    );
+    if (response is AppResultSuccess<AppResponse>) {
+      final JobModel data = JobModel.fromJson(response.netData?.data);
+      return AppResult.success(data);
     }
     if (response is AppResultFailure) {
       return AppResult.failure(

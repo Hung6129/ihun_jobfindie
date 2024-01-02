@@ -4,6 +4,8 @@ import 'package:ihun_jobfindie/features/jobs/data/models/job_model.dart';
 
 abstract class JobRepository {
   Future<AppResult<List<JobModel>>> fetchAllJobs();
+
+  Future<AppResult<JobModel>> fetchJobDetail(String id);
 }
 
 class JobRepositoryImpl implements JobRepository {
@@ -12,5 +14,10 @@ class JobRepositoryImpl implements JobRepository {
   @override
   Future<AppResult<List<JobModel>>> fetchAllJobs() {
     return _jobDataSourceRemote.fetchAllJobs();
+  }
+  
+  @override
+  Future<AppResult<JobModel>> fetchJobDetail(String id) {
+    return _jobDataSourceRemote.fetchJobDetail(id);
   }
 }

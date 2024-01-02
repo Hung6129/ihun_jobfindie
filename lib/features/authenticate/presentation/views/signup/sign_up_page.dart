@@ -12,7 +12,7 @@ import 'package:ihun_jobfindie/features/authenticate/presentation/widgets/app_tx
 
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
-import 'package:ihun_jobfindie/shared/widgets/app_btn_lbl_icon.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_texticonbtn.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -74,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       onChange: (value) {},
                       keyboardType: TextInputType.visiblePassword,
                     ),
-                    AppBtnLabelWithIcon(
+                    AppTextIconBtn(
                       label: AppStrings.signUpTitle,
                       labelColor: Palettes.textBlack,
                       bgColor: Palettes.p4,

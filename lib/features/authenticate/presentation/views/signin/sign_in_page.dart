@@ -11,7 +11,7 @@ import 'package:ihun_jobfindie/features/authenticate/presentation/controller/aut
 import 'package:ihun_jobfindie/features/authenticate/presentation/widgets/app_txtfield.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import 'package:ihun_jobfindie/shared/theme/palettes.dart';
-import 'package:ihun_jobfindie/shared/widgets/app_btn_lbl_icon.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_texticonbtn.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -87,7 +87,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   verticalMargin12,
-                  AppBtnLabelWithIcon(
+                  AppTextIconBtn(
                     label: AppStrings.signInTitle,
                     labelColor: Palettes.textWhite,
                     bgColor: Palettes.p2,

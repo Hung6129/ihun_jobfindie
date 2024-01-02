@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/views/signin/sign_in_page.dart';
 import 'package:ihun_jobfindie/features/authenticate/presentation/views/signup/sign_up_page.dart';
 import 'package:ihun_jobfindie/features/candidate/presentation/views/profile_page.dart';
+import 'package:ihun_jobfindie/features/jobs/presentation/views/job_detail_page.dart';
 import 'package:ihun_jobfindie/features/main/main_page.dart';
 import 'package:ihun_jobfindie/features/walk_through/walk_through_page.dart';
 
@@ -124,6 +125,25 @@ class AppRoutes {
         );
 
       case jobDetail:
+        return PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const JobDetailPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween = Tween(begin: begin, end: end).chain(
+              CurveTween(
+                curve: curve,
+              ),
+            );
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        );
       case profile:
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => const ProfilePage(),

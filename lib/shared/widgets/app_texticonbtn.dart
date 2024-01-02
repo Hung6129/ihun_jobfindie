@@ -4,8 +4,8 @@ import 'package:ihun_jobfindie/shared/theme/palettes.dart';
 
 import '../styles/text_styles.dart';
 
-class AppBtnLabelWithIcon extends StatelessWidget {
-  const AppBtnLabelWithIcon({
+class AppTextIconBtn extends StatelessWidget {
+  const AppTextIconBtn({
     super.key,
     required this.label,
     this.labelColor = Palettes.textBlack,

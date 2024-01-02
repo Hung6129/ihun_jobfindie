@@ -4,6 +4,8 @@ import 'package:ihun_jobfindie/features/jobs/domain/repository/job_repository.da
 
 abstract class JobUseCase {
   Future<AppResult<List<JobModel>>> fetchAllJobs();
+
+  Future<AppResult<JobModel>> fetchJobDetail(String id);
 }
 
 class JobUseCaseImpl implements JobUseCase {
@@ -12,5 +14,10 @@ class JobUseCaseImpl implements JobUseCase {
   @override
   Future<AppResult<List<JobModel>>> fetchAllJobs() {
     return _jobRepository.fetchAllJobs();
+  }
+  
+  @override
+  Future<AppResult<JobModel>> fetchJobDetail(String id) {
+    return _jobRepository.fetchJobDetail(id);
   }
 }
