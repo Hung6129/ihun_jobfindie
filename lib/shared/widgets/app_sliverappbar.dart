@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AppSilverBarWidget extends StatelessWidget {
@@ -8,11 +9,15 @@ class AppSilverBarWidget extends StatelessWidget {
     required this.expandedHeight,
     this.collapsedHeight,
     this.titleWidget,
-    required this.onlyShowTitleWhenCollapsed,
     this.backgroundWidget,
     this.leadingWidget,
     this.actions,
     this.iconThemeData,
+    required this.toolbarHeight,
+    this.bgColor,
+    this.pinned,
+    this.snap,
+    this.floating,
   }) : super(key: key);
 
   final List<Widget> children;
@@ -20,7 +25,6 @@ class AppSilverBarWidget extends StatelessWidget {
   final double? collapsedHeight;
   final double toolbarHeight;
   final Widget? titleWidget;
-  final bool onlyShowTitleWhenCollapsed;
   final Widget? backgroundWidget;
 
   final Widget? leadingWidget;
@@ -29,6 +33,10 @@ class AppSilverBarWidget extends StatelessWidget {
 
   final Color? bgColor;
 
+  final bool? pinned;
+  final bool? snap;
+  final bool? floating;
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -36,9 +44,15 @@ class AppSilverBarWidget extends StatelessWidget {
       slivers: <Widget>[
         SliverAppBar(
           backgroundColor: bgColor ?? context.theme.primaryColor,
-          pinned: true,
-          snap: true,
-          floating: true,
+          pinned: pinned ?? true,
+          snap: snap ?? false,
+          floating: floating ?? false,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20.r),
+              bottomRight: Radius.circular(20.r),
+            ),
+          ),
           collapsedHeight: collapsedHeight,
           expandedHeight: expandedHeight,
           toolbarHeight: toolbarHeight,
