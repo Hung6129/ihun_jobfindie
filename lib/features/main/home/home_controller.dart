@@ -16,7 +16,7 @@ class HomeController extends GetxController {
   Rxn<List<JobHomeModel>> listVIewAllJobModel = Rxn();
   RxString email = ''.obs;
   RxString name = '--'.obs;
-  RxString avatar = 'https://i.pinimg.com/474x/68/e5/d3/68e5d30de3741f077cea06f1b1a12a34.jpg'.obs;
+  RxString avatar = ''.obs;
 
   HomeController(this._jobsUseCase, this._authUseCase);
 

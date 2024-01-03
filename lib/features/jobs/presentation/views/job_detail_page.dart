@@ -29,7 +29,7 @@ class JobDetailPage extends StatelessWidget {
                     Get.back();
                   },
                   child: Icon(
-                    FontAwesomeIcons.arrowLeft,
+                    FontAwesomeIcons.chevronLeft,
                   ),
                 ),
                 actions: [
@@ -48,12 +48,7 @@ class JobDetailPage extends StatelessWidget {
                   ),
                   horizontalMargin24,
                 ],
-                collapsedHeight: 60.h,
                 pinned: true,
-                title: Text(
-                  controller.jobModel.value?.title ?? '',
-                  style: TextStyles.defaultStyle,
-                ),
               ),
               SliverList(
                 delegate: SliverChildListDelegate(
@@ -61,13 +56,84 @@ class JobDetailPage extends StatelessWidget {
                     Column(
                       children: [
                         /// company image
-                        Center(
-                          child: AppCachedNetworkImage(
-                            height: 80.h,
-                            imageUrl: controller.jobModel.value?.imageUrl ?? '',
-                          ),
+                        AppCachedNetworkImage(
+                          width: 150.w,
+                          imageUrl: controller.jobModel.value?.imageUrl ?? '',
+                          fit: BoxFit.cover,
                         ),
                         verticalMargin16,
+                        Text(
+                          controller.jobModel.value?.title ?? '',
+                          style: TextStyles.defaultStyle.appTitle,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 60.h,
+                                width: 60.w,
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      FontAwesomeIcons.sackDollar,
+                                      size: 30.sp,
+                                      color: Palettes.p5,
+                                    ),
+                                    Text(
+                                      controller.jobModel.value?.salary ?? '',
+                                      style: TextStyles.defaultStyle.smallText,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              horizontalMargin16,
+                              Container(
+                                height: 60.h,
+                                width: 60.w,
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      FontAwesomeIcons.businessTime,
+                                      size: 30.sp,
+                                      color: Palettes.p6,
+                                    ),
+                                    Text(
+                                      controller.jobModel.value?.contract ?? '',
+                                      style: TextStyles.defaultStyle.smallText,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              horizontalMargin16,
+                              Container(
+                                height: 60.h,
+                                width: 60.w,
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      FontAwesomeIcons.locationDot,
+                                      size: 30.sp,
+                                      color: Palettes.p7,
+                                    ),
+                                    Text(
+                                      controller.jobModel.value?.modality ?? '',
+                                      style: TextStyles.defaultStyle.smallText,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
 
                         /// tabs description and requirement
                         FlutterToggleTab(
@@ -97,33 +163,31 @@ class JobDetailPage extends StatelessWidget {
                                   style: TextStyles.defaultStyle.mediumText,
                                 ),
                               )
-                            : Padding(
-                                padding: EdgeInsets.all(8),
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: controller.jobModel.value?.requirement.length ?? 0,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(bottom: 20),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            FontAwesomeIcons.check,
-                                            color: Palettes.getRandomColor(),
+                            : ListView.builder(
+                                padding: EdgeInsets.only(top: 16.h, left: 5.w, right: 5.w),
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: controller.jobModel.value?.requirement.length ?? 0,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: 15.h),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          FontAwesomeIcons.check,
+                                          color: Palettes.getRandomColor(),
+                                        ),
+                                        horizontalMargin8,
+                                        Expanded(
+                                          child: Text(
+                                            controller.jobModel.value?.requirement[index] ?? '',
+                                            style: TextStyles.defaultStyle.mediumText,
                                           ),
-                                          horizontalMargin8,
-                                          Expanded(
-                                            child: Text(
-                                              controller.jobModel.value?.requirement[index] ?? '',
-                                              style: TextStyles.defaultStyle.mediumText,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                               )),
                       ],
                     )

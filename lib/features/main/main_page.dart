@@ -13,26 +13,27 @@ class MainPage extends StatelessWidget {
       init: MainController(),
       builder: (controller) {
         return Scaffold(
-            body: Obx(
-              () => controller.listScreens[controller.currentIndex.value],
-            ),
-            bottomNavigationBar: Obx(
-              () => NavigationBar(
-                elevation: 1,
-                indicatorShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(5.r),
-                    bottom: Radius.circular(5.r),
-                  ),
+          body: Obx(
+            () => controller.listScreens[controller.currentIndex.value],
+          ),
+          bottomNavigationBar: Obx(
+            () => NavigationBar(
+              elevation: 1,
+              indicatorShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(5.r),
+                  bottom: Radius.circular(5.r),
                 ),
-                height: 45.h,
-                selectedIndex: controller.currentIndex.value,
-                onDestinationSelected: (int index) {
-                  controller.currentIndex.value = index;
-                },
-                destinations: controller.destinations,
               ),
-            ));
+              height: 40.h,
+              selectedIndex: controller.currentIndex.value,
+              onDestinationSelected: (int index) {
+                controller.currentIndex.value = index;
+              },
+              destinations: controller.destinations,
+            ),
+          ),
+        );
       },
     );
   }

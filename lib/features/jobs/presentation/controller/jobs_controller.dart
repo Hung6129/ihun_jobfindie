@@ -24,6 +24,10 @@ class JobController extends GetxController {
     fetchJobDetails();
   }
 
+  void getJobPostRecruiterName()async{
+    
+  }
+
   void fetchJobDetails() async {
     AppFullScreenLoadingIndicator.show();
     await Future.delayed(Duration(milliseconds: 300));

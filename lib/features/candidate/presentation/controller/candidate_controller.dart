@@ -36,24 +36,25 @@ class CandidateController extends GetxController {
 
   void signOut() async {
     showDialog(
-        context: Get.context!,
-        builder: (context) => AlertDialog(
-              title: Text('Bạn có chắc chắn muốn đăng xuất?'),
-              actions: [
-                TextButton(
-                    onPressed: () async {
-                      await Global.storageServices.remove(AppStorage.userTokenKey);
-                      await Global.storageServices.remove(AppStorage.userProfileKey);
-                      await Global.storageServices.remove(AppStorage.isSavePassword);
-                      Get.offAllNamed(AppRoutes.signIn);
-                    },
-                    child: Text('Đăng xuất')),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Hủy')),
-              ],
-            ));
+      context: Get.context!,
+      builder: (context) => AlertDialog(
+        title: Text('Bạn có chắc chắn muốn đăng xuất?'),
+        actions: [
+          TextButton(
+              onPressed: () async {
+                await Global.storageServices.remove(AppStorage.userTokenKey);
+                await Global.storageServices.remove(AppStorage.userProfileKey);
+                await Global.storageServices.remove(AppStorage.isSavePassword);
+                Get.offAllNamed(AppRoutes.signIn);
+              },
+              child: Text('Đăng xuất')),
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Hủy')),
+        ],
+      ),
+    );
   }
 }

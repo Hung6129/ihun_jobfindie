@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -15,20 +16,39 @@ class MainController extends GetxController {
     JobPage(),
   ];
 
-  List<Widget> destinations = const [
+  List<Widget> destinations = [
     NavigationDestination(
-      selectedIcon: Icon(FontAwesomeIcons.house),
-      icon: Icon(FontAwesomeIcons.house),
+      selectedIcon: Icon(
+        FontAwesomeIcons.house,
+      ),
+      icon: Icon(
+        FontAwesomeIcons.house,
+        size: 18.sp,
+      ),
       label: 'Home',
     ),
     NavigationDestination(
+      selectedIcon: Badge(
+        child: Icon(
+          FontAwesomeIcons.solidComments,
+        ),
+      ),
       icon: Badge(
-        child: Icon(FontAwesomeIcons.solidComments),
+        child: Icon(
+          FontAwesomeIcons.solidComments,
+          size: 18.sp,
+        ),
       ),
       label: 'Messages',
     ),
     NavigationDestination(
-      icon: Icon(FontAwesomeIcons.briefcase),
+      selectedIcon: Icon(
+        FontAwesomeIcons.briefcase,
+      ),
+      icon: Icon(
+        FontAwesomeIcons.briefcase,
+        size: 18.sp,
+      ),
       label: 'Jobs',
     ),
   ];

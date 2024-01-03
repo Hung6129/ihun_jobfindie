@@ -10,10 +10,11 @@ class WalkThroughController extends GetxController {
     final isFirstTimeOpen = Global.storageServices.getIsFirstTime();
     final isSavePassword = Global.storageServices.isSavePassword();
     final isUserToken = Global.storageServices.getString(AppStorage.userTokenKey);
+    final isUserId = Global.storageServices.getString(AppStorage.userProfileKey);
     await Future.delayed(const Duration(seconds: 1));
     if (isFirstTimeOpen == true) {
       Get.offAllNamed(AppRoutes.wellcome);
-    } else if (isSavePassword == true && isUserToken.isNotEmpty) {
+    } else if (isSavePassword == true && isUserToken.isNotEmpty && isUserId.isNotEmpty) {
       Get.offAllNamed(AppRoutes.home);
     } else {
       Get.offAllNamed(AppRoutes.signIn);

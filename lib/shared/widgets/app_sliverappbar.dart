@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class AppSliverAppBar extends StatelessWidget {
-  const AppSliverAppBar({
-    super.key,
+class AppSilverBarWidget extends StatelessWidget {
+  const AppSilverBarWidget({
+    Key? key,
     required this.children,
     required this.expandedHeight,
     this.collapsedHeight,
@@ -12,19 +13,12 @@ class AppSliverAppBar extends StatelessWidget {
     this.leadingWidget,
     this.actions,
     this.iconThemeData,
-    this.flexibleSpaceBar,
-    this.centerTitle,
-    this.automaticallyImplyLeading = true,
-    this.pinned = true,
-    this.leadingWidth,
-    this.onStretchTrigger,
-    this.bottom,
-    this.backgroundColor,
-  });
+  }) : super(key: key);
 
   final List<Widget> children;
   final double expandedHeight;
   final double? collapsedHeight;
+  final double toolbarHeight;
   final Widget? titleWidget;
   final bool onlyShowTitleWhenCollapsed;
   final Widget? backgroundWidget;
@@ -33,42 +27,27 @@ class AppSliverAppBar extends StatelessWidget {
   final List<Widget>? actions;
   final IconThemeData? iconThemeData;
 
-  final bool? centerTitle;
-  final bool? automaticallyImplyLeading;
-  final bool? pinned;
-
-  final double? leadingWidth;
-
-  final FlexibleSpaceBar? flexibleSpaceBar;
-
-  final Function? onStretchTrigger;
-
-  final PreferredSizeWidget? bottom;
-
-  final Color? backgroundColor;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      slivers: [
+      physics: const ClampingScrollPhysics(),
+      slivers: <Widget>[
         SliverAppBar(
-          bottom: bottom,
-          backgroundColor: backgroundColor ?? Colors.black,
+          backgroundColor: bgColor ?? context.theme.primaryColor,
+          pinned: true,
+          snap: true,
+          floating: true,
+          collapsedHeight: collapsedHeight,
+          expandedHeight: expandedHeight,
+          toolbarHeight: toolbarHeight,
+          title: titleWidget,
+          titleSpacing: 0,
+          flexibleSpace: FlexibleSpaceBar(),
           leading: leadingWidget,
           actions: actions,
-          leadingWidth: leadingWidth?.toDouble(),
-          automaticallyImplyLeading: automaticallyImplyLeading!,
-          iconTheme: iconThemeData,
-          expandedHeight: expandedHeight,
-          collapsedHeight: collapsedHeight,
-          pinned: pinned!,
-          floating: false,
-          snap: false,
-          stretch: true,
-          onStretchTrigger: () async {
-            onStretchTrigger == null ? null : onStretchTrigger!();
-          },
-          flexibleSpace: flexibleSpaceBar,
+          actionsIconTheme: iconThemeData ?? const IconThemeData(color: Colors.white, size: 20),
         ),
         SliverList(
           delegate: SliverChildListDelegate(children),

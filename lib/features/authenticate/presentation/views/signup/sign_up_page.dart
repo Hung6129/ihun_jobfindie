@@ -38,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return GetBuilder<AuthenticateController>(
         init: AuthenticateController(Get.find()),
-        builder: (context) {
+        builder: (controller) {
           return Scaffold(
               body: Stack(
             children: [
@@ -85,10 +85,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                       onPressed: () {
-                        context.requestRegister(
+                        controller.requestRegister(
                           nameController.text,
                           passwordController.text,
                           emailController.text,
+                          context,
                         );
                       },
                     ),

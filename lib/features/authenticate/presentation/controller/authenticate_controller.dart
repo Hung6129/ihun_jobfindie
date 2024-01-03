@@ -9,6 +9,7 @@ import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_post_model.dart';
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_snackbar.dart';
 import 'package:logger/logger.dart';
 
 class AuthenticateController extends GetxController {
@@ -33,31 +34,21 @@ class AuthenticateController extends GetxController {
   Future<void> executeLoginByAccount(String email, String password, BuildContext context) async {
     try {
       if (email.isEmpty || password.isEmpty) {
-        Get.snackbar(
-          'Thông báo',
-          'Vui lòng nhập đầy đủ thông tin',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          margin: EdgeInsets.all(10),
-          borderRadius: 10,
-          duration: Duration(seconds: 3),
-        );
+        AppSnackbarWidget(
+          title: 'Thông báo',
+          message: 'Vui lòng nhập đầy đủ thông tin',
+          isError: true,
+        ).show(context);
         return;
       }
       AppFullScreenLoadingIndicator.show();
       final response = await _authUseCase.signIn(email, password);
       if (response is AppResultSuccess<UserPostModel>) {
-        Get.snackbar(
-          'Thông báo',
-          AppStrings.signInSuccess,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          margin: EdgeInsets.all(10),
-          borderRadius: 10,
-          duration: Duration(seconds: 3),
-        );
+        AppSnackbarWidget(
+          title: 'Thông báo',
+          message: AppStrings.signInSuccess,
+          isError: false,
+        ).show(context);
         if (isSavePassword.value) {
           Global.storageServices.setBool(AppStorage.isSavePassword, true);
         }
@@ -65,87 +56,62 @@ class AuthenticateController extends GetxController {
         Get.offAllNamed(AppRoutes.home);
       }
       if (response is AppResultFailure) {
-        Get.snackbar(
-          'Thông báo',
-          (response as AppResultFailure).exception!.message.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          margin: EdgeInsets.all(10),
-          borderRadius: 10,
-          duration: Duration(seconds: 3),
-        );
+        AppSnackbarWidget(
+          title: 'Thông báo',
+          message: (response as AppResultFailure).exception!.message.toString(),
+          isError: true,
+        ).show(context);
       }
     } catch (e) {
-      Get.snackbar(
-        'Thông báo',
-        AppStrings.signInFailed,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        margin: EdgeInsets.all(10),
-        borderRadius: 10,
-        duration: Duration(seconds: 3),
-      );
+      AppSnackbarWidget(
+        title: 'Thông báo',
+        message: AppStrings.signInFailed,
+        isError: true,
+      ).show(context);
     } finally {
       AppFullScreenLoadingIndicator.dismiss();
     }
   }
 
-  void requestRegister(String userName, String password, String email) async {
+  void requestRegister(
+    String userName,
+    String password,
+    String email,
+    BuildContext context,
+  ) async {
     try {
       if (userName.isEmpty || password.isEmpty || email.isEmpty) {
-        Get.snackbar(
-          'Thông báo',
-          'Vui lòng nhập đầy đủ thông tin',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          margin: EdgeInsets.all(10),
-          borderRadius: 10,
-          duration: Duration(seconds: 3),
-        );
+        AppSnackbarWidget(
+          title: 'Thông báo',
+          message: 'Vui lòng nhập đầy đủ thông tin',
+          isError: true,
+        ).show(context);
         return;
       }
       AppFullScreenLoadingIndicator.show();
       final response = await _authUseCase.signUp(email, password, userName);
       AppFullScreenLoadingIndicator.dismiss();
       if (response is AppResultSuccess<EmptyModel>) {
-        Get.snackbar(
-          'Thông báo',
-          AppStrings.signUpSuccess,
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          margin: EdgeInsets.all(10),
-          borderRadius: 10,
-          duration: Duration(seconds: 3),
-        );
+        AppSnackbarWidget(
+          title: 'Thông báo',
+          message: AppStrings.signUpSuccess,
+          isError: false,
+        ).show(context);
         Get.offAllNamed(AppRoutes.signIn);
       }
       if (response is AppResultFailure) {
-        Get.snackbar(
-          'Thông báo',
-          (response as AppResultFailure).exception!.message.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          margin: EdgeInsets.all(10),
-          borderRadius: 10,
-          duration: Duration(seconds: 3),
-        );
+        AppSnackbarWidget(
+          title: 'Thông báo',
+          message: (response as AppResultFailure).exception!.message.toString(),
+          isError: true,
+        ).show(context);
       }
     } catch (e) {
-      Get.snackbar(
-        'Thông báo',
-        AppStrings.signUpFailed,
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        margin: EdgeInsets.all(10),
-        borderRadius: 10,
-        duration: Duration(seconds: 3),
-      );
+      AppSnackbarWidget(
+        title: 'Thông báo',
+        message: AppStrings.signUpFailed,
+        isError: true,
+      ).show(context);
     } finally {
       AppFullScreenLoadingIndicator.dismiss();
     }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/features/main/home/home_controller.dart';
 import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
@@ -18,18 +19,21 @@ class JobTrendingViewAllPage extends StatelessWidget {
       init: HomeController(Get.find(), Get.find()),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          title: Text('Trending Jobs'),
+          title: Text(
+            AppStrings.homeTrendingJob,
+            style: TextStyles.defaultStyle.appBarTitle,
+          ),
         ),
         body: Obx(
           () => ListView.builder(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.only(bottom: 50.h),
             physics: BouncingScrollPhysics(),
+            itemCount: controller.listVIewAllJobModel.value?.length ?? 0,
+            shrinkWrap: true,
             itemBuilder: (context, index) {
               final data = controller.listVIewAllJobModel.value![index];
               return GestureDetector(
-                onTap: () {
-                  controller.onJobItemPressed(data.id);
-                },
+                onTap: () => controller.onJobItemPressed(data.id),
                 child: Card(
                   color: Palettes.textWhite,
                   surfaceTintColor: Palettes.textWhite,
@@ -95,8 +99,6 @@ class JobTrendingViewAllPage extends StatelessWidget {
                 ),
               );
             },
-            itemCount: controller.listVIewAllJobModel.value?.length ?? 0,
-            shrinkWrap: true,
           ),
         ),
       ),

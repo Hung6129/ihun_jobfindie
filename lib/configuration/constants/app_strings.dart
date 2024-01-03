@@ -42,4 +42,5 @@ class AppStrings {
   static const String homeSuggestions = 'Suggested Jobs for You';
   static const String homeRecentJobs = 'Recent Jobs';
   static const String homeViewAll = 'View All';
+  static const String homeTrendingJob = 'Trending Jobs';
 }

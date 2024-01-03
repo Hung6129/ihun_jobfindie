@@ -3,7 +3,7 @@ import 'package:ihun_jobfindie/features/authenticate/presentation/views/signin/s
 import 'package:ihun_jobfindie/features/authenticate/presentation/views/signup/sign_up_page.dart';
 import 'package:ihun_jobfindie/features/candidate/presentation/views/profile_page.dart';
 import 'package:ihun_jobfindie/features/jobs/presentation/views/job_detail_page.dart';
-import 'package:ihun_jobfindie/features/main/home/job_trending_viewall_page.dart';
+import 'package:ihun_jobfindie/features/main/home/home_trending_viewall_page.dart';
 import 'package:ihun_jobfindie/features/main/main_page.dart';
 import 'package:ihun_jobfindie/features/walk_through/walk_through_page.dart';
 
