@@ -8,11 +8,14 @@ import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_model.dart';
 
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
+
 import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 
 class CandidateController extends GetxController {
-  final _authUseCase = Get.find<AuthenUseCase>();
+  late final AuthenUseCase _authUseCase;
+  CandidateController(this._authUseCase);
   Rxn<UserProfileModel?> profileModel = Rxn();
+
   @override
   void onInit() async {
     super.onInit();

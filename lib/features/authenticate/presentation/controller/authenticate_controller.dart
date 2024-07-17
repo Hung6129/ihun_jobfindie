@@ -73,7 +73,7 @@ class AuthenticateController extends GetxController {
     }
   }
 
-  void requestRegister(
+  Future<void> requestRegister(
     String userName,
     String password,
     String email,

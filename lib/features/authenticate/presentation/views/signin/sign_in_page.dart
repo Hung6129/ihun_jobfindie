@@ -6,12 +6,13 @@ import 'package:ihun_jobfindie/configuration/constants/app_asset.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
-import 'package:ihun_jobfindie/features/authenticate/presentation/controller/authenticate_controller.dart';
 
 import 'package:ihun_jobfindie/shared/widgets/app_txtfield.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_texticonbtn.dart';
+
+import '../../controller/authenticate_controller.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

@@ -41,10 +41,14 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
   Future<AppResult<UserProfileModel>> getProfile() async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: '/api/user/find/${Global.storageServices.getString(AppStorage.userProfileKey)}',
+        url: '/api/user/find/${Global.storageServices.getString(
+          AppStorage.userProfileKey,
+        )}',
         method: HTTPMethod.get,
         headers: {
-          'token': 'Bearer ${Global.storageServices.getString(AppStorage.userTokenKey)}',
+          'token': 'Bearer ${Global.storageServices.getString(
+            AppStorage.userTokenKey,
+          )}',
         },
       ),
     );
@@ -83,4 +87,26 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
     }
     return AppResult.exceptionEmpty();
   }
+
+  @override
+  Future<AppResult<EmptyModel>> checkTokenIsExpired(String token) async {
+    final response = await _networkService.request(
+      clientRequest: ClientRequest(
+        url: '/api/refreshToken',
+        method: HTTPMethod.post,
+        body: {"refreshToken": token},
+      ),
+    );
+    if (response is AppResultSuccess<AppResponse>) {
+      final EmptyModel emptyModel = EmptyModel();
+      return AppResult.success(emptyModel);
+    }
+    if (response is AppResultFailure) {
+      return AppResult.failure((response as AppResultFailure).exception);
+    }
+    return AppResult.exceptionEmpty();
+  }
+
+  @override
+  Future<void> logout() async {}
 }

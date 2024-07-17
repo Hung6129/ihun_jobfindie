@@ -11,7 +11,7 @@ class WalkThroughPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<WalkThroughController>(
-      init: WalkThroughController(),
+      init: WalkThroughController(Get.find()),
       builder: (controller) {
         return const Scaffold(
           body: Center(

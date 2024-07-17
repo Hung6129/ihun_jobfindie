@@ -10,6 +10,10 @@ abstract class AuthenUseCase {
   Future<AppResult<EmptyModel>> signUp(String email, String password, String name);
 
   Future<AppResult<UserProfileModel>> getProfile();
+
+  Future<AppResult<EmptyModel>> checkTokenIsExpired(String token);
+
+  Future<void> logout();
 }
 
 class AuthenUseCaseImpl implements AuthenUseCase {
@@ -27,5 +31,16 @@ class AuthenUseCaseImpl implements AuthenUseCase {
   @override
   Future<AppResult<EmptyModel>> signUp(String email, String password, String name) {
     return _authenticateRepository.signUp(email, password, name);
+  }
+
+  @override
+  Future<AppResult<EmptyModel>> checkTokenIsExpired(String token) {
+    return _authenticateRepository.checkTokenIsExpired(token);
+  }
+
+  @override
+  Future<void> logout() {
+    // TODO: implement logout
+    throw UnimplementedError();
   }
 }

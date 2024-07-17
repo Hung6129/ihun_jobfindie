@@ -12,7 +12,7 @@ dependencies:
 
   ## UI
   dots_indicator: ^3.0.0
-  google_fonts: ^5.1.0
+  google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.0
   cached_network_image: ^3.3.0
 
@@ -26,18 +26,18 @@ dependencies:
   get: ^4.6.6
 
   ## Firebase
-  firebase_core: ^2.24.2
-  firebase_crashlytics: ^3.4.8
+  firebase_core: ^3.0.0
+  firebase_crashlytics: ^4.0.0
 
   flutter_easyloading: ^3.0.5
   flutter_secure_storage: ^9.0.0
   font_awesome_flutter: ^10.6.0
   auto_size_text: ^3.0.0
   flutter_toggle_tab: ^1.4.1
-  lottie: ^2.7.0
+  lottie: ^3.1.2
   pull_to_refresh_plus: ^2.0.3
   flutter_network_connectivity: ^0.0.6
-  
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -49,10 +49,10 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/icons/app-icon.png"
 
-
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
     - assets/lottie_json/
     - assets/icons/
+    - assets/vector/

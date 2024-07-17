@@ -1,4 +1,5 @@
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_result.dart';
+import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_model.dart';
 import 'package:ihun_jobfindie/features/jobs/data/models/job_home_model.dart';
 import 'package:ihun_jobfindie/features/jobs/data/models/job_model.dart';
 import 'package:ihun_jobfindie/features/jobs/domain/repository/job_repository.dart';
@@ -10,6 +11,8 @@ abstract class JobUseCase {
   Future<AppResult<List<JobHomeModel>>> fetchAllJobs();
 
   Future<AppResult<JobModel>> fetchJobDetail(String id);
+
+  Future<AppResult<UserProfileModel>> fetchRecruiterInfor(String id);
 }
 
 class JobUseCaseImpl implements JobUseCase {
@@ -28,5 +31,10 @@ class JobUseCaseImpl implements JobUseCase {
   @override
   Future<AppResult<List<JobHomeModel>>> fetchTrendingJobs() {
     return _jobRepository.fetchTrendingJobs();
+  }
+  
+  @override
+  Future<AppResult<UserProfileModel>> fetchRecruiterInfor(String id) {
+    return _jobRepository.fetchRecruiterInfor(id);
   }
 }

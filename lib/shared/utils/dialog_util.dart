@@ -127,7 +127,9 @@
 //     bool barrierDismissible = false,
 //   }) {
 //     AppDialogDefaultWidget(
-//       icon: hasIcon ? SvgPicture.asset('assets/vectors/ic_waring_on_dialog.svg') : null,
+//       icon: hasIcon
+//           ? SvgPicture.asset('assets/vectors/ic_waring_on_dialog.svg')
+//           : null,
 //       title: title,
 //       hasCloseIcon: hasCloseIcon,
 //       subText: subText,
@@ -156,7 +158,9 @@
 //     bool barrierDismissible = false,
 //   }) {
 //     AppDialogDefaultWidget(
-//       icon: hasIcon ? SvgPicture.asset('assets/vectors/ic_delete_on_dialog.svg') : null,
+//       icon: hasIcon
+//           ? SvgPicture.asset('assets/vectors/ic_delete_on_dialog.svg')
+//           : null,
 //       title: title,
 //       hasCloseIcon: hasCloseIcon,
 //       subText: subText,
@@ -202,7 +206,8 @@
 //     DialogUtil.onDialogError(
 //       Get.context,
 //       title: Strings.getDataFailure.tr,
-//       onPositiveFunc: onPositiveFunc != null ? onPositiveFunc.call : () => Get.close(2),
+//       onPositiveFunc:
+//           onPositiveFunc != null ? onPositiveFunc.call : () => Get.close(2),
 //     );
 //   }
 
@@ -218,7 +223,9 @@
 //     bool barrierDismissible = false,
 //   }) {
 //     AppDialogDefaultWidget(
-//       icon: hasIcon ? SvgPicture.asset('assets/vectors/ic_waring_on_dialog.svg') : null,
+//       icon: hasIcon
+//           ? SvgPicture.asset('assets/vectors/ic_waring_on_dialog.svg')
+//           : null,
 //       title: title,
 //       hasCloseIcon: hasCloseIcon,
 //       subText: subText,

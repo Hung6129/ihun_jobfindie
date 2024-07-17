@@ -23,8 +23,8 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    fetchTrendingJobs();
-    getUserInfor();
+    await fetchTrendingJobs();
+    await getUserInfor();
   }
 
   @override
@@ -32,7 +32,7 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void getUserInfor() async {
+  getUserInfor() async {
     final response = await _authUseCase.getProfile();
     if (response is AppResultSuccess<UserProfileModel>) {
       email.value = response.netData?.email ?? '';
@@ -44,13 +44,14 @@ class HomeController extends GetxController {
     }
   }
 
-  void fetchTrendingJobs() async {
+  fetchTrendingJobs() async {
     AppFullScreenLoadingIndicator.show();
     await Future.delayed(Duration(seconds: 1));
     final response = await _jobsUseCase.fetchTrendingJobs();
     AppFullScreenLoadingIndicator.dismiss();
     if (response is AppResultSuccess<List<JobHomeModel>>) {
       listJobModel.value = response.netData;
+      listJobModel.value!.shuffle();
     }
     if (response is AppResultFailure) {
       debugPrint('error when fetch list job');
@@ -64,6 +65,7 @@ class HomeController extends GetxController {
     AppFullScreenLoadingIndicator.dismiss();
     if (response is AppResultSuccess<List<JobHomeModel>>) {
       listVIewAllJobModel.value = response.netData;
+      listVIewAllJobModel.value!.shuffle();
     }
     if (response is AppResultFailure) {
       debugPrint('error when fetch list job');

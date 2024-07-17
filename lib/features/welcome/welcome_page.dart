@@ -1,30 +1,10 @@
-import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/material.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-
-import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
-import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
-import 'package:ihun_jobfindie/configuration/data/services/global.dart';
-import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
-
-import 'package:ihun_jobfindie/features/welcome/welcome_controller.dart';
-import 'package:ihun_jobfindie/features/welcome/welcome_list_pages.dart';
-import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
-import 'package:ihun_jobfindie/shared/styles/palettes.dart';
-import 'package:ihun_jobfindie/shared/widgets/app_icon_btn.dart';
+part of 'welcome_controller.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> listScreens = const [
-      Screen1(),
-      Screen2(),
-      Screen3(),
-    ];
     return GetBuilder<WelcomeController>(
       init: WelcomeController(),
       builder: (controller) {
@@ -33,11 +13,9 @@ class WelcomePage extends StatelessWidget {
             children: [
               /// PageView for each splash screen
               PageView(
-                onPageChanged: (int index) {
-                  controller.indexPage.value = index;
-                },
+                onPageChanged: (int index) => controller.indexPage.value = index,
                 controller: controller.pageController,
-                children: listScreens,
+                children: controller.listScreens,
               ),
 
               /// Show the dots indicator
@@ -48,7 +26,7 @@ class WelcomePage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 50.h),
                     child: DotsIndicator(
-                      dotsCount: listScreens.length,
+                      dotsCount: controller.listScreens.length,
                       position: controller.indexPage.value,
                       decorator: DotsDecorator(
                         spacing: const EdgeInsets.all(10),

@@ -9,6 +9,7 @@ import 'package:ihun_jobfindie/configuration/bindings/app_binding.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
+import 'package:ihun_jobfindie/configuration/services/app_services.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 
 /// Sets a callback to use for reporting errors to Crashlytics.
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.put<AppService>(AppServiceImpl());
     return ScreenUtilInit(
       builder: (context, child) => GetMaterialApp(
         builder: AppFullScreenLoadingIndicator.init(
@@ -50,7 +52,6 @@ class MyApp extends StatelessWidget {
                 child: child!,
               )),
         ),
-        // theme: ThemeData(useMaterial3: true),
         title: AppStrings.appTitle,
         debugShowCheckedModeBanner: false,
         smartManagement: SmartManagement.onlyBuilder,

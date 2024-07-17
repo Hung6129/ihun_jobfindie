@@ -8,7 +8,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: CandidateController(),
+      init: CandidateController(Get.find()),
       builder: (controller) => Scaffold(
           appBar: AppBar(
             title: Text('Profile'),

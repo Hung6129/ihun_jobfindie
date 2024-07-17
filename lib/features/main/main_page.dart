@@ -25,7 +25,7 @@ class MainPage extends StatelessWidget {
                   bottom: Radius.circular(5.r),
                 ),
               ),
-              height: 40.h,
+              height: 50.h,
               selectedIndex: controller.currentIndex.value,
               onDestinationSelected: (int index) {
                 controller.currentIndex.value = index;

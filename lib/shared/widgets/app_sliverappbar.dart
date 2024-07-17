@@ -43,6 +43,7 @@ class AppSilverBarWidget extends StatelessWidget {
       physics: const ClampingScrollPhysics(),
       slivers: <Widget>[
         SliverAppBar(
+          elevation: 0,
           backgroundColor: bgColor ?? context.theme.primaryColor,
           pinned: pinned ?? true,
           snap: snap ?? false,

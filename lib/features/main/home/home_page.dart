@@ -26,9 +26,9 @@ class HomePage extends StatelessWidget {
         backgroundColor: Palettes.textWhite,
         body: AppSilverBarWidget(
           bgColor: Palettes.p2,
-          expandedHeight: 80.h,
-          toolbarHeight: 80.h,
-          collapsedHeight: 80.h,
+          expandedHeight: 70.h,
+          toolbarHeight: 70.h,
+          collapsedHeight: 70.h,
           titleWidget: Obx(
             () => Row(
               children: [

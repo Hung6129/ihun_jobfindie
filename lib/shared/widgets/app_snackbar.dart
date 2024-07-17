@@ -30,7 +30,7 @@ class AppSnackbarWidget {
         messageText: messageWidget ?? Text(message, style: TextStyles.defaultStyle.whiteText),
         duration: duration ?? const Duration(seconds: 3),
         margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        backgroundColor: isError ? context?.theme.colorScheme.error : context?.theme.primaryColor,
+        backgroundColor: isError ? Colors.red : Colors.green,
         icon: Padding(
           padding: const EdgeInsets.all(8.0),
           child: isError
