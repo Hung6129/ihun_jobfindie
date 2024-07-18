@@ -41,15 +41,8 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
   Future<AppResult<UserProfileModel>> getProfile() async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: '/api/user/find/${Global.storageServices.getString(
-          AppStorage.userProfileKey,
-        )}',
+        url: '/api/user/find/${Global.storageServices.getString(AppStorage.userProfileKey)}',
         method: HTTPMethod.get,
-        headers: {
-          'token': 'Bearer ${Global.storageServices.getString(
-            AppStorage.userTokenKey,
-          )}',
-        },
       ),
     );
     if (response is AppResultSuccess<AppResponse>) {
@@ -99,6 +92,7 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
     );
     if (response is AppResultSuccess<AppResponse>) {
       final EmptyModel emptyModel = EmptyModel();
+      Global.storageServices.setString(AppStorage.userTokenKey, response.netData?.data['token']);
       return AppResult.success(emptyModel);
     }
     if (response is AppResultFailure) {

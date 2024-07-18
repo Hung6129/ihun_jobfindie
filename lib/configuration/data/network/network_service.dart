@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
+import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_urls.dart';
+import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 
 import 'package:logger/logger.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -27,6 +29,7 @@ abstract class NetworkService extends GetxService {
     dio.interceptors.add(PrettyDioLogger(
       requestBody: true,
       responseBody: false,
+      requestHeader: true,
     ));
 
     return dio;
@@ -44,7 +47,9 @@ class NetworkServiceImpl extends NetworkService {
     super.onInit();
     _logger = Logger(printer: PrettyPrinter(methodCount: 0));
     _dio = NetworkService.newDio();
-    _dio.interceptors.add(NetworkInterceptorWrapper(diO: _dio));
+    _dio.interceptors.add(
+      NetworkInterceptorWrapper(diO: _dio),
+    );
   }
 
   @override

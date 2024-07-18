@@ -12,6 +12,7 @@ class AppServiceImpl extends AppService {
   @override
   void forceLogout() async {
     AppSnackbarWidget(
+      duration: const Duration(seconds: 5),
       title: 'Phiên đăng nhập đã hết hạn',
       message: 'Vui lòng đăng nhập lại',
       isError: true,

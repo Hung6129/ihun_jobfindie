@@ -23,7 +23,9 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   @override
   void dispose() {
     super.dispose();
@@ -75,9 +77,7 @@ class _SignInPageState extends State<SignInPage> {
                       children: [
                         Checkbox(
                           value: controller.isSavePassword.value,
-                          onChanged: (value) {
-                            controller.isSavePassword.value = value!;
-                          },
+                          onChanged: (value) => controller.isSavePassword.value = value!,
                         ),
                         Text(
                           AppStrings.signInRememberMe,
@@ -97,9 +97,11 @@ class _SignInPageState extends State<SignInPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.r),
                     ),
-                    onPressed: () async {
-                      await controller.executeLoginByAccount(emailController.text, passwordController.text, context);
-                    },
+                    onPressed: () async => await controller.executeLoginByAccount(
+                      emailController.text,
+                      passwordController.text,
+                      context,
+                    ),
                   ),
                   verticalMargin12,
                   Row(
@@ -110,10 +112,11 @@ class _SignInPageState extends State<SignInPage> {
                         style: TextStyles.defaultStyle,
                       ),
                       TextButton(
-                        onPressed: () {
-                          Get.toNamed(AppRoutes.signUp);
-                        },
-                        child: Text(AppStrings.signUpTitle, style: TextStyles.defaultStyle.underLine.bold.mediumText),
+                        onPressed: () => Get.toNamed(AppRoutes.signUp),
+                        child: Text(
+                          AppStrings.signUpTitle,
+                          style: TextStyles.defaultStyle.underLine.bold.mediumText,
+                        ),
                       ),
                     ],
                   ),
@@ -166,11 +169,6 @@ class _SignInPageState extends State<SignInPage> {
                         onPressed: () {},
                         child: Image.asset(AppAsset.call2, width: 28.w),
                       ),
-                      // horizontalMargin12,
-                      // TextButton(
-                      //   onPressed: () => throw Exception(),
-                      //   child: const Text("Throw Test Exception"),
-                      // ),
                     ],
                   )
                 ],
