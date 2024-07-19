@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' show debugPrint;
 import 'package:ihun_jobfindie/configuration/data/network/app_urls.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_response.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_result.dart';
@@ -64,9 +65,11 @@ class JobDataSourceRemote implements JobRepository {
         method: HTTPMethod.get,
       ),
     );
+    debugPrint('response: $response');
     if (response is AppResultSuccess<AppResponse>) {
       final List<JobHomeModel> listData = [];
       final List<dynamic> list = response.netData?.data;
+      debugPrint('list: $list');
       list.forEach((element) {
         listData.add(JobHomeModel.fromJson(element));
       });

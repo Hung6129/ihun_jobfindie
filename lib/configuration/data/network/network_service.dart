@@ -75,9 +75,7 @@ class NetworkServiceImpl extends NetworkService {
           ? AppResponse.fromJsonToList(response.data)
           : AppResponse.fromJson(response.data);
       return HttpStatus(response.statusCode).isOk
-          ? AppResult.success(
-              appResponse,
-            )
+          ? AppResult.success(appResponse)
           : AppResult.failure(
               NetworkException(
                 code: response.statusCode,
