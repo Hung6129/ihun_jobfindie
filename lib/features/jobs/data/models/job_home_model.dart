@@ -26,6 +26,7 @@ class JobHomeModel extends Equatable {
   final String imageUrl;
   final String agentId;
   final String date;
+  final String description;
 
   const JobHomeModel(
     this.id,
@@ -39,6 +40,7 @@ class JobHomeModel extends Equatable {
     this.agentId,
     this.date,
     this.modality,
+    this.description,
   );
 
   factory JobHomeModel.fromJson(Map<String, dynamic> json) {
@@ -54,6 +56,7 @@ class JobHomeModel extends Equatable {
       json['agentId'],
       json['date'],
       json['modality'],
+      json['description'],
     );
   }
 
@@ -70,5 +73,6 @@ class JobHomeModel extends Equatable {
         agentId,
         date,
         modality,
+        description,
       ];
 }
