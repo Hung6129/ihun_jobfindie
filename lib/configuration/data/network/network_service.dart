@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
-import 'package:ihun_jobfindie/configuration/constants/app_urls.dart';
+import 'package:ihun_jobfindie/configuration/data/network/app_urls.dart';
 import 'package:ihun_jobfindie/configuration/data/services/global.dart';
+import 'package:ihun_jobfindie/configuration/services/app_services.dart';
 
 import 'package:logger/logger.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -35,7 +35,9 @@ abstract class NetworkService extends GetxService {
     return dio;
   }
 
-  Future<AppResult<AppResponse>> request({required ClientRequest clientRequest});
+  Future<AppResult<AppResponse>> request({
+    required ClientRequest clientRequest,
+  });
 }
 
 class NetworkServiceImpl extends NetworkService {

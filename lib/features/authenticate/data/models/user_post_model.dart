@@ -15,29 +15,32 @@ import 'package:equatable/equatable.dart';
 class UserPostModel extends Equatable {
   final String id;
   final String token;
+  final String refreshToken;
+  final String userName;
+  final String email;
 
   const UserPostModel(
     this.id,
     this.token,
+    this.refreshToken,
+    this.userName,
+    this.email,
   );
 
   factory UserPostModel.fromJson(Map<String, dynamic> json) {
     return UserPostModel(
       json['_id'],
       json['token'],
+      json['refreshToken'],
+      json['username'],
+      json['email'],
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'token': token,
-    };
-  }
+  @override
+  String toString() =>
+      'UserPostModel(id: $id, token: $token, refreshToken: $refreshToken, userName: $userName, email: $email)';
 
   @override
-  List<Object?> get props => [
-        id,
-        token,
-      ];
+  List<Object?> get props => [id, token, refreshToken, userName, email];
 }

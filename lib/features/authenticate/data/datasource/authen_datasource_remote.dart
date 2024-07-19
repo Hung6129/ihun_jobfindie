@@ -1,4 +1,5 @@
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
+import 'package:ihun_jobfindie/configuration/data/network/app_urls.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_response.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_result.dart';
 import 'package:ihun_jobfindie/configuration/data/network/network_service.dart';
@@ -16,7 +17,7 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
   Future<AppResult<UserPostModel>> signIn(String email, String password) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: '/api/login',
+        url: AppUrls.logIn,
         method: HTTPMethod.post,
         body: {
           'email': email,
@@ -26,7 +27,9 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
     );
 
     if (response is AppResultSuccess<AppResponse>) {
-      final UserPostModel userPost = UserPostModel.fromJson(response.netData?.data);
+      final UserPostModel userPost = UserPostModel.fromJson(
+        response.netData?.data,
+      );
       return AppResult.success(userPost);
     }
     if (response is AppResultFailure) {
@@ -41,7 +44,11 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
   Future<AppResult<UserProfileModel>> getProfile() async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: '/api/user/find/${Global.storageServices.getString(AppStorage.userProfileKey)}',
+        url: AppUrls.getUserById(
+          Global.storageServices.getString(
+            AppStorage.userProfileKey,
+          ),
+        ),
         method: HTTPMethod.get,
       ),
     );
@@ -61,7 +68,7 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
   Future<AppResult<EmptyModel>> signUp(String email, String password, String name) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: '/api/register',
+        url: AppUrls.register,
         method: HTTPMethod.post,
         body: {
           'email': email,
@@ -85,14 +92,16 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
   Future<AppResult<EmptyModel>> checkTokenIsExpired(String token) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: '/api/refreshToken',
+        url: AppUrls.refreshToken,
         method: HTTPMethod.post,
-        body: {"refreshToken": token},
+        body: {
+          "refreshToken": token,
+        },
       ),
     );
     if (response is AppResultSuccess<AppResponse>) {
       final EmptyModel emptyModel = EmptyModel();
-      Global.storageServices.setString(AppStorage.userTokenKey, response.netData?.data['token']);
+      Global.storageServices.setString(AppStorage.userTokenKey, response.netData?.data['newAccessToken']);
       return AppResult.success(emptyModel);
     }
     if (response is AppResultFailure) {

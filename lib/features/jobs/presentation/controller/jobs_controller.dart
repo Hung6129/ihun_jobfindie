@@ -31,7 +31,9 @@ class JobController extends GetxController {
 
   Future<void> getJobPostRecruiterName() async {
     await Future.delayed(Duration(milliseconds: 300));
-    final response = await _jobUseCase.fetchRecruiterInfor(jobModel.value!.agentId);
+    final response = await _jobUseCase.fetchRecruiterInfor(
+      jobModel.value!.agentId,
+    );
     if (response is AppResultSuccess<UserProfileModel>) {
       recruiterName.value = response.netData?.username;
     }

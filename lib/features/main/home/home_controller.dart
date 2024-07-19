@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_result.dart';
-import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_model.dart';
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
 import 'package:ihun_jobfindie/features/jobs/data/models/job_home_model.dart';
@@ -51,7 +50,6 @@ class HomeController extends GetxController {
     AppFullScreenLoadingIndicator.dismiss();
     if (response is AppResultSuccess<List<JobHomeModel>>) {
       listJobModel.value = response.netData;
-      listJobModel.value!.shuffle();
     }
     if (response is AppResultFailure) {
       debugPrint('error when fetch list job');
@@ -72,7 +70,5 @@ class HomeController extends GetxController {
     }
   }
 
-  void onJobItemPressed(String jobId) {
-    Get.toNamed(AppRoutes.jobDetail, arguments: jobId);
-  }
+
 }

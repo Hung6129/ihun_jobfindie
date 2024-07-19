@@ -1,3 +1,4 @@
+import 'package:ihun_jobfindie/configuration/data/network/app_urls.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_response.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_result.dart';
 import 'package:ihun_jobfindie/configuration/data/network/network_service.dart';
@@ -14,7 +15,7 @@ class JobDataSourceRemote implements JobRepository {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
         isRequestForList: true,
-        url: '/api/job/?limit=25',
+        url: AppUrls.allJobs,
         method: HTTPMethod.get,
       ),
     );
@@ -38,7 +39,7 @@ class JobDataSourceRemote implements JobRepository {
   Future<AppResult<JobModel>> fetchJobDetail(String id) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: '/api/job/find/$id',
+        url: AppUrls.jobById(id),
         method: HTTPMethod.get,
       ),
     );
@@ -59,7 +60,7 @@ class JobDataSourceRemote implements JobRepository {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
         isRequestForList: true,
-        url: '/api/job/?limit=10',
+        url: AppUrls.trendingJobs,
         method: HTTPMethod.get,
       ),
     );
@@ -80,10 +81,10 @@ class JobDataSourceRemote implements JobRepository {
   }
 
   @override
-  Future<AppResult<UserProfileModel>> fetchRecruiterInfor(String id)async {
+  Future<AppResult<UserProfileModel>> fetchRecruiterInfor(String id) async {
     final response = await _networkService.request(
       clientRequest: ClientRequest(
-        url: '/api/user/recruiter/find/$id',
+        url: AppUrls.recruiterInfor(id),
         method: HTTPMethod.get,
       ),
     );

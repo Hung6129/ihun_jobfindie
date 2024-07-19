@@ -3,6 +3,8 @@ part of 'network_service.dart';
 class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
   late final Dio diO;
 
+  final _logger = Logger(printer: PrettyPrinter(methodCount: 0));
+
   NetworkInterceptorWrapper({required this.diO});
 
   @override
@@ -22,25 +24,26 @@ class NetworkInterceptorWrapper extends QueuedInterceptorsWrapper {
       return handler.next(err);
     }
     // Do something with response error
-    if (err.response?.statusCode == 401 ) {
-      debugPrint("hello ${err.response?.data.toString()}");
-      // final refreshToken = Global.storageServices.getString(AppStorage.refreshTokenKey);
-      // if (refreshToken.isNotEmpty) {
-      //   final response = await diO.post(
-      //     'api/refresh-token',
-      //     data: {'refresh_token': refreshToken},
-      //     options: Options(
-      //       headers: _basicToken,
-      //     ),
-      //   );
-      //   if (response.statusCode == 200) {
-      //     final token = response.data['token'];
-      //     Global.storageServices.setString(AppStorage.userTokenKey, token);
-      //     return handler.resolve(await diO.fetch(err.requestOptions));
-      //   }
-      // }
-      // Global.storageServices.clear();
-      // Global.navigationServices.pushNamedAndRemoveUntil(AppRoute.login);
+    if (err.response?.statusCode == 401 &&
+        err.response?.data['meta']['errorMessages'] == 'jwt expired') {
+      // Handle refresh token
+      _logger.e('Token expired: ${err.response?.data['meta']['errorMessages']}');
+      final refreshToken = Global.storageServices.getString(AppStorage.refreshToken);
+      if (refreshToken.isNotEmpty) {
+        final response = await diO.post(
+          AppUrls.refreshToken,
+          data: {'refresh_token': refreshToken},
+          options: Options(
+            headers: _basicToken,
+          ),
+        );
+        if (response.statusCode == 200) {
+          final token = response.data['token'];
+          Global.storageServices.setString(AppStorage.userTokenKey, token);
+          return handler.resolve(await diO.fetch(err.requestOptions));
+        }
+      }
+      Get.find<AppService>().forceLogout();
     } else {
       return handler.next(err);
     }

@@ -30,7 +30,7 @@ class JobTrendingViewAllPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final data = controller.listVIewAllJobModel.value![index];
                   return GestureDetector(
-                    onTap: () => controller.onJobItemPressed(data.id),
+                    // onTap: () => controller.onJobItemPressed(data.id),
                     child: Card(
                       color: Palettes.textWhite,
                       surfaceTintColor: Palettes.textWhite,
@@ -68,7 +68,8 @@ class JobTrendingViewAllPage extends StatelessWidget {
                                         size: 16.sp,
                                       ),
                                       horizontalMargin4,
-                                      Text(data.salary.toString(), style: TextStyles.defaultStyle.smallText),
+                                      Text(data.salary.toString(),
+                                          style: TextStyles.defaultStyle.smallText),
                                       horizontalMargin12,
                                       FaIcon(
                                         FontAwesomeIcons.suitcase,

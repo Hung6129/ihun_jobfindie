@@ -23,12 +23,14 @@ class AuthenticateController extends GetxController {
     super.onInit();
   }
 
-  void saveToken(String tokenKey, String profileId) async {
-    final logger = Logger(printer: PrettyPrinter(methodCount: 0));
-    logger.i('tokenKey: $tokenKey');
-    logger.i('profileId: $profileId');
-    await Global.storageServices.setString(AppStorage.userTokenKey, tokenKey);
-    await Global.storageServices.setString(AppStorage.userProfileKey, profileId);
+  final logger = Logger(printer: PrettyPrinter(methodCount: 0));
+
+  void saveToken(UserPostModel user) async {
+    await Global.storageServices.setString(AppStorage.userTokenKey, user.token);
+    await Global.storageServices.setString(AppStorage.userProfileKey, user.id);
+    await Global.storageServices.setString(AppStorage.refreshToken, user.refreshToken);
+    await Global.storageServices.setString(AppStorage.userEmail, user.email);
+    await Global.storageServices.setString(AppStorage.userName, user.userName);
   }
 
   Future<void> executeLoginByAccount(String email, String password, BuildContext context) async {
@@ -50,9 +52,12 @@ class AuthenticateController extends GetxController {
           isError: false,
         ).show(context);
         if (isSavePassword.value) {
-          Global.storageServices.setBool(AppStorage.isSavePassword, true);
+          Global.storageServices.setBool(
+            AppStorage.isSavePassword,
+            true,
+          );
         }
-        saveToken(response.netData!.token, response.netData!.id);
+        saveToken(response.netData!);
         Get.offAllNamed(AppRoutes.home);
       }
       if (response is AppResultFailure) {
