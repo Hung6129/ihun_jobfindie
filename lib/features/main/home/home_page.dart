@@ -7,7 +7,8 @@ import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/features/jobs/data/models/job_home_model.dart';
-import 'package:ihun_jobfindie/features/main/home/home_controller.dart';
+import 'package:ihun_jobfindie/features/main/controller/home_controller.dart';
+import 'package:ihun_jobfindie/features/main/home/home_trending_viewall_page.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_cached_image_widget.dart';
@@ -56,10 +57,7 @@ class HomePage extends StatelessWidget {
           children: [
             AppTitleViewAll(
               title: AppStrings.homeTrendingJob,
-              onPressed: () {
-                Get.toNamed(AppRoutes.jobTrendingViewAll);
-                // controller.fetchTrendingViewAll();
-              },
+              onPressed: () => JobTrendingViewAllPage.openForJobTrendingViewAll(controller),
             ),
             Container(
               height: 220.h,

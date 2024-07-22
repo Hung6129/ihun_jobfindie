@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-import 'package:ihun_jobfindie/features/main/main_controller.dart';
+import 'package:ihun_jobfindie/features/main/controller/main_controller.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});

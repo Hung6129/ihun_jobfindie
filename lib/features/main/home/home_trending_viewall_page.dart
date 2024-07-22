@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_spacing.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
-import 'package:ihun_jobfindie/features/main/home/home_controller.dart';
+import 'package:ihun_jobfindie/features/main/controller/home_controller.dart';
 import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_cached_image_widget.dart';
@@ -15,6 +15,13 @@ import '../../jobs/data/models/job_home_model.dart';
 
 class JobTrendingViewAllPage extends StatelessWidget {
   const JobTrendingViewAllPage({super.key});
+
+  static openForJobTrendingViewAll(
+    HomeController controller,
+  ) {
+    controller.fetchTrendingViewAll();
+    return Get.to(() => JobTrendingViewAllPage());
+  }
 
   @override
   Widget build(BuildContext context) {

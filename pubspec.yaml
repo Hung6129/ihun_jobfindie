@@ -39,6 +39,7 @@ dependencies:
   flutter_network_connectivity: ^0.0.6
   flutter_svg: ^2.0.9
   timeago: ^3.7.0
+  rxdart: ^0.27.7
 
 dev_dependencies:
   flutter_test:
