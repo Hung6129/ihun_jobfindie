@@ -15,6 +15,8 @@ class AppUrls {
   static const String searchProduct = "/job/search/";
   static const String productById = "/job/find/";
 
+  static String getJobsByAgentId(String agentId) => "/job/agent/$agentId";
+
   // for authentication and getting user info
   static const String logIn = "/login";
   static const String register = "/register";

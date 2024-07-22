@@ -33,6 +33,9 @@ class UserProfileModel extends Equatable {
     this.isAgent,
   );
 
+  // get list of skills
+  String get skill => skills.join(', ');
+
   factory UserProfileModel.fromJson(Map<String, dynamic> json) {
     return UserProfileModel(
       json['username'],

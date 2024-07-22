@@ -25,14 +25,6 @@ class AuthenticateController extends GetxController {
 
   final logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
-  void saveToken(UserPostModel user) async {
-    await Global.storageServices.setString(AppStorage.userTokenKey, user.token);
-    await Global.storageServices.setString(AppStorage.userProfileKey, user.id);
-    await Global.storageServices.setString(AppStorage.refreshToken, user.refreshToken);
-    await Global.storageServices.setString(AppStorage.userEmail, user.email);
-    await Global.storageServices.setString(AppStorage.userName, user.userName);
-  }
-
   Future<void> executeLoginByAccount(String email, String password, BuildContext context) async {
     try {
       if (email.isEmpty || password.isEmpty) {
@@ -57,12 +49,13 @@ class AuthenticateController extends GetxController {
             true,
           );
         }
-        saveToken(response.netData!);
+        Global.storageServices.saveUserInfor(response.netData!);
         Get.offAllNamed(AppRoutes.home);
       }
       if (response is AppResultFailure) {
         AppSnackbarWidget(
           title: 'Thông báo',
+          duration: const Duration(seconds: 4),
           message: (response as AppResultFailure).exception!.message.toString(),
           isError: true,
         ).show(context);

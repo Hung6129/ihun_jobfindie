@@ -107,42 +107,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     verticalMargin16,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: Palettes.textWhite,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: borderRadius64,
-                              side: BorderSide(
-                                color: Palettes.textBlack,
-                                width: 0.2,
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: Image.asset(AppAsset.google, width: 28.w),
-                        ),
-                        horizontalMargin12,
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: Palettes.textWhite,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: borderRadius64,
-                              side: BorderSide(
-                                color: Palettes.textBlack,
-                                width: 0.2,
-                              ),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: Image.asset(AppAsset.call2, width: 28.w),
-                        ),
-                      ],
-                    )
+                    _buildSocialBtn(),
                   ],
                 ),
               ),
@@ -150,6 +115,45 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSocialBtn() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: Palettes.textWhite,
+            shape: const RoundedRectangleBorder(
+              borderRadius: borderRadius64,
+              side: BorderSide(
+                color: Palettes.textBlack,
+                width: 0.2,
+              ),
+            ),
+          ),
+          onPressed: () {},
+          child: Image.asset(AppAsset.google, width: 28.w),
+        ),
+        horizontalMargin12,
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: Palettes.textWhite,
+            shape: const RoundedRectangleBorder(
+              borderRadius: borderRadius64,
+              side: BorderSide(
+                color: Palettes.textBlack,
+                width: 0.2,
+              ),
+            ),
+          ),
+          onPressed: () {},
+          child: Image.asset(AppAsset.call2, width: 28.w),
+        ),
+      ],
     );
   }
 

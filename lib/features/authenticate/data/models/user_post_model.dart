@@ -18,6 +18,7 @@ class UserPostModel extends Equatable {
   final String refreshToken;
   final String userName;
   final String email;
+  final bool isAgent;
 
   const UserPostModel(
     this.id,
@@ -25,6 +26,7 @@ class UserPostModel extends Equatable {
     this.refreshToken,
     this.userName,
     this.email,
+    this.isAgent,
   );
 
   factory UserPostModel.fromJson(Map<String, dynamic> json) {
@@ -34,13 +36,21 @@ class UserPostModel extends Equatable {
       json['refreshToken'],
       json['username'],
       json['email'],
+      json['isAgent'],
     );
   }
 
   @override
   String toString() =>
-      'UserPostModel(id: $id, token: $token, refreshToken: $refreshToken, userName: $userName, email: $email)';
+      'UserPostModel(id: $id, token: $token, refreshToken: $refreshToken, userName: $userName, email: $email, isAgent: $isAgent)';
 
   @override
-  List<Object?> get props => [id, token, refreshToken, userName, email];
+  List<Object?> get props => [
+        id,
+        token,
+        refreshToken,
+        userName,
+        email,
+        isAgent,
+      ];
 }

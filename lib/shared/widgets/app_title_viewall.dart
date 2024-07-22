@@ -23,7 +23,7 @@ class AppTitleViewAll extends StatelessWidget {
           GestureDetector(
             onTap: onPressed,
             child: Text(
-              'See All',
+              'view all',
               style: TextStyles.defaultStyle.smallText.underLine,
             ),
           ),

@@ -12,4 +12,6 @@ class AppStorage {
   static const String userEmail = 'user_email';
 
   static const String userName = 'user_name';
+
+  static const String isAgent = 'is_agent';
 }

@@ -13,6 +13,7 @@
 //     },
 
 import 'package:equatable/equatable.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class JobHomeModel extends Equatable {
   final String id;
@@ -54,7 +55,7 @@ class JobHomeModel extends Equatable {
       json['status'],
       json['imageUrl'],
       json['agentId'],
-      json['date'],
+      timeago.format(DateTime.parse(json['date'])),
       json['modality'],
       json['description'],
     );

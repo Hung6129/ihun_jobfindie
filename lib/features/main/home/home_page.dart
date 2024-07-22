@@ -28,33 +28,26 @@ class HomePage extends StatelessWidget {
           expandedHeight: 70.h,
           toolbarHeight: 70.h,
           collapsedHeight: 70.h,
-          titleWidget: Obx(
-            () => Row(
-              children: [
-                horizontalMargin12,
-                GestureDetector(
-                  onTap: () => Get.toNamed(AppRoutes.profile),
-                  child: AppCachedNetworkImage(
-                    imageUrl: controller.avatar.value,
-                    width: 60.w,
-                    height: 60.h,
-                  ),
-                ),
-                horizontalMargin12,
-                Text(
-                  'Hi, ${controller.name.value}',
-                  style: TextStyles.defaultStyle.appBarTitle.whiteText,
-                ),
-              ],
-            ),
-          ),
+          titleWidget: _buildAvt(controller),
           actions: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                // Handle nav to notification page
+              },
               child: Badge(
+                backgroundColor: Palettes.p3,
+                label: Container(
+                  width: 8,
+                  height: 8,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                ),
                 child: Icon(
                   FontAwesomeIcons.solidBell,
                   color: Colors.white,
+                  size: 20.sp,
                 ),
               ),
             ),
@@ -65,11 +58,11 @@ class HomePage extends StatelessWidget {
               title: AppStrings.homeTrendingJob,
               onPressed: () {
                 Get.toNamed(AppRoutes.jobTrendingViewAll);
-                controller.fetchTrendingViewAll();
+                // controller.fetchTrendingViewAll();
               },
             ),
             Container(
-              height: 200.h,
+              height: 220.h,
               child: _buildBody(controller),
             )
           ],
@@ -78,33 +71,84 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(HomeController controller) {
-    return Obx(
-      () => ListView.builder(
-        itemCount: controller.listJobModel.value?.length ?? 0,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          final data = controller.listJobModel.value![index];
-          return _buildCardItem(data);
-        },
-      ),
-    );
-  }
+  Widget _buildAvt(
+    HomeController controller,
+  ) =>
+      Obx(
+        () => Row(
+          children: [
+            horizontalMargin12,
+            GestureDetector(
+              onTap: () => Get.toNamed(AppRoutes.profile),
+              child: Stack(
+                children: [
+                  AppCachedNetworkImage(
+                    imageUrl: controller.avatar.value,
+                    width: 60.w,
+                    height: 60.h,
+                  ),
+                  controller.isAgent.value
+                      ? Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Container(
+                            width: 20.w,
+                            height: 20.h,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Palettes.p6,
+                            ),
+                            child: Icon(
+                              FontAwesomeIcons.userTie,
+                              color: Palettes.textWhite,
+                              size: 12.sp,
+                            ),
+                          ),
+                        )
+                      : SizedBox.shrink()
+                ],
+              ),
+            ),
+            horizontalMargin12,
+            Text(
+              'Hi, ${controller.name.value}',
+              style: TextStyles.defaultStyle.appBarTitle.whiteText,
+            ),
+          ],
+        ),
+      );
 
-  Widget _buildCardItem(JobHomeModel data) {
-    return GestureDetector(
-      onTap: () {
-        final jobId = data.id;
-        Get.toNamed(AppRoutes.jobDetail, arguments: jobId);
-      },
-      child: SizedBox(
-        width: 300.w,
-        height: 200.h,
+  Widget _buildBody(
+    HomeController controller,
+  ) =>
+      Obx(
+        () => ListView.builder(
+          physics: const ClampingScrollPhysics(),
+          itemCount: controller.listJobModel.value?.length ?? 0,
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            final data = controller.listJobModel.value![index];
+            return GestureDetector(
+              onTap: () => controller.navToJobDetail(data.id),
+              child: _buildCardItem(
+                data,
+              ),
+            );
+          },
+        ),
+      );
+
+  Widget _buildCardItem(
+    JobHomeModel data,
+  ) =>
+      SizedBox(
+        width: 320.w,
+        height: 220.h,
         child: Card(
           color: Palettes.textWhite,
           surfaceTintColor: Palettes.textWhite,
-          elevation: 3,
+          elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
           margin: EdgeInsets.symmetric(
             horizontal: 12.w,
@@ -112,10 +156,12 @@ class HomePage extends StatelessWidget {
           ),
           child: Container(
             margin: EdgeInsets.symmetric(
-              horizontal: 10.w,
-              vertical: 10.h,
+              horizontal: 8.w,
+              vertical: 8.h,
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
                   children: [
@@ -123,7 +169,7 @@ class HomePage extends StatelessWidget {
                       imageUrl: data.imageUrl,
                       width: 80.w,
                     ),
-                    horizontalMargin24,
+                    horizontalMargin12,
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,15 +188,16 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                verticalMargin12,
+                verticalMargin8,
                 Text(
                   data.description,
                   style: TextStyles.defaultStyle.smallText,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
-                verticalMargin12,
+                verticalMargin8,
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FaIcon(
                       FontAwesomeIcons.moneyBill,
@@ -176,12 +223,15 @@ class HomePage extends StatelessWidget {
                     horizontalMargin4,
                     Text(data.contract, style: TextStyles.defaultStyle.smallText),
                   ],
-                )
+                ),
+                verticalMargin8,
+                Text(
+                  '${data.date} . ${data.status}',
+                  style: TextStyles.defaultStyle.smallText.greyText,
+                ),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

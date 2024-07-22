@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/data/network/nets/app_result.dart';
+import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_model.dart';
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
 import 'package:ihun_jobfindie/features/jobs/data/models/job_home_model.dart';
@@ -16,6 +17,7 @@ class HomeController extends GetxController {
   RxString email = ''.obs;
   RxString name = '--'.obs;
   RxString avatar = ''.obs;
+  RxBool isAgent = false.obs;
 
   HomeController(this._jobsUseCase, this._authUseCase);
 
@@ -37,6 +39,7 @@ class HomeController extends GetxController {
       email.value = response.netData?.email ?? '';
       name.value = response.netData?.username ?? '';
       avatar.value = response.netData?.avatar ?? '';
+      isAgent.value = response.netData?.isAgent ?? false;
     }
     if (response is AppResultFailure) {
       debugPrint('error when get user name and email');
@@ -70,5 +73,7 @@ class HomeController extends GetxController {
     }
   }
 
-
+  void navToJobDetail(String id) {
+    Get.toNamed(AppRoutes.jobDetail, arguments: id);
+  }
 }

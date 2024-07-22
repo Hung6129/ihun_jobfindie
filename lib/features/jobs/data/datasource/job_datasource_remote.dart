@@ -99,4 +99,28 @@ class JobDataSourceRemote implements JobRepository {
     }
     return AppResult.exceptionEmpty();
   }
+
+  @override
+  Future<AppResult<List<JobHomeModel>>> fetchJobsByAgentId(String agentId) async {
+    final response = await _networkService.request(
+      clientRequest: ClientRequest(
+        url: AppUrls.getJobsByAgentId(agentId),
+        method: HTTPMethod.get,
+      ),
+    );
+    if (response is AppResultSuccess<AppResponse>) {
+      final List<JobHomeModel> listData = [];
+      final List<dynamic> list = response.netData?.data;
+      list.forEach((element) {
+        listData.add(JobHomeModel.fromJson(element));
+      });
+      return AppResult.success(listData);
+    }
+    if (response is AppResultFailure) {
+      return AppResult.failure(
+        (response as AppResultFailure).exception,
+      );
+    }
+    return AppResult.exceptionEmpty();
+  }
 }

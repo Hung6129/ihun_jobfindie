@@ -1,4 +1,5 @@
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
+import 'package:ihun_jobfindie/features/authenticate/data/models/user_post_model.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,5 +39,23 @@ class StorageServices {
 
   void clear() {
     _preferences.clear();
+  }
+
+  void saveUserInfor(UserPostModel user) async {
+    await _preferences.setString(AppStorage.userTokenKey, user.token);
+    await _preferences.setString(AppStorage.userProfileKey, user.id);
+    await _preferences.setString(AppStorage.refreshToken, user.refreshToken);
+    await _preferences.setString(AppStorage.userEmail, user.email);
+    await _preferences.setString(AppStorage.userName, user.userName);
+    await _preferences.setBool(AppStorage.isAgent, user.isAgent);
+  }
+
+  void removeUserInfor() async {
+    await _preferences.remove(AppStorage.userTokenKey);
+    await _preferences.remove(AppStorage.userProfileKey);
+    await _preferences.remove(AppStorage.refreshToken);
+    await _preferences.remove(AppStorage.userEmail);
+    await _preferences.remove(AppStorage.userName);
+    await _preferences.remove(AppStorage.isAgent);
   }
 }
