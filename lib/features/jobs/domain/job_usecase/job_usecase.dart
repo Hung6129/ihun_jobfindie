@@ -14,11 +14,14 @@ abstract class JobUseCase {
   Future<AppResult<UserProfileModel>> fetchRecruiterInfor(String id);
 
   Future<AppResult<List<JobHomeModel>>> fetchJobsByAgentId(String agentId);
+
+  Future<AppResult<List<JobHomeModel>>> fetchJobsApplied(String userId);
 }
 
 class JobUseCaseImpl implements JobUseCase {
   late final JobRepository _jobRepository;
   JobUseCaseImpl(this._jobRepository);
+
   @override
   Future<AppResult<List<JobHomeModel>>> fetchAllJobs() {
     return _jobRepository.fetchAllJobs();
@@ -42,5 +45,10 @@ class JobUseCaseImpl implements JobUseCase {
   @override
   Future<AppResult<List<JobHomeModel>>> fetchJobsByAgentId(String agentId) {
     return _jobRepository.fetchJobsByAgentId(agentId);
+  }
+
+  @override
+  Future<AppResult<List<JobHomeModel>>> fetchJobsApplied(String userId) {
+    return _jobRepository.fetchJobsApplied(userId);
   }
 }

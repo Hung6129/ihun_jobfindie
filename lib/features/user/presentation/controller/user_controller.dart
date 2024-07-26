@@ -11,10 +11,10 @@ import 'package:logger/logger.dart';
 import '../../../../configuration/constants/app_storage.dart';
 import '../../../jobs/data/models/job_home_model.dart';
 
-class CandidateController extends GetxController {
+class UserController extends GetxController {
   late final AuthenUseCase _authUseCase;
   late final JobUseCase _jobUseCase;
-  CandidateController(
+  UserController(
     this._authUseCase,
     this._jobUseCase,
   );
@@ -30,9 +30,9 @@ class CandidateController extends GetxController {
     await _fetchData();
   }
 
-  Future<void> _fetchJobsByAgentId(String agentId) async {
+  Future<void> _fetchJobsApplied(String userId) async {
     try {
-      final response = await _jobUseCase.fetchJobsByAgentId(agentId);
+      final response = await _jobUseCase.fetchJobsApplied(userId);
       if (response is AppResultSuccess<List<JobHomeModel>>) {
         listJobModel.value = response.netData;
       }
@@ -53,10 +53,8 @@ class CandidateController extends GetxController {
       if (response is AppResultSuccess<UserProfileModel>) {
         profileModel.value = response.netData;
         isAgent.value = response.netData?.isAgent ?? false;
-        var agentId = await Global.storageServices.getString(AppStorage.userProfileKey);
-        if (isAgent.value) {
-          _fetchJobsByAgentId(agentId);
-        }
+        var userId = await Global.storageServices.getString(AppStorage.userProfileKey);
+        _fetchJobsApplied(userId);
       }
       if (response is AppResultFailure) {
         _logger.e('error when fetch profile');

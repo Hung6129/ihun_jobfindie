@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 import '../../../../configuration/constants/app_spacing.dart';
 import '../../../../shared/widgets/app_cached_image_widget.dart';
-import '../controller/candidate_controller.dart';
+import '../controller/user_controller.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) => GetBuilder(
-        init: CandidateController(Get.find(), Get.find()),
+        init: UserController(Get.find(), Get.find()),
         builder: (controller) => Scaffold(
           appBar: AppBar(
             title: Text('My Profile'),
@@ -42,7 +42,7 @@ class ProfilePage extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Divider(),
                   ),
-                  _buildJobsByAgnetId(controller),
+                  _buildJobsApplied(controller),
                 ],
               ),
             ),
@@ -50,34 +50,32 @@ class ProfilePage extends StatelessWidget {
         ),
       );
 
-  Widget _buildJobsByAgnetId(CandidateController controller) => !controller.isAgent.value
-      ? const SizedBox.shrink()
-      : ListTile(
-          title: Text(
-            'Jobs you posted',
-            style: TextStyles.defaultStyle.largeText,
+  Widget _buildJobsApplied(UserController controller) => ListTile(
+        title: Text(
+          'Jobs Applied',
+          style: TextStyles.defaultStyle.largeText,
+        ),
+        subtitle: Obx(
+          () => ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: controller.listJobModel.value?.length ?? 0,
+            itemBuilder: (context, index) {
+              final job = controller.listJobModel.value![index];
+              return ListTile(
+                onTap: () {},
+                title: Text(
+                  job.title,
+                  style: TextStyles.defaultStyle.mediumText,
+                ),
+                subtitle: Text('${job.date}'),
+              );
+            },
           ),
-          subtitle: Obx(
-            () => ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: controller.listJobModel.value?.length ?? 0,
-              itemBuilder: (context, index) {
-                final job = controller.listJobModel.value![index];
-                return ListTile(
-                  onTap: () {},
-                  title: Text(
-                    job.title,
-                    style: TextStyles.defaultStyle.mediumText,
-                  ),
-                  subtitle: Text('You posted: ${job.date}'),
-                );
-              },
-            ),
-          ),
-        );
+        ),
+      );
 
-  Widget _buildAvt(CandidateController controller) => Obx(
+  Widget _buildAvt(UserController controller) => Obx(
         () => Row(
           children: [
             horizontalMargin12,

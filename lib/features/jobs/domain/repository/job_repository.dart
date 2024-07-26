@@ -14,6 +14,8 @@ abstract class JobRepository {
   Future<AppResult<UserProfileModel>> fetchRecruiterInfor(String id);
 
   Future<AppResult<List<JobHomeModel>>> fetchJobsByAgentId(String agentId);
+
+  Future<AppResult<List<JobHomeModel>>> fetchJobsApplied(String userId);
 }
 
 class JobRepositoryImpl implements JobRepository {
@@ -42,5 +44,10 @@ class JobRepositoryImpl implements JobRepository {
   @override
   Future<AppResult<List<JobHomeModel>>> fetchJobsByAgentId(String agentId) {
     return _jobDataSourceRemote.fetchJobsByAgentId(agentId);
+  }
+
+  @override
+  Future<AppResult<List<JobHomeModel>>> fetchJobsApplied(String userId) {
+    return _jobDataSourceRemote.fetchJobsApplied(userId);
   }
 }

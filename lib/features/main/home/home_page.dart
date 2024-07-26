@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
             Container(
               height: 220.h,
               child: _buildBody(controller),
-            )
+            ),
           ],
         ),
       ),

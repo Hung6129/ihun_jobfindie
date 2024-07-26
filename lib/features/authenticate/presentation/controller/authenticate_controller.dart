@@ -25,7 +25,11 @@ class AuthenticateController extends GetxController {
 
   final logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
-  Future<void> executeLoginByAccount(String email, String password, BuildContext context) async {
+  Future<void> executeLoginByAccount(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
     try {
       if (email.isEmpty || password.isEmpty) {
         AppSnackbarWidget(
@@ -38,19 +42,28 @@ class AuthenticateController extends GetxController {
       AppFullScreenLoadingIndicator.show();
       final response = await _authUseCase.signIn(email, password);
       if (response is AppResultSuccess<UserPostModel>) {
-        AppSnackbarWidget(
-          title: 'Thông báo',
-          message: AppStrings.signInSuccess,
-          isError: false,
-        ).show(context);
-        if (isSavePassword.value) {
-          Global.storageServices.setBool(
-            AppStorage.isSavePassword,
-            true,
-          );
+        if (response.netData!.isAgent) {
+          AppSnackbarWidget(
+            title: 'Thông báo',
+            message: "Tài khoản của bạn không phải là người tìm việc.",
+            isError: true,
+          ).show(context);
+          return;
+        } else {
+          AppSnackbarWidget(
+            title: 'Thông báo',
+            message: AppStrings.signInSuccess,
+            isError: false,
+          ).show(context);
+          if (isSavePassword.value) {
+            Global.storageServices.setBool(
+              AppStorage.isSavePassword,
+              true,
+            );
+          }
+          Global.storageServices.saveUserInfor(response.netData!);
+          Get.offAllNamed(AppRoutes.home);
         }
-        Global.storageServices.saveUserInfor(response.netData!);
-        Get.offAllNamed(AppRoutes.home);
       }
       if (response is AppResultFailure) {
         AppSnackbarWidget(
