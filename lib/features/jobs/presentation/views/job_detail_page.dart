@@ -22,7 +22,7 @@ class JobDetailPage extends StatelessWidget {
       builder: (controller) => Scaffold(
         body: Obx(
           () => AppSilverBarWidget(
-            expandedHeight: 30.h,
+            expandedHeight: 50.h,
             collapsedHeight: 30.h,
             toolbarHeight: 30.h,
             bgColor: Palettes.textWhite,
@@ -94,6 +94,8 @@ class JobDetailPage extends StatelessWidget {
 
   Widget _buildBody(JobController controller) {
     return Container(
+      height: 1.sh,
+      color: Palettes.textWhite,
       child: Column(
         children: [
           _buildCompanyInfor(controller),
@@ -132,7 +134,7 @@ class JobDetailPage extends StatelessWidget {
         ),
         verticalMargin4,
         Text(
-          'Posted by ${controller.recruiterName.value ?? '--'}',
+          '${controller.recruiterName.value ?? '--'}  -  ${controller.jobModel.value?.date ?? '--'}',
           style: TextStyles.defaultStyle.smallText,
         ),
       ],
@@ -147,7 +149,7 @@ class JobDetailPage extends StatelessWidget {
         FlutterToggleTab(
           width: 80.w,
           borderRadius: 15.r,
-          height: 40.h,
+          height: 35.h,
           selectedIndex: controller.selectedIndex.value,
           selectedBackgroundColors: [Palettes.p3],
           selectedTextStyle: TextStyles.defaultStyle.mediumText.bold.whiteText,
@@ -156,9 +158,7 @@ class JobDetailPage extends StatelessWidget {
             "Description",
             "Requirement",
           ],
-          selectedLabelIndex: (index) {
-            controller.selectedIndex.value = index;
-          },
+          selectedLabelIndex: (index) => controller.selectedIndex.value = index,
           isScroll: false,
         ),
 
@@ -183,14 +183,15 @@ class JobDetailPage extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            FontAwesomeIcons.check,
+                            FontAwesomeIcons.handPointRight,
                             color: Palettes.getRandomColor(),
+                            size: 20.sp,
                           ),
                           horizontalMargin8,
                           Expanded(
                             child: Text(
                               controller.jobModel.value?.requirement[index] ?? '',
-                              style: TextStyles.defaultStyle.mediumText,
+                              style: TextStyles.defaultStyle,
                             ),
                           ),
                         ],
@@ -210,66 +211,59 @@ class JobDetailPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: 60.h,
-          width: 60.w,
-          child: Column(
-            children: [
-              Icon(
-                FontAwesomeIcons.sackDollar,
-                size: 30.sp,
-                color: Palettes.p5,
-              ),
-              Text(
-                controller.jobModel.value?.salary ?? '--',
-                style: TextStyles.defaultStyle.smallText,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
+        TextIcon(
+          text:
+              '${controller.jobModel.value?.salary ?? '--'} / ${controller.jobModel.value?.period ?? '--'}',
+          icon: FontAwesomeIcons.dollarSign,
+          iconColor: Palettes.p5,
         ),
         horizontalMargin16,
-        Container(
-          height: 60.h,
-          width: 60.w,
-          child: Column(
-            children: [
-              Icon(
-                FontAwesomeIcons.businessTime,
-                size: 30.sp,
-                color: Palettes.p6,
-              ),
-              Text(
-                controller.jobModel.value?.contract ?? '--',
-                style: TextStyles.defaultStyle.smallText,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
+        TextIcon(
+          text: controller.jobModel.value?.contract ?? '--',
+          icon: FontAwesomeIcons.briefcase,
+          iconColor: Palettes.p6,
         ),
         horizontalMargin16,
-        Container(
-          height: 60.h,
-          width: 60.w,
-          child: Column(
-            children: [
-              Icon(
-                FontAwesomeIcons.locationDot,
-                size: 30.sp,
-                color: Palettes.p7,
-              ),
-              Text(
-                controller.jobModel.value?.modality ?? '--',
-                style: TextStyles.defaultStyle.smallText,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
+        TextIcon(
+          text: controller.jobModel.value?.modality ?? '--',
+          icon: FontAwesomeIcons.suitcase,
+          iconColor: Palettes.p7,
         ),
       ],
+    );
+  }
+}
+
+class TextIcon extends StatelessWidget {
+  const TextIcon({
+    super.key,
+    required this.text,
+    required this.icon,
+    required this.iconColor,
+  });
+
+  final String text;
+  final IconData icon;
+  final Color iconColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60.h,
+      width: 70.w,
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            size: 30.sp,
+            color: iconColor,
+          ),
+          Text(
+            text,
+            style: TextStyles.defaultStyle.smallText,
+          ),
+        ],
+      ),
     );
   }
 }

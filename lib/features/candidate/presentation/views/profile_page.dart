@@ -52,13 +52,13 @@ class ProfilePage extends StatelessWidget {
 
   Widget _buildJobsByAgnetId(CandidateController controller) => !controller.isAgent.value
       ? const SizedBox.shrink()
-      : Obx(
-          () => ListTile(
-            title: Text(
-              'Jobs you posted',
-              style: TextStyles.defaultStyle.largeText,
-            ),
-            subtitle: ListView.builder(
+      : ListTile(
+          title: Text(
+            'Jobs you posted',
+            style: TextStyles.defaultStyle.largeText,
+          ),
+          subtitle: Obx(
+            () => ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.listJobModel.value?.length ?? 0,

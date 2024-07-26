@@ -224,7 +224,7 @@ class HomePage extends StatelessWidget {
                 ),
                 verticalMargin8,
                 Text(
-                  '${data.date} . ${data.status}',
+                  '${data.date} - ${data.status}',
                   style: TextStyles.defaultStyle.smallText.greyText,
                 ),
               ],

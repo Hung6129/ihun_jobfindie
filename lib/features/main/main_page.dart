@@ -27,9 +27,7 @@ class MainPage extends StatelessWidget {
               ),
               height: 50.h,
               selectedIndex: controller.currentIndex.value,
-              onDestinationSelected: (int index) {
-                controller.currentIndex.value = index;
-              },
+              onDestinationSelected: (int index) => controller.currentIndex.value = index,
               destinations: controller.destinations,
             ),
           ),

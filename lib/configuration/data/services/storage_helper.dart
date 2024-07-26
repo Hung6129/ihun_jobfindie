@@ -50,7 +50,7 @@ class StorageServices {
     await _preferences.setBool(AppStorage.isAgent, user.isAgent);
   }
 
-  void removeUserInfor() async {
+  Future<void> removeUserInfor() async {
     await _preferences.remove(AppStorage.userTokenKey);
     await _preferences.remove(AppStorage.userProfileKey);
     await _preferences.remove(AppStorage.refreshToken);

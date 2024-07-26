@@ -4,14 +4,10 @@ import 'package:ihun_jobfindie/configuration/data/network/nets/app_result.dart';
 import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_model.dart';
-
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
 import 'package:ihun_jobfindie/features/jobs/domain/job_usecase/job_usecase.dart';
-
 import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 import 'package:logger/logger.dart';
-import 'package:rxdart/rxdart.dart';
-
 import '../../../../configuration/constants/app_storage.dart';
 import '../../../jobs/data/models/job_home_model.dart';
 
@@ -31,14 +27,7 @@ class CandidateController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    var agentId = await Global.storageServices.getString(AppStorage.userProfileKey);
-    CombineLatestStream(
-      [
-        _fetchData().asStream(),
-        _fetchJobsByAgentId(agentId).asStream(),
-      ],
-      (List<dynamic> values) => values,
-    );
+    await _fetchData();
   }
 
   Future<void> _fetchJobsByAgentId(String agentId) async {
@@ -59,10 +48,15 @@ class CandidateController extends GetxController {
 
   Future<void> _fetchData() async {
     try {
+      AppFullScreenLoadingIndicator.show();
       final response = await _authUseCase.getProfile();
       if (response is AppResultSuccess<UserProfileModel>) {
         profileModel.value = response.netData;
         isAgent.value = response.netData?.isAgent ?? false;
+        var agentId = await Global.storageServices.getString(AppStorage.userProfileKey);
+        if (isAgent.value) {
+          _fetchJobsByAgentId(agentId);
+        }
       }
       if (response is AppResultFailure) {
         _logger.e('error when fetch profile');
