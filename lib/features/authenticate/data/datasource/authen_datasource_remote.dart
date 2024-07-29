@@ -101,7 +101,8 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
     );
     if (response is AppResultSuccess<AppResponse>) {
       final EmptyModel emptyModel = EmptyModel();
-      Global.storageServices.setString(AppStorage.userTokenKey, response.netData?.data['newAccessToken']);
+      Global.storageServices
+          .setString(AppStorage.userTokenKey, response.netData?.data['newAccessToken']);
       return AppResult.success(emptyModel);
     }
     if (response is AppResultFailure) {
@@ -112,4 +113,31 @@ class AuthenDataSourceRemote implements AuthenticateRepository {
 
   @override
   Future<void> logout() async {}
+
+  @override
+  Future<AppResult<UserProfileModel>> updateUserProfile(
+    UserProfileModel userProfileModel,
+  ) async {
+    final response = await _networkService.request(
+      clientRequest: ClientRequest(
+        url: AppUrls.updateProfile(
+          Global.storageServices.getString(
+            AppStorage.userProfileKey,
+          ),
+        ),
+        method: HTTPMethod.put,
+        body: userProfileModel.toJson(),
+      ),
+    );
+    if (response is AppResultSuccess<AppResponse>) {
+      final UserProfileModel userPro = UserProfileModel.fromJson(response.netData?.data);
+      return AppResult.success(userPro);
+    }
+    if (response is AppResultFailure) {
+      return AppResult.failure(
+        (response as AppResultFailure).exception,
+      );
+    }
+    return AppResult.exceptionEmpty();
+  }
 }

@@ -28,8 +28,8 @@ abstract class NetworkService extends GetxService {
     ));
     dio.interceptors.add(PrettyDioLogger(
       requestBody: true,
-      responseBody: false,
-      requestHeader: true,
+      responseBody: true,
+      // requestHeader: true,
     ));
 
     return dio;

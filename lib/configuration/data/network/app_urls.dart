@@ -23,4 +23,5 @@ class AppUrls {
   static const String register = "/register";
   static String getUserById(String userId) => "/user/find/$userId";
   static const String refreshToken = "/refreshToken";
+  static String updateProfile(String userId) => "/user/update/$userId";
 }

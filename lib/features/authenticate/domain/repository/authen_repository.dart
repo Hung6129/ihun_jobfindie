@@ -9,6 +9,7 @@ abstract class AuthenticateRepository {
   Future<AppResult<EmptyModel>> signUp(String email, String password, String name);
   Future<AppResult<UserProfileModel>> getProfile();
   Future<AppResult<EmptyModel>> checkTokenIsExpired(String token);
+  Future<AppResult<UserProfileModel>> updateUserProfile(UserProfileModel userProfileModel);
   Future<void> logout();
 }
 
@@ -34,10 +35,15 @@ class AuthenticateRepositoryImpl implements AuthenticateRepository {
   Future<AppResult<EmptyModel>> checkTokenIsExpired(String token) {
     return _authenDataSourceRemote.checkTokenIsExpired(token);
   }
-  
+
   @override
   Future<void> logout() {
     // TODO: implement logout
     throw UnimplementedError();
+  }
+
+  @override
+  Future<AppResult<UserProfileModel>> updateUserProfile(UserProfileModel userProfileModel) {
+    return _authenDataSourceRemote.updateUserProfile(userProfileModel);
   }
 }

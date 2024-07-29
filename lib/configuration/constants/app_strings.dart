@@ -6,6 +6,16 @@ class AppStrings {
   static const headError = 'Error';
   static const headSuccess = 'Success';
   static const errorWhenPickFile = 'There are some errors when uploading the file';
+  static const warningWhenPickFile = 'Please pick a file first';
+  static const uploadFileSuccess = 'File uploaded successfully';
+  static const errorWhenUploadFile = 'There are some errors when uploading the file';
+
+// Profile Page
+  static const String profileTitle = 'Profile';
+  static const String profileEmail = 'Email';
+  static const String errorWhenFetchProfile = 'There are some errors when fetching the profile';
+  static const errorWhenFetchListJob = 'There are some errors when fetching the list job';
+  static const errorWhenUpdateProfile = 'There are some errors when updating the profile';
 
 // Splash Page
   static const String splashTitle1 = 'Welcome to\niHun Jobfinde';

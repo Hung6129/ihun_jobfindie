@@ -13,6 +13,8 @@ abstract class AuthenUseCase {
 
   Future<AppResult<EmptyModel>> checkTokenIsExpired(String token);
 
+  Future<AppResult<UserProfileModel>> updateUserProfile(UserProfileModel userProfileModel);
+
   Future<void> logout();
 }
 
@@ -42,5 +44,10 @@ class AuthenUseCaseImpl implements AuthenUseCase {
   Future<void> logout() {
     // TODO: implement logout
     throw UnimplementedError();
+  }
+
+  @override
+  Future<AppResult<UserProfileModel>> updateUserProfile(UserProfileModel userProfileModel) {
+    return _authenticateRepository.updateUserProfile(userProfileModel);
   }
 }

@@ -28,72 +28,83 @@ class UserController extends GetxController {
     this._jobUseCase,
   );
   Rxn<UserProfileModel?> profileModel = Rxn();
-  Rxn<List<JobHomeModel>> listJobModel = Rxn();
-  RxBool isAgent = false.obs;
+  Rxn<List<JobHomeModel>?> listJobModel = Rxn([]);
+
+  RxString fileName = "".obs;
 
   final _logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
-  String? fileName;
+  RxDouble progress = 0.0.obs;
+
+  RxBool isShowLoading = false.obs;
+
   List<PlatformFile>? paths;
   String? directoryPath;
   String? extension;
 
   @override
+  void dispose() {
+    super.dispose();
+    profileModel.close();
+    listJobModel.close();
+    fileName.close();
+    progress.close();
+    isShowLoading.close();
+  }
+
+  @override
   void onInit() async {
     super.onInit();
     await _fetchData();
-    await _getResumeFileFormFirebaseStorage();
   }
 
-  Future<void> _getResumeFileFormFirebaseStorage() async {
+  Future<String> _getResumeFileFormFirebaseStorage(
+    String fileName,
+  ) async {
     try {
-      if (fileName!.isNotEmpty || fileName != '') {
-        final storage = FirebaseStorage.instance.ref();
-        final ref = storage
-            .child('candidateResume')
-            .child('/${Global.storageServices.getString(AppStorage.userProfileKey)}')
-            .child('/$fileName');
-        _logger.i('ref: $ref');
-        final url = await ref.getDownloadURL();
-        _logger.i('download url: $url');
-      } else {
-        _logger.e('file name is empty');
-      }
+      final storage = FirebaseStorage.instance.ref();
+      final ref = storage
+          .child('candidateResume')
+          .child('/${Global.storageServices.getString(AppStorage.userProfileKey)}')
+          .child('/$fileName');
+      final url = await ref.getDownloadURL();
+      _logger.i('download url: $url');
+      return url;
     } on firebase_core.FirebaseException catch (e) {
       _logger.e('Failed to get download URL:' + e.toString());
+      rethrow;
     } on PlatformException catch (e) {
       _logger.e('Unsupported operation' + e.toString());
+      rethrow;
     } catch (e) {
-      _logger.e('error when pick file $e');
+      _logger.e('error when get download url $e');
+      rethrow;
     }
   }
 
   Future<void> onPickFile() async {
     try {
-      directoryPath = null;
       paths = (await FilePicker.platform.pickFiles(
         onFileLoading: (FilePickerStatus status) => print(status),
         allowedExtensions:
             (extension?.isNotEmpty ?? false) ? extension?.replaceAll(' ', '').split(',') : null,
       ))
           ?.files;
-
-      fileName = paths!.map((e) => e.name).toString();
-      directoryPath = (paths!.map((e) => e.path)).toList()[0].toString();
-      if (paths != null || directoryPath != null) {
+      if (paths != null) {
+        fileName.value = paths!.map((e) => e.name).toString();
+        directoryPath = (paths!.map((e) => e.path)).toList()[0].toString();
         await _uploadUserResumeToFirebaseStorage();
       } else {
-        AppSnackbarWidget(
-          title: AppStrings.headError,
-          message: AppStrings.errorWhenPickFile,
-          isError: true,
+        return AppSnackbarWidget(
+          title: AppStrings.headWaring,
+          message: AppStrings.warningWhenPickFile,
+          isWaring: true,
         ).show(Get.context!);
-        return;
       }
     } on PlatformException catch (e) {
       _logger.e('Unsupported operation' + e.toString());
-    } catch (e) {
-      _logger.e('error when pick file $e');
+    } catch (e, str) {
+      _logger.e('error when pick file $e $str');
     }
   }
 
@@ -106,6 +117,7 @@ class UserController extends GetxController {
           .child('/${Global.storageServices.getString(AppStorage.userProfileKey)}')
           .child('/$fileName');
       io.File file = io.File(directoryPath!);
+
       if (!file.existsSync()) {
         _logger.e('file not exist');
         AppSnackbarWidget(
@@ -115,6 +127,7 @@ class UserController extends GetxController {
         ).show(Get.context!);
         return;
       }
+
       final metadata = SettableMetadata(
         contentType: 'application/pdf',
         customMetadata: {
@@ -122,16 +135,45 @@ class UserController extends GetxController {
         },
       );
       _logger.i('file path: ${file.path}');
-      await ref.putFile(
-        file,
-        metadata,
-      );
+
+      await ref.putFile(file, metadata).snapshotEvents.listen((event) async {
+        isShowLoading.value = true;
+
+        _logger.i('Task state: ${event.state}');
+        _logger.i('Progress: ${(event.bytesTransferred / event.totalBytes) * 100} %');
+
+        progress.value = (event.bytesTransferred / event.totalBytes) * 100;
+
+        if (event.state == TaskState.success) {
+          final urlDown = await _getResumeFileFormFirebaseStorage(fileName.value);
+          await _callUpdateProfile(
+            profileModel.value!.copyWith(
+              resumeFileName: fileName.value,
+              resumeFileUrl: urlDown,
+            ),
+          );
+          isShowLoading.value = false;
+          AppSnackbarWidget(
+            title: AppStrings.headSuccess,
+            message: AppStrings.uploadFileSuccess,
+            isError: false,
+          ).show(Get.context!);
+        }
+        if (event.state == TaskState.error) {
+          isShowLoading.value = false;
+          AppSnackbarWidget(
+            title: AppStrings.headError,
+            message: AppStrings.errorWhenUploadFile,
+            isError: true,
+          ).show(Get.context!);
+        }
+      });
     } on firebase_core.FirebaseException catch (e) {
       _logger.e('Failed to upload file and get download URL:' + e.toString());
     } on PlatformException catch (e) {
       _logger.e('Unsupported operation' + e.toString());
     } catch (e) {
-      _logger.e('error when pick file $e');
+      _logger.e('Failed to upload file and get download URL:' + e.toString());
     }
   }
 
@@ -157,17 +199,23 @@ class UserController extends GetxController {
       final response = await _authUseCase.getProfile();
       if (response is AppResultSuccess<UserProfileModel>) {
         profileModel.value = response.netData;
-        isAgent.value = response.netData?.isAgent ?? false;
         var userId = await Global.storageServices.getString(AppStorage.userProfileKey);
         var resumeFileName = profileModel.value?.resumeFileName;
-        _logger.i('resume file name: $resumeFileName');
-        if (resumeFileName!.isNotEmpty || resumeFileName == '') {
-          fileName = resumeFileName;
+
+        if (resumeFileName!.isNotEmpty || resumeFileName != '') {
+          fileName.value = resumeFileName;
+          await _getResumeFileFormFirebaseStorage(fileName.value);
         }
+
         _fetchJobsApplied(userId);
       }
       if (response is AppResultFailure) {
         _logger.e('error when fetch profile');
+        AppSnackbarWidget(
+          title: AppStrings.headError,
+          message: AppStrings.errorWhenFetchProfile,
+          isError: true,
+        ).show(Get.context!);
       }
     } catch (e) {
       _logger.e('error when fetch profile in catch $e');
@@ -196,4 +244,25 @@ class UserController extends GetxController {
           ],
         ),
       );
+
+  Future<void> _callUpdateProfile(
+    UserProfileModel profileModel,
+  ) async {
+    try {
+      final data = await _authUseCase.updateUserProfile(profileModel);
+      if (data is AppResultSuccess<UserProfileModel>) {
+        this.profileModel.value = data.netData;
+      } else if (data is AppResultFailure) {
+        _logger.e('error when update profile');
+        AppSnackbarWidget(
+          title: AppStrings.headError,
+          message: AppStrings.errorWhenUpdateProfile,
+          isError: true,
+        ).show(Get.context!);
+      }
+    } catch (e) {
+      _logger.e('error when update profile in catch $e');
+      rethrow;
+    }
+  }
 }

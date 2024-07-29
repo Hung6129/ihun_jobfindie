@@ -10,12 +10,14 @@ class AppSnackbarWidget {
       this.icon,
       this.duration,
       this.isError = false,
+      this.isWaring = false,
       this.titleWidget,
       this.messageWidget});
 
   final String title;
   final String message;
   final bool isError;
+  final bool isWaring;
   final Icon? icon;
   final Duration? duration;
   final Widget? titleWidget;
@@ -26,11 +28,16 @@ class AppSnackbarWidget {
       Get.closeCurrentSnackbar();
     }
     Get.snackbar(title, message,
-        titleText: titleWidget ?? Text(title, style: TextStyles.defaultStyle.whiteText.mediumText.bold),
+        titleText:
+            titleWidget ?? Text(title, style: TextStyles.defaultStyle.whiteText.mediumText.bold),
         messageText: messageWidget ?? Text(message, style: TextStyles.defaultStyle.whiteText),
         duration: duration ?? const Duration(seconds: 3),
         margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        backgroundColor: isError
+            ? Colors.red
+            : isWaring
+                ? Colors.orangeAccent
+                : Colors.green,
         icon: Padding(
           padding: const EdgeInsets.all(8.0),
           child: isError
@@ -39,11 +46,17 @@ class AppSnackbarWidget {
                   color: Palettes.p8,
                   size: 32,
                 )
-              : Icon(
-                  Icons.check_circle,
-                  color: Palettes.p8,
-                  size: 32,
-                ),
+              : isWaring
+                  ? Icon(
+                      Icons.warning,
+                      color: Palettes.p8,
+                      size: 32,
+                    )
+                  : Icon(
+                      Icons.check_circle,
+                      color: Palettes.p8,
+                      size: 32,
+                    ),
         ),
         snackPosition: SnackPosition.BOTTOM);
   }

@@ -34,6 +34,7 @@ class UserProfileModel extends Equatable {
   final bool isAgent;
   final String bio;
   final String resumeFileName;
+  final String resumeFileUrl;
   final List<String> socialList;
   final String location;
   final String phoneNum;
@@ -47,6 +48,7 @@ class UserProfileModel extends Equatable {
     this.isAgent,
     this.bio,
     this.resumeFileName,
+    this.resumeFileUrl,
     this.socialList,
     this.location,
     this.phoneNum,
@@ -65,10 +67,58 @@ class UserProfileModel extends Equatable {
       json['isAgent'],
       json['bio'],
       json['resumeFileName'],
+      json['resumeFileUrl'],
       List<String>.from(json['socialList'] ?? []),
       json['location'],
       json['phoneNum'],
     );
+  }
+
+  UserProfileModel copyWith({
+    String? username,
+    String? email,
+    String? avatar,
+    List<String>? skills,
+    bool? isAdmin,
+    bool? isAgent,
+    String? bio,
+    String? resumeFileName,
+    String? resumeFileUrl,
+    List<String>? socialList,
+    String? location,
+    String? phoneNum,
+  }) {
+    return UserProfileModel(
+      username ?? this.username,
+      email ?? this.email,
+      avatar ?? this.avatar,
+      skills ?? this.skills,
+      isAdmin ?? this.isAdmin,
+      isAgent ?? this.isAgent,
+      bio ?? this.bio,
+      resumeFileName ?? this.resumeFileName,
+      resumeFileUrl ?? this.resumeFileUrl,
+      socialList ?? this.socialList,
+      location ?? this.location,
+      phoneNum ?? this.phoneNum,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'username': username,
+      'email': email,
+      'avatar': avatar,
+      'skills': skills,
+      'isAdmin': isAdmin,
+      'isAgent': isAgent,
+      'bio': bio,
+      'resumeFileName': resumeFileName,
+      'resumeFileUrl': resumeFileUrl,
+      'socialList': socialList,
+      'location': location,
+      'phoneNum': phoneNum,
+    };
   }
 
   @override
@@ -81,6 +131,7 @@ class UserProfileModel extends Equatable {
         isAgent,
         bio,
         resumeFileName,
+        resumeFileUrl,
         socialList,
         location,
         phoneNum,
