@@ -14,7 +14,7 @@ class AppServiceImpl extends AppService {
   void forceLogout() async {
     // removeUserInfor
     CombineLatestStream.list([
-      Global.storageServices.removeUserInfor().asStream(),
+      Global.storageServices.removeUserInforS().asStream(),
     ]).listen(
       (value) {
         Get.offAllNamed(AppRoutes.signIn);

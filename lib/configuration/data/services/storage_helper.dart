@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' show debugPrint;
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_post_model.dart';
 
@@ -11,35 +12,22 @@ class StorageServices {
     return this;
   }
 
-  Future<bool> setBool(String key, bool value) async {
-    return await _preferences.setBool(key, value);
-  }
+  Future<bool> setBool(String key, bool value) async => await _preferences.setBool(key, value);
 
   get getBool => _preferences.getBool;
 
-  String getString(String key) {
-    return _preferences.getString(key) ?? '';
-  }
+  String getString(String key) => _preferences.getString(key) ?? '';
 
-  Future<bool> setString(String key, String value) async {
-    return await _preferences.setString(key, value);
-  }
+  Future<bool> setString(String key, String value) async =>
+      await _preferences.setString(key, value);
 
-  bool isSavePassword() {
-    return _preferences.getBool(AppStorage.isSavePassword) ?? false;
-  }
+  bool isSavePassword() => _preferences.getBool(AppStorage.isSavePassword) ?? false;
 
-  bool getIsFirstTime() {
-    return _preferences.getBool(AppStorage.firstTimeOpen) == null ? true : false;
-  }
+  bool getIsFirstTime() => _preferences.getBool(AppStorage.firstTimeOpen) == null ? true : false;
 
-  Future<bool> remove(String userToken) {
-    return _preferences.remove(userToken);
-  }
+  // Future<bool> remove(String userToken) => _preferences.remove(userToken);
 
-  void clear() {
-    _preferences.clear();
-  }
+  void clear() => _preferences.clear();
 
   void saveUserInfor(UserPostModel user) async {
     await _preferences.setString(AppStorage.userTokenKey, user.token);
@@ -48,14 +36,28 @@ class StorageServices {
     await _preferences.setString(AppStorage.userEmail, user.email);
     await _preferences.setString(AppStorage.userName, user.userName);
     await _preferences.setBool(AppStorage.isAgent, user.isAgent);
+    debugPrint('save user infor');
   }
 
-  Future<void> removeUserInfor() async {
+  void removeUserInfor() async {
     await _preferences.remove(AppStorage.userTokenKey);
     await _preferences.remove(AppStorage.userProfileKey);
     await _preferences.remove(AppStorage.refreshToken);
     await _preferences.remove(AppStorage.userEmail);
     await _preferences.remove(AppStorage.userName);
     await _preferences.remove(AppStorage.isAgent);
+    await _preferences.remove(AppStorage.isSavePassword);
+    debugPrint('remove user infor');
+  }
+
+    Future<void> removeUserInforS() async {
+    await _preferences.remove(AppStorage.userTokenKey);
+    await _preferences.remove(AppStorage.userProfileKey);
+    await _preferences.remove(AppStorage.refreshToken);
+    await _preferences.remove(AppStorage.userEmail);
+    await _preferences.remove(AppStorage.userName);
+    await _preferences.remove(AppStorage.isAgent);
+    await _preferences.remove(AppStorage.isSavePassword);
+    debugPrint('remove user infor');
   }
 }

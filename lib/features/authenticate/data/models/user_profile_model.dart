@@ -1,17 +1,26 @@
 // {
-//     "_id": "64ee28639ea08fd7e1bbfae3",
-//     "username": "Hung Long",
-//     "email": "test2@gmail.com",
+//     "_id": "667533cae7a28cf8cbabae7c",
+//     "username": "Long Tran",
+//     "email": "longtran@gmail.com",
 //     "isAdmin": false,
 //     "isAgent": false,
 //     "skills": [
 //         "Flutter",
-//         "Dart"
+//         "Swift",
+//         "Firebase",
+//         "Java",
+//         "NodeJS",
+//         "Python"
 //     ],
-//     "avatar": "https://plus.unsplash.com/premium_photo-1675034393500-dc5fe64b527a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjV8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
-//     "createdAt": "2023-08-29T17:18:27.554Z",
-//     "updatedAt": "2023-08-31T05:33:06.091Z",
-//     "__v": 0
+//     "avatar": "https://bit.ly/4cWua0j",
+//     "bio": "My name is Long Tran. I am a software engineer. I have been working in the software industry
+//  for 5 years. I have experience in developing mobile applications using Flutter, Swift, and Java.
+//  I also have experience in developing web applications using NodeJS and Python.
+//  I am passionate about technology and always eager to learn new things.",
+//     "location": "Ho Chi Minh City, Vietnam",
+//     "resumeFileName": "",
+//     "socialList": [],
+//     "phoneNum":"0336965267"
 // }
 
 import 'package:equatable/equatable.dart';
@@ -23,6 +32,11 @@ class UserProfileModel extends Equatable {
   final List<String> skills;
   final bool isAdmin;
   final bool isAgent;
+  final String bio;
+  final String resumeFileName;
+  final List<String> socialList;
+  final String location;
+  final String phoneNum;
 
   const UserProfileModel(
     this.username,
@@ -31,6 +45,11 @@ class UserProfileModel extends Equatable {
     this.skills,
     this.isAdmin,
     this.isAgent,
+    this.bio,
+    this.resumeFileName,
+    this.socialList,
+    this.location,
+    this.phoneNum,
   );
 
   // get list of skills
@@ -44,6 +63,11 @@ class UserProfileModel extends Equatable {
       List<String>.from(json['skills'] ?? []),
       json['isAdmin'],
       json['isAgent'],
+      json['bio'],
+      json['resumeFileName'],
+      List<String>.from(json['socialList'] ?? []),
+      json['location'],
+      json['phoneNum'],
     );
   }
 
@@ -55,5 +79,10 @@ class UserProfileModel extends Equatable {
         skills,
         isAdmin,
         isAgent,
+        bio,
+        resumeFileName,
+        socialList,
+        location,
+        phoneNum,
       ];
 }

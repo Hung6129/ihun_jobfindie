@@ -18,11 +18,6 @@ class AuthenticateController extends GetxController {
 
   final RxBool isSavePassword = RxBool(false);
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   final logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
   Future<void> executeLoginByAccount(
@@ -33,8 +28,8 @@ class AuthenticateController extends GetxController {
     try {
       if (email.isEmpty || password.isEmpty) {
         AppSnackbarWidget(
-          title: 'Thông báo',
-          message: 'Vui lòng nhập đầy đủ thông tin',
+          title: AppStrings.headError,
+          message: AppStrings.plsFillInAllInfo,
           isError: true,
         ).show(context);
         return;
@@ -44,14 +39,14 @@ class AuthenticateController extends GetxController {
       if (response is AppResultSuccess<UserPostModel>) {
         if (response.netData!.isAgent) {
           AppSnackbarWidget(
-            title: 'Thông báo',
-            message: "Tài khoản của bạn không phải là người tìm việc.",
+            title: AppStrings.headError,
+            message: AppStrings.youAreNotRecruiter,
             isError: true,
           ).show(context);
           return;
         } else {
           AppSnackbarWidget(
-            title: 'Thông báo',
+            title: AppStrings.headSuccess,
             message: AppStrings.signInSuccess,
             isError: false,
           ).show(context);
@@ -60,6 +55,7 @@ class AuthenticateController extends GetxController {
               AppStorage.isSavePassword,
               true,
             );
+            debugPrint('save password');
           }
           Global.storageServices.saveUserInfor(response.netData!);
           Get.offAllNamed(AppRoutes.home);
@@ -67,7 +63,7 @@ class AuthenticateController extends GetxController {
       }
       if (response is AppResultFailure) {
         AppSnackbarWidget(
-          title: 'Thông báo',
+          title: AppStrings.headError,
           duration: const Duration(seconds: 4),
           message: (response as AppResultFailure).exception!.message.toString(),
           isError: true,
@@ -75,7 +71,7 @@ class AuthenticateController extends GetxController {
       }
     } catch (e) {
       AppSnackbarWidget(
-        title: 'Thông báo',
+        title: AppStrings.headError,
         message: AppStrings.signInFailed,
         isError: true,
       ).show(context);
@@ -93,8 +89,8 @@ class AuthenticateController extends GetxController {
     try {
       if (userName.isEmpty || password.isEmpty || email.isEmpty) {
         AppSnackbarWidget(
-          title: 'Thông báo',
-          message: 'Vui lòng nhập đầy đủ thông tin',
+          title: AppStrings.headError,
+          message: AppStrings.plsFillInAllInfo,
           isError: true,
         ).show(context);
         return;
@@ -104,7 +100,7 @@ class AuthenticateController extends GetxController {
       AppFullScreenLoadingIndicator.dismiss();
       if (response is AppResultSuccess<EmptyModel>) {
         AppSnackbarWidget(
-          title: 'Thông báo',
+          title: AppStrings.headSuccess,
           message: AppStrings.signUpSuccess,
           isError: false,
         ).show(context);
@@ -112,14 +108,14 @@ class AuthenticateController extends GetxController {
       }
       if (response is AppResultFailure) {
         AppSnackbarWidget(
-          title: 'Thông báo',
+          title: AppStrings.headError,
           message: (response as AppResultFailure).exception!.message.toString(),
           isError: true,
         ).show(context);
       }
     } catch (e) {
       AppSnackbarWidget(
-        title: 'Thông báo',
+        title: AppStrings.headError,
         message: AppStrings.signUpFailed,
         isError: true,
       ).show(context);

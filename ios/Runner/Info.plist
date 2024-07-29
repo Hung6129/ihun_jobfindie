@@ -18,6 +18,22 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
+
+	<key>UIBackgroundModes</key>
+	<array>
+   		<string>fetch</string>
+   		<string>remote-notification</string>
+	</array>
+	<key>NSAppleMusicUsageDescription</key>
+	<string> $(PRODUCT_NAME) would like to access your Apple Music library</string>
+	<key>UISupportsDocumentBrowser</key>
+		<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+		<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+		<string> $(PRODUCT_NAME) would like to access your photo library</string>
+
+
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>

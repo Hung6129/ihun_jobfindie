@@ -1,6 +1,12 @@
 class AppStrings {
   static const String appTitle = 'iHun Jobfinde';
 
+// General
+  static const headWaring = 'Warning';
+  static const headError = 'Error';
+  static const headSuccess = 'Success';
+  static const errorWhenPickFile = 'There are some errors when uploading the file';
+
 // Splash Page
   static const String splashTitle1 = 'Welcome to\niHun Jobfinde';
   static const String splashTitle2a = 'We help you find your dream job';
@@ -18,11 +24,13 @@ class AppStrings {
   static const String signInDontHaveAccount = 'Don\'t have an account?';
   static const String signInGreeting = 'Hey, Welcome! 👋 ';
   static const String orSignInWith = 'Or sign in with';
-  static const String signInRememberMe = 'Remember me';
+  static const String signInRememberMe = 'Save password';
   static const String signInForgotPassword = 'Forgot Password?';
   static const String signInFailed = 'Please check your email and password, and try again';
   static const String signInFailed1 = 'Failed to sign in, please try again later';
   static const String signInSuccess = 'Sign in successfully';
+  static const String plsFillInAllInfo = 'Please fill in all the information';
+  static const String youAreNotRecruiter = 'Your account is not a recruiter account';
 
 // Sign Up Page
   static const String signUpTitle = 'Sign Up';
