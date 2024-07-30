@@ -72,48 +72,18 @@ class HomePage extends StatelessWidget {
   Widget _buildAvt(
     HomeController controller,
   ) =>
-      Obx(
-        () => Row(
-          children: [
-            horizontalMargin12,
-            GestureDetector(
-              onTap: () => Get.toNamed(AppRoutes.profile),
-              child: Stack(
-                children: [
-                  AppCachedNetworkImage(
-                    imageUrl: controller.avatar.value,
-                    width: 60.w,
-                    height: 60.h,
-                  ),
-                  controller.isAgent.value
-                      ? Positioned(
-                          right: 0,
-                          bottom: 0,
-                          child: Container(
-                            width: 20.w,
-                            height: 20.h,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Palettes.p6,
-                            ),
-                            child: Icon(
-                              FontAwesomeIcons.userTie,
-                              color: Palettes.textWhite,
-                              size: 12.sp,
-                            ),
-                          ),
-                        )
-                      : SizedBox.shrink()
-                ],
-              ),
+      Row(
+        children: [
+          horizontalMargin24,
+          GestureDetector(
+            onTap: () => Get.toNamed(AppRoutes.profile),
+            child: Icon(
+              FontAwesomeIcons.solidCircleUser,
+              color: Colors.white,
+              size: 30.sp,
             ),
-            horizontalMargin12,
-            Text(
-              'Hi, ${controller.name.value}',
-              style: TextStyles.defaultStyle.appBarTitle.whiteText,
-            ),
-          ],
-        ),
+          ),
+        ],
       );
 
   Widget _buildBody(

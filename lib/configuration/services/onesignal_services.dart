@@ -25,7 +25,8 @@ class OnesignalServicesImpl extends OnesignalServices {
     OneSignal.initialize("c4ba9d07-6561-4f55-b39b-fffea28425f2");
 
     OneSignal.LiveActivities.setupDefault();
-    // OneSignal.LiveActivities.setupDefault(options: new LiveActivitySetupOptions(enablePushToStart: false, enablePushToUpdate: true));
+    // OneSignal.LiveActivities.setupDefault
+    //(options: new LiveActivitySetupOptions(enablePushToStart: false, enablePushToUpdate: true));
 
     // AndroidOnly stat only
     // OneSignal.Notifications.removeNotification(1);

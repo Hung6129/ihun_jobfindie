@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
     Get.put<AppService>(AppServiceImpl());
     return ScreenUtilInit(
       builder: (context, child) => GetMaterialApp(
+        initialBinding: AppBinding(),
         builder: AppFullScreenLoadingIndicator.init(
           builder: ((context, child) => MediaQuery(
                 data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
@@ -59,7 +60,6 @@ class MyApp extends StatelessWidget {
         smartManagement: SmartManagement.onlyBuilder,
         getPages: AppRoutes.routes,
         initialRoute: AppRoutes.init,
-        initialBinding: AppBinding(),
       ),
     );
   }
