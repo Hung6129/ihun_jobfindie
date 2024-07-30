@@ -12,9 +12,11 @@ import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/configuration/services/app_services.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 
+///
 /// Sets a callback to use for reporting errors to Crashlytics.
 /// This allows you to capture errors from your entire app in one place.
 /// The default behavior is to send uncaught Flutter errors to Crashlytics.
+///
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

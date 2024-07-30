@@ -47,6 +47,12 @@ class ProfilePage extends StatelessWidget {
                 // User avatar
                 _buildAvt(controller),
                 _buildUploadResumeFileButton(controller),
+                Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8.0),
+                    child: Text(controller.profileModel.value?.bio ?? '- -'),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Divider(),
@@ -147,48 +153,47 @@ class ProfilePage extends StatelessWidget {
             color: controller.fileName.value == "" ? Colors.redAccent : Colors.green,
             dashPattern: [10, 6],
             child: Container(
-              width: 320.w,
-              height: 40.h,
-              child: Center(
-                child: !controller.isShowLoading.value
-                    ? Row(
+              width: 330.w,
+              height: 45.h,
+              child: !controller.isShowLoading.value
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          controller.fileName.value == ""
+                              ? FontAwesomeIcons.fileArrowUp
+                              : FontAwesomeIcons.solidCircleCheck,
+                          size: 20.sp,
+                          color: controller.fileName.value == "" ? Colors.redAccent : Colors.green,
+                        ),
+                        horizontalMargin8,
+                        Text(
+                          controller.fileName.value == ""
+                              ? 'Upload Resume'
+                              : controller.fileName.value,
+                          style: TextStyles.defaultStyle.smallText.bold,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            controller.fileName.value == ""
-                                ? FontAwesomeIcons.fileArrowUp
-                                : FontAwesomeIcons.solidCircleCheck,
-                            size: 20.sp,
-                            color:
-                                controller.fileName.value == "" ? Colors.redAccent : Colors.green,
-                          ),
-                          horizontalMargin8,
                           Text(
-                            controller.fileName.value == ""
-                                ? 'Upload Resume'
-                                : controller.fileName.value,
-                            style: TextStyles.defaultStyle.smallText.bold,
+                            controller.progress.value == 1 ? 'Upload completed' : 'Uploading...',
+                            style: TextStyles.defaultStyle.smallText,
+                          ),
+                          LinearProgressIndicator(
+                            value: controller.progress.value,
+                            backgroundColor: Colors.grey[200],
+                            valueColor: AlwaysStoppedAnimation<Color>(Palettes.p2),
                           ),
                         ],
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              controller.progress.value == 1 ? 'Upload completed' : 'Uploading...',
-                              style: TextStyles.defaultStyle.smallText,
-                            ),
-                            LinearProgressIndicator(
-                              value: controller.progress.value,
-                              backgroundColor: Colors.grey[200],
-                              valueColor: AlwaysStoppedAnimation<Color>(Palettes.p2),
-                            ),
-                          ],
-                        ),
                       ),
-              ),
+                    ),
             ),
           ),
         ),

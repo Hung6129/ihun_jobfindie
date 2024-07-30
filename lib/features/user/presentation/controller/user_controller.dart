@@ -200,13 +200,7 @@ class UserController extends GetxController {
       if (response is AppResultSuccess<UserProfileModel>) {
         profileModel.value = response.netData;
         var userId = await Global.storageServices.getString(AppStorage.userProfileKey);
-        var resumeFileName = profileModel.value?.resumeFileName;
-
-        if (resumeFileName!.isNotEmpty || resumeFileName != '') {
-          fileName.value = resumeFileName;
-          await _getResumeFileFormFirebaseStorage(fileName.value);
-        }
-
+        fileName.value = profileModel.value!.resumeFileName;
         _fetchJobsApplied(userId);
       }
       if (response is AppResultFailure) {
