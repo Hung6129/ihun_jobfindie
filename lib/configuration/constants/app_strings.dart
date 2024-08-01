@@ -9,6 +9,7 @@ class AppStrings {
   static const warningWhenPickFile = 'Please pick a file first';
   static const uploadFileSuccess = 'File uploaded successfully';
   static const errorWhenUploadFile = 'There are some errors when uploading the file';
+  static const copiedToClipboard = 'Copied to clipboard';
 
 // Profile Page
   static const String profileTitle = 'Profile';

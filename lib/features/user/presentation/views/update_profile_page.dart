@@ -1,5 +1,7 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
@@ -35,7 +37,13 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
               ),
             ),
             body: SingleChildScrollView(
-              child: _buildUpdateForm(controller),
+              child: Column(
+                children: [
+                  _buildUpdateForm(controller),
+                  verticalMargin12,
+                  _buildUploadResumeFileButton(controller),
+                ],
+              ),
             ),
             bottomNavigationBar: _buildBottomButton(controller),
           ),
@@ -46,78 +54,142 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
 
   Widget _buildUpdateForm(
     UpdateProfileController controller,
-  ) {
-    return FormBuilder(
-      key: controller.formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            FormBuilderTextField(
-              name: 'username',
-              decoration: const InputDecoration(labelText: 'Full Name'),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-              ]),
-            ),
-            verticalMargin12,
-            FormBuilderTextField(
-              name: 'email',
-              decoration: const InputDecoration(labelText: 'Email'),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-                FormBuilderValidators.email(),
-              ]),
-            ),
-            verticalMargin12,
-            FormBuilderTextField(
-              name: 'bio',
-              decoration: const InputDecoration(
-                labelText: 'Bio',
+  ) =>
+      FormBuilder(
+        key: controller.formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              FormBuilderTextField(
+                name: 'username',
+                decoration: const InputDecoration(labelText: 'Full Name'),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
               ),
-              maxLines: 20,
-              minLines: 3,
-              keyboardType: TextInputType.multiline,
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-              ]),
-            ),
-            verticalMargin12,
-            FormBuilderTextField(
-              name: 'location',
-              decoration: const InputDecoration(labelText: 'Your Location'),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-              ]),
-            ),
-            verticalMargin12,
-            FormBuilderTextField(
-              name: 'phoneNum',
-              decoration: const InputDecoration(labelText: 'Phone Number'),
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-                FormBuilderValidators.numeric(),
-              ]),
-            ),
-          ],
+              verticalMargin12,
+              FormBuilderTextField(
+                name: 'email',
+                decoration: const InputDecoration(labelText: 'Email'),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.email(),
+                ]),
+              ),
+              verticalMargin12,
+              FormBuilderTextField(
+                name: 'bio',
+                decoration: const InputDecoration(
+                  labelText: 'Bio',
+                ),
+                maxLines: 20,
+                minLines: 3,
+                keyboardType: TextInputType.multiline,
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
+              ),
+              verticalMargin12,
+              FormBuilderTextField(
+                name: 'location',
+                decoration: const InputDecoration(labelText: 'Your Location'),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
+              ),
+              verticalMargin12,
+              FormBuilderTextField(
+                name: 'phoneNum',
+                decoration: const InputDecoration(labelText: 'Phone Number'),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.numeric(),
+                ]),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 
-  Widget _buildBottomButton(UpdateProfileController controller) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 30, left: 20, right: 20),
-      child: ElevatedButton.icon(
-        icon: const Icon(FontAwesomeIcons.solidFloppyDisk, color: Colors.white),
-        style: ElevatedButton.styleFrom(
-            minimumSize: const Size(double.infinity, 50), backgroundColor: Palettes.p2),
-        onPressed: () => controller.updateProfile(),
-        label: Text(
-          'Update Profile',
-          style: TextStyles.defaultStyle.semibold.mediumText.whiteText,
+  Widget _buildBottomButton(UpdateProfileController controller) => Container(
+        margin: const EdgeInsets.only(bottom: 30, left: 20, right: 20),
+        child: ElevatedButton.icon(
+          icon: const Icon(FontAwesomeIcons.solidFloppyDisk, color: Colors.white),
+          style: ElevatedButton.styleFrom(
+              minimumSize: const Size(double.infinity, 50), backgroundColor: Palettes.p2),
+          onPressed: () => controller.updateProfile(),
+          label: Text(
+            'Update Profile',
+            style: TextStyles.defaultStyle.semibold.mediumText.whiteText,
+          ),
         ),
-      ),
-    );
-  }
+      );
+
+  Widget _buildUploadResumeFileButton(UpdateProfileController controller) => Obx(
+        () => GestureDetector(
+          onTap: () {
+            if (controller.fileName.value.isEmpty && controller.fileName.value == '') {
+              controller.onPickFile();
+            } else {
+              controller.showBottomSheet;
+            }
+          },
+          child: DottedBorder(
+            borderType: BorderType.RRect,
+            radius: Radius.circular(12),
+            color: controller.fileName.value == "" ? Colors.redAccent : Colors.green,
+            dashPattern: [10, 6],
+            child: Container(
+              width: 330.w,
+              height: 45.h,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: !controller.isShowLoading.value
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Icon(
+                            controller.fileName.value == ""
+                                ? FontAwesomeIcons.fileArrowUp
+                                : FontAwesomeIcons.folderOpen,
+                            size: 20.sp,
+                            color:
+                                controller.fileName.value == "" ? Colors.redAccent : Colors.green,
+                          ),
+                        ),
+                        horizontalMargin8,
+                        Expanded(
+                          child: Text(
+                            controller.fileName.value == ""
+                                ? 'Upload Resume'
+                                : '${controller.fileName.value}',
+                            style: TextStyles.defaultStyle.smallText.bold,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            controller.progress.value == 1 ? 'Upload completed' : 'Uploading...',
+                            style: TextStyles.defaultStyle.smallText,
+                          ),
+                          LinearProgressIndicator(
+                            value: controller.progress.value,
+                            backgroundColor: Colors.grey[200],
+                            valueColor: AlwaysStoppedAnimation<Color>(Palettes.p2),
+                          ),
+                        ],
+                      ),
+                    ),
+            ),
+          ),
+        ),
+      );
 }
