@@ -1,10 +1,6 @@
-name: android-firebase-distribution
+name: Flutter
 
 on:
-  push:
-    branches:
-      - main
-
   workflow_call:
     inputs:
       runs-on:
@@ -17,7 +13,7 @@ on:
         required: true
         default: 'latest'
         type: string
-
+  
 jobs:
   test-stable:
     runs-on: ${{ inputs.runs-on }}
@@ -27,6 +23,28 @@ jobs:
       - uses: ./
         with:
           channel: stable
+          version: ${{ inputs.version }}
+
+      - name: Dart version
+        run: dart --version
+      - name: Flutter version
+        run: flutter --version
+      - name: Flutter doctor
+        run: flutter doctor
+
+      - name: Run hello world
+        run: |
+          echo "main() { print('hello world'); }" > hello.dart
+          dart hello.dart
+
+  test-beta:
+    runs-on: ${{ inputs.runs-on }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./
+        with:
+          channel: beta
           version: ${{ inputs.version }}
 
       - name: Dart version
