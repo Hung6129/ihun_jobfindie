@@ -16,7 +16,7 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.3.0' # specify the flutter version you are using
+        flutter-version: '3.22.2' # specify the flutter version you are using
 
     - name: Install dependencies
       run: flutter pub get
@@ -24,13 +24,22 @@ jobs:
     - name: Clean project
       run: flutter clean
 
+    - name: Extract version from pubspec.yaml
+      id: extract_version
+      run: |
+        version=$(grep '^version:' pubspec.yaml | cut -d ' ' -f 2)
+        buildName=$(echo $version | cut -d '+' -f 1)
+        buildNumber=$(echo $version | cut -d '+' -f 2)
+        echo "BUILD_NAME=$buildName" >> $GITHUB_ENV
+        echo "BUILD_NUMBER=$buildNumber" >> $GITHUB_ENV
+
     - name: Build APK
-      run: flutter build apk --release --flavor staging
+      run: flutter build apk --release --build-name ${{ env.BUILD_NAME }} --build-number ${{ env.BUILD_NUMBER }}
 
     - name: Distribute to Firebase App Distribution
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }} # Ensure you have set the FIREBASE_TOKEN secret in your repository
       run: |
-        flutter firebase appdistribution:distribute build/app/outputs/flutter-apk/app-staging-release.apk \
+        flutter firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
           --app 1:211127426949:android:25da9cfa382b6505faaeec \
           --groups "mee"
