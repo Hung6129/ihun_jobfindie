@@ -122,11 +122,6 @@ class UserProfileModel extends Equatable {
   }
 
   @override
-  String toString() {
-    return 'UserProfileModel(username: $username, email: $email, avatar: $avatar, skills: $skills, isAdmin: $isAdmin, isAgent: $isAgent, bio: $bio, resumeFileName: $resumeFileName, resumeFileUrl: $resumeFileUrl, socialList: $socialList, location: $location, phoneNum: $phoneNum)';
-  }
-
-  @override
   List<Object?> get props => [
         username,
         email,

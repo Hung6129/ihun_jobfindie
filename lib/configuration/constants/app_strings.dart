@@ -16,7 +16,6 @@ class AppStrings {
   static const String errorWhenFetchProfile = 'There are some errors when fetching the profile';
   static const errorWhenFetchListJob = 'There are some errors when fetching the list job';
   static const errorWhenUpdateProfile = 'There are some errors when updating the profile';
-  static const updateProfileSuccess = 'Profile updated successfully';
 
 // Splash Page
   static const String splashTitle1 = 'Welcome to\niHun Jobfinde';

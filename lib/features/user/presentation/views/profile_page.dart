@@ -24,16 +24,16 @@ class ProfilePage extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                onPressed: () => controller.openUpdateProfilePage(),
+                onPressed: () => controller.signOut(),
                 icon: Icon(
-                  FontAwesomeIcons.penToSquare,
+                  FontAwesomeIcons.rightFromBracket,
                   size: 20.sp,
                 ),
               ),
               IconButton(
-                onPressed: () => controller.signOut(),
+                onPressed: () {},
                 icon: Icon(
-                  FontAwesomeIcons.rightFromBracket,
+                  FontAwesomeIcons.penToSquare,
                   size: 20.sp,
                 ),
               ),

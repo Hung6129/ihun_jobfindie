@@ -8,9 +8,12 @@ import 'package:ihun_jobfindie/features/jobs/data/datasource/job_datasource_remo
 import 'package:ihun_jobfindie/features/jobs/domain/job_usecase/job_usecase.dart';
 import 'package:ihun_jobfindie/features/jobs/domain/repository/job_repository.dart';
 
+
 class AppBinding extends Bindings {
   @override
   void dependencies() {
+
+
     Get.put<NetworkService>(NetworkServiceImpl());
 
 //

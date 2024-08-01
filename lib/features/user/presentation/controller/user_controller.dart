@@ -12,7 +12,6 @@ import 'package:ihun_jobfindie/configuration/routes/app_routes.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_model.dart';
 import 'package:ihun_jobfindie/features/authenticate/domain/authen_usecase/authen_usecase.dart';
 import 'package:ihun_jobfindie/features/jobs/domain/job_usecase/job_usecase.dart';
-import 'package:ihun_jobfindie/features/user/presentation/views/update_profile_page.dart';
 import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 import 'package:logger/logger.dart';
 import '../../../../configuration/constants/app_storage.dart';
@@ -43,27 +42,19 @@ class UserController extends GetxController {
   String? directoryPath;
   String? extension;
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   profileModel.close();
-  //   listJobModel.close();
-  //   fileName.close();
-  //   progress.close();
-  //   isShowLoading.close();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    profileModel.close();
+    listJobModel.close();
+    fileName.close();
+    progress.close();
+    isShowLoading.close();
+  }
 
   @override
   void onInit() async {
     super.onInit();
-    await _fetchData();
-  }
-
-  void openUpdateProfilePage() async {
-    await Get.to(
-      () => UpdateProfilePage(),
-      arguments: profileModel.value,
-    );
     await _fetchData();
   }
 
