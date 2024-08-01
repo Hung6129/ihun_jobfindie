@@ -34,9 +34,7 @@ Future<void> main() async {
   // Set the orientation to portrait only
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
-  ]).then((value) {
-    runApp(const MyApp());
-  });
+  ]).then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
