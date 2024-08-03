@@ -10,6 +10,7 @@ import 'package:ihun_jobfindie/shared/styles/palettes.dart';
 import 'package:ihun_jobfindie/shared/styles/text_styles.dart';
 
 import '../controller/update_profile_controller.dart';
+import 'pdf_view_page.dart';
 
 class UpdateProfilePage extends StatefulWidget {
   const UpdateProfilePage({super.key});
@@ -22,9 +23,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<UpdateProfileController>(
-      init: UpdateProfileController(
-        Get.find(),
-      ),
+      init: UpdateProfileController(Get.find()),
       builder: (controller) {
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -32,8 +31,11 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
             appBar: AppBar(
               title: const Text('Update Profile'),
               leading: IconButton(
-                icon: const Icon(FontAwesomeIcons.arrowLeft),
-                onPressed: () => Get.back(),
+                icon: Icon(
+                  FontAwesomeIcons.chevronLeft,
+                  size: 20.sp,
+                ),
+                onPressed: () => Navigator.pop(context),
               ),
             ),
             body: SingleChildScrollView(
@@ -41,7 +43,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                 children: [
                   _buildUpdateForm(controller),
                   verticalMargin12,
-                  _buildUploadResumeFileButton(controller),
+                  _buildUploadResumeFileButton(context, controller),
                 ],
               ),
             ),
@@ -126,13 +128,17 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
         ),
       );
 
-  Widget _buildUploadResumeFileButton(UpdateProfileController controller) => Obx(
+  Widget _buildUploadResumeFileButton(
+    BuildContext context,
+    UpdateProfileController controller,
+  ) =>
+      Obx(
         () => GestureDetector(
           onTap: () {
             if (controller.fileName.value.isEmpty && controller.fileName.value == '') {
               controller.onPickFile();
             } else {
-              controller.showBottomSheet;
+              showBottomSheetOpts(context, controller);
             }
           },
           child: DottedBorder(
@@ -142,32 +148,27 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
             dashPattern: [10, 6],
             child: Container(
               width: 330.w,
-              height: 45.h,
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              height: 60.h,
               child: !controller.isShowLoading.value
-                  ? Row(
+                  ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Expanded(
-                          child: Icon(
-                            controller.fileName.value == ""
-                                ? FontAwesomeIcons.fileArrowUp
-                                : FontAwesomeIcons.folderOpen,
-                            size: 20.sp,
-                            color:
-                                controller.fileName.value == "" ? Colors.redAccent : Colors.green,
-                          ),
+                        Icon(
+                          controller.fileName.value == ""
+                              ? FontAwesomeIcons.fileArrowUp
+                              : FontAwesomeIcons.folderOpen,
+                          size: 20.sp,
+                          color: controller.fileName.value == "" ? Colors.redAccent : Colors.green,
                         ),
                         horizontalMargin8,
-                        Expanded(
-                          child: Text(
-                            controller.fileName.value == ""
-                                ? 'Upload Resume'
-                                : '${controller.fileName.value}',
-                            style: TextStyles.defaultStyle.smallText.bold,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                        Text(
+                          controller.fileName.value == ""
+                              ? 'Choose your resume file'
+                              : '${controller.fileName.value}',
+                          style: TextStyles.defaultStyle.smallText.bold,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     )
@@ -192,4 +193,57 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
           ),
         ),
       );
+
+  Future showBottomSheetOpts(
+    BuildContext context,
+    UpdateProfileController controller,
+  ) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (builder) {
+        return Container(
+          height: 200.h,
+          padding: EdgeInsets.all(16.0),
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(FontAwesomeIcons.eye),
+                title: Text('View file'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    Get.context!,
+                    MaterialPageRoute(
+                      builder: (context) => PDFViewPage(
+                        path: controller.directoryPath.value,
+                        fileName: controller.fileName.value,
+                      ),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.penToSquare),
+                title: Text('Upload new file'),
+                onTap: () async {
+                  Navigator.pop(context);
+                  await controller.onPickFile();
+                },
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.solidTrashCan),
+                title: Text('Delete file'),
+                onTap: () async {
+                  Navigator.pop(context);
+                  await controller.onDeleteResumeFile(
+                    fileName: controller.fileName.value,
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }

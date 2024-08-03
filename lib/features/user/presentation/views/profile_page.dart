@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +46,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                 // User avatar
                 _buildAvt(controller),
-                // _buildUploadResumeFileButton(controller),
+                _buildResumeFile(controller),
                 Obx(
                   () => Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8.0),
@@ -178,74 +179,70 @@ class ProfilePage extends StatelessWidget {
         ),
       );
 
-  // Widget _buildUploadResumeFileButton(UserController controller) => Obx(
-  //       () => GestureDetector(
-  //         onTap: () {
-  //           if (controller.fileName.value == "") {
-  //             controller.onPickFile();
-  //           } else {
-  //             debugPrint('Open PDF file: ${controller.profileModel.value!.resumeFileUrl}');
-  //             controller.openPdfFile(
-  //               controller.profileModel.value!.resumeFileUrl,
-  //               controller.profileModel.value!.resumeFileName,
-  //             );
-  //           }
-  //         },
-  //         child: DottedBorder(
-  //           borderType: BorderType.RRect,
-  //           radius: Radius.circular(12),
-  //           color: controller.fileName.value == "" ? Colors.redAccent : Colors.green,
-  //           dashPattern: [10, 6],
-  //           child: Container(
-  //             width: 330.w,
-  //             height: 45.h,
-  //             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-  //             child: !controller.isShowLoading.value
-  //                 ? Row(
-  //                     mainAxisAlignment: MainAxisAlignment.center,
-  //                     children: [
-  //                       Expanded(
-  //                         child: Icon(
-  //                           controller.fileName.value == ""
-  //                               ? FontAwesomeIcons.fileArrowUp
-  //                               : FontAwesomeIcons.solidCircleCheck,
-  //                           size: 20.sp,
-  //                           color:
-  //                               controller.fileName.value == "" ? Colors.redAccent : Colors.green,
-  //                         ),
-  //                       ),
-  //                       horizontalMargin8,
-  //                       Expanded(
-  //                         child: Text(
-  //                           controller.fileName.value == ""
-  //                               ? 'Upload Resume'
-  //                               : '${controller.fileName.value}',
-  //                           style: TextStyles.defaultStyle.smallText.bold,
-  //                           maxLines: 2,
-  //                           overflow: TextOverflow.ellipsis,
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   )
-  //                 : Padding(
-  //                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-  //                     child: Column(
-  //                       mainAxisAlignment: MainAxisAlignment.center,
-  //                       children: [
-  //                         Text(
-  //                           controller.progress.value == 1 ? 'Upload completed' : 'Uploading...',
-  //                           style: TextStyles.defaultStyle.smallText,
-  //                         ),
-  //                         LinearProgressIndicator(
-  //                           value: controller.progress.value,
-  //                           backgroundColor: Colors.grey[200],
-  //                           valueColor: AlwaysStoppedAnimation<Color>(Palettes.p2),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //           ),
-  //         ),
-  //       ),
-  //     );
+  Widget _buildResumeFile(UserController controller) => Obx(
+        () => GestureDetector(
+          onTap: () {
+            if (controller.fileName.value == "") {
+              controller.openUpdateProfilePage();
+            } else {
+              debugPrint('Open PDF file: ${controller.profileModel.value!.resumeFileUrl}');
+              controller.openPdfFile(
+                controller.profileModel.value!.resumeFileUrl,
+                controller.profileModel.value!.resumeFileName,
+              );
+            }
+          },
+          child: DottedBorder(
+            borderType: BorderType.RRect,
+            radius: Radius.circular(12),
+            color: controller.fileName.value == "" ? Colors.redAccent : Colors.green,
+            dashPattern: [10, 6],
+            child: Container(
+              width: 330.w,
+              height: 60.h,
+              child: !controller.isShowLoading.value
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          controller.fileName.value == ""
+                              ? FontAwesomeIcons.fileArrowUp
+                              : FontAwesomeIcons.solidCircleCheck,
+                          size: 20.sp,
+                          color: controller.fileName.value == "" ? Colors.redAccent : Colors.green,
+                        ),
+                        horizontalMargin8,
+                        Text(
+                          controller.fileName.value == ""
+                              ? 'Upload Resume'
+                              : '${controller.fileName.value}',
+                          style: TextStyles.defaultStyle.smallText.bold,
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            controller.progress.value == 1 ? 'Upload completed' : 'Uploading...',
+                            style: TextStyles.defaultStyle.smallText,
+                          ),
+                          LinearProgressIndicator(
+                            value: controller.progress.value,
+                            backgroundColor: Colors.grey[200],
+                            valueColor: AlwaysStoppedAnimation<Color>(Palettes.p2),
+                          ),
+                        ],
+                      ),
+                    ),
+            ),
+          ),
+        ),
+      );
 }

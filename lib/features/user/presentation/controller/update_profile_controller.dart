@@ -2,15 +2,13 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_storage.dart';
 import 'package:ihun_jobfindie/configuration/constants/app_strings.dart';
 import 'package:ihun_jobfindie/configuration/data/services/global.dart';
 import 'package:ihun_jobfindie/features/authenticate/data/models/user_profile_model.dart';
+import 'package:ihun_jobfindie/shared/widgets/app_loading_indicator.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../configuration/data/network/nets/app_result.dart';
@@ -19,14 +17,18 @@ import '../../../authenticate/domain/authen_usecase/authen_usecase.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'dart:io' as io;
 
-import '../views/pdf_view_page.dart';
-
+///
+/// get arguments from profile page, and set to form
+/// through value [fileName] and [profileModel]
+///
+/// using those two values, we can check if the user has uploaded a file or not
+///
 class UpdateProfileController extends GetxController {
   final _logger = Logger(printer: PrettyPrinter(methodCount: 0));
 
   final formKey = GlobalKey<FormBuilderState>();
 
-  var userProfile = Get.arguments as UserProfileModel;
+  var userProfile = Get.arguments;
 
   late final AuthenUseCase _authUseCase;
 
@@ -35,30 +37,33 @@ class UpdateProfileController extends GetxController {
   UpdateProfileController(this._authUseCase);
 
   RxDouble progress = 0.0.obs;
+
   RxBool isShowLoading = false.obs;
+
   RxString fileName = "".obs;
+
   List<PlatformFile>? paths;
-  String? directoryPath;
-  String? extension;
+
+  RxString directoryPath = ''.obs;
+
+  RxString resumeFileUrl = ''.obs;
 
   @override
   void onReady() {
     super.onReady();
-    _logger.i('UpdateProfileController is ready');
     setFormValue(userProfile);
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   // get arguments from profile page, and set to form
+  // through value [fileName] and [profileModel]
   void setFormValue(UserProfileModel userProfile) {
     this.profileModel.value = userProfile;
     fileName.value = userProfile.resumeFileName;
-
+    directoryPath.value = userProfile.resumeFileUrl;
+    resumeFileUrl.value = userProfile.resumeFileUrl;
     _logger.i('user profile: $userProfile');
+
+    // set the value to form
     formKey.currentState?.patchValue({
       'username': userProfile.username,
       'email': userProfile.email,
@@ -70,7 +75,7 @@ class UpdateProfileController extends GetxController {
     });
   }
 
-  void updateProfile() async {
+  Future<void> updateProfile() async {
     if (formKey.currentState!.saveAndValidate()) {
       await _callUpdateProfile(profileModel.value!.copyWith(
         username: formKey.currentState!.fields['username']!.value as String,
@@ -78,8 +83,8 @@ class UpdateProfileController extends GetxController {
         bio: formKey.currentState!.fields['bio']!.value as String,
         location: formKey.currentState!.fields['location']!.value as String,
         phoneNum: formKey.currentState!.fields['phoneNum']!.value as String,
-        resumeFileName: formKey.currentState!.fields['resumeFileName']!.value as String,
-        resumeFileUrl: formKey.currentState!.fields['resumeFileUrl']!.value as String,
+        resumeFileName: fileName.value,
+        resumeFileUrl: resumeFileUrl.value,
       ));
     }
   }
@@ -139,14 +144,30 @@ class UpdateProfileController extends GetxController {
     try {
       paths = (await FilePicker.platform.pickFiles(
         onFileLoading: (FilePickerStatus status) => print(status),
-        allowedExtensions:
-            (extension?.isNotEmpty ?? false) ? extension?.replaceAll(' ', '').split(',') : null,
       ))
           ?.files;
       if (paths != null) {
-        fileName.value = paths!.map((e) => e.name).toString();
-        directoryPath = (paths!.map((e) => e.path)).toList()[0].toString();
-        await _uploadUserResumeToFirebaseStorage();
+        // check [fileName] is not empty, then upload
+        // new file and delete the old file
+        if (fileName.value.isNotEmpty) {
+          await _uploadNewUserResumeToFirebaseStorageAndDeleteOldFile(
+            // pass the new file name and directory
+            newName: paths!.map((e) => e.name).toString(),
+            newDirectory: (paths!.map((e) => e.path)).toList()[0].toString(),
+            // pass the old file name and directory
+            oldName: fileName.value,
+            oldDirectory: directoryPath.value,
+          );
+        } else {
+          // set the value to [fileName] and [directoryPath]
+          // to the file that user just picked
+          fileName.value = paths!.map((e) => e.name).toString();
+          directoryPath.value = (paths!.map((e) => e.path)).toList()[0].toString();
+          await _uploadUserResumeToFirebaseStorage(
+            name: fileName.value,
+            directory: directoryPath.value,
+          );
+        }
       } else {
         return AppSnackbarWidget(
           title: AppStrings.headWaring,
@@ -161,50 +182,26 @@ class UpdateProfileController extends GetxController {
     }
   }
 
-  Future<void> onPickFileAndUpdateFile() async {
-    try {
-      paths = (await FilePicker.platform.pickFiles(
-        onFileLoading: (FilePickerStatus status) => print(status),
-        allowedExtensions:
-            (extension?.isNotEmpty ?? false) ? extension?.replaceAll(' ', '').split(',') : null,
-      ))
-          ?.files;
-      if (paths != null) {
-        fileName.value = paths!.map((e) => e.name).toString();
-        directoryPath = (paths!.map((e) => e.path)).toList()[0].toString();
-        await _uploadUserResumeToFirebaseStorage();
-      } else {
-        return AppSnackbarWidget(
-          title: AppStrings.headWaring,
-          message: AppStrings.warningWhenPickFile,
-          isWaring: true,
-        ).show(Get.context!);
-      }
-    } on PlatformException catch (e) {
-      _logger.e('Unsupported operation' + e.toString());
-    } catch (e, str) {
-      _logger.e('error when pick file $e $str');
-    }
-  }
-
-  Future<void> _uploadUserResumeToFirebaseStorage() async {
+  Future<void> _uploadUserResumeToFirebaseStorage({
+    required String name,
+    required String directory,
+  }) async {
     try {
       final storage = FirebaseStorage.instance.ref();
       // Create a reference to the location you want to upload to in firebase
       final ref = storage
           .child('candidateResume')
           .child('/${Global.storageServices.getString(AppStorage.userProfileKey)}')
-          .child('/$fileName');
-      io.File file = io.File(directoryPath!);
-
+          .child('/$name');
+      io.File file = io.File(directory);
+      // check if the file is exist
       if (!file.existsSync()) {
         _logger.e('file not exist');
-        AppSnackbarWidget(
+        return AppSnackbarWidget(
           title: AppStrings.headError,
           message: AppStrings.errorWhenPickFile,
           isError: true,
         ).show(Get.context!);
-        return;
       }
 
       final metadata = SettableMetadata(
@@ -217,17 +214,15 @@ class UpdateProfileController extends GetxController {
 
       await ref.putFile(file, metadata).snapshotEvents.listen((event) async {
         isShowLoading.value = true;
-
-        _logger.i('Task state: ${event.state}');
-        _logger.i('Progress: ${(event.bytesTransferred / event.totalBytes) * 100} %');
-
+        // _logger.i('Task state: ${event.state}');
+        // _logger.i('Progress: ${(event.bytesTransferred / event.totalBytes) * 100} %');
         progress.value = (event.bytesTransferred / event.totalBytes) * 100;
-
         if (event.state == TaskState.success) {
-          final urlDown = await _getResumeFileFormFirebaseStorage(fileName.value);
+          final urlDown = await _getResumeFileFormFirebaseStorage(name);
+          resumeFileUrl.value = urlDown;
           await _callUpdateProfile(
             profileModel.value!.copyWith(
-              resumeFileName: fileName.value,
+              resumeFileName: name,
               resumeFileUrl: urlDown,
             ),
           );
@@ -256,15 +251,32 @@ class UpdateProfileController extends GetxController {
     }
   }
 
-  Future<void> _uploadNewUserResumeToFirebaseStorageAndDeleteOldFile() async {
+  Future<void> _uploadNewUserResumeToFirebaseStorageAndDeleteOldFile({
+    required String newName,
+    required String newDirectory,
+    required String oldName,
+    required String oldDirectory,
+  }) async {
     try {
-      final storage = FirebaseStorage.instance.ref();
-      // Create a reference to the location you want to upload to in firebase
-      final ref = storage
+      /// Get the old file on firebase storage
+      final oldStorage = FirebaseStorage.instance
+          .ref()
           .child('candidateResume')
           .child('/${Global.storageServices.getString(AppStorage.userProfileKey)}')
-          .child('/$fileName');
-      io.File file = io.File(directoryPath!);
+          .child('/$oldName');
+
+      await oldStorage.delete();
+
+      _logger.i('old file deleted');
+
+      /// Create a new reference
+      final newStorage = FirebaseStorage.instance
+          .ref()
+          .child('candidateResume')
+          .child('/${Global.storageServices.getString(AppStorage.userProfileKey)}')
+          .child('/$newName');
+
+      io.File file = io.File(newDirectory);
 
       if (!file.existsSync()) {
         _logger.e('file not exist');
@@ -284,19 +296,19 @@ class UpdateProfileController extends GetxController {
       );
       _logger.i('file path: ${file.path}');
 
-      await ref.putFile(file, metadata).snapshotEvents.listen((event) async {
+      await newStorage.putFile(file, metadata).snapshotEvents.listen((event) async {
         isShowLoading.value = true;
-
-        _logger.i('Task state: ${event.state}');
-        _logger.i('Progress: ${(event.bytesTransferred / event.totalBytes) * 100} %');
-
+        // _logger.i('Task state: ${event.state}');
+        // _logger.i('Progress: ${(event.bytesTransferred / event.totalBytes) * 100} %');
         progress.value = (event.bytesTransferred / event.totalBytes) * 100;
-
         if (event.state == TaskState.success) {
-          final urlDown = await _getResumeFileFormFirebaseStorage(fileName.value);
+          final urlDown = await _getResumeFileFormFirebaseStorage(newName);
+          fileName.value = newName;
+          directoryPath.value = newDirectory;
+          resumeFileUrl.value = urlDown;
           await _callUpdateProfile(
             profileModel.value!.copyWith(
-              resumeFileName: fileName.value,
+              resumeFileName: newName,
               resumeFileUrl: urlDown,
             ),
           );
@@ -325,35 +337,35 @@ class UpdateProfileController extends GetxController {
     }
   }
 
-  Future showBottomSheet() {
-    return Get.bottomSheet(
-      backgroundColor: Colors.white,
-      Container(
-        height: 150.h,
-        padding: EdgeInsets.all(16.0),
-        child: Wrap(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(FontAwesomeIcons.eye),
-              title: Text('View file'),
-              onTap: () => Navigator.push(
-                Get.context!,
-                MaterialPageRoute(
-                  builder: (context) => PDFViewPage(
-                    path: profileModel.value!.resumeFileUrl,
-                    fileName: profileModel.value!.resumeFileName,
-                  ),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(FontAwesomeIcons.penToSquare),
-              title: Text('Upload new file'),
-              onTap: () async => await onPickFileAndUpdateFile(),
-            ),
-          ],
+  Future<void> onDeleteResumeFile({
+    required String fileName,
+  }) async {
+    try {
+      AppFullScreenLoadingIndicator.show();
+      final oldStorage = FirebaseStorage.instance
+          .ref()
+          .child('candidateResume')
+          .child('/${Global.storageServices.getString(AppStorage.userProfileKey)}')
+          .child('/$fileName');
+
+      await oldStorage.delete();
+
+      this.fileName.value = '';
+      this.directoryPath.value = '';
+      this.resumeFileUrl.value = '';
+
+      await _callUpdateProfile(
+        profileModel.value!.copyWith(
+          resumeFileName: '',
+          resumeFileUrl: '',
         ),
-      ),
-    );
+      );
+      AppFullScreenLoadingIndicator.dismiss();
+      AppSnackbarWidget(
+        title: AppStrings.headSuccess,
+        message: 'File deleted successfully',
+        isError: false,
+      ).show(Get.context!);
+    } catch (e) {}
   }
 }
