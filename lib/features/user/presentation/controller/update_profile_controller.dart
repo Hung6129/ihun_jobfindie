@@ -18,34 +18,25 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'dart:io' as io;
 
 ///
-/// get arguments from profile page, and set to form
-/// through value [fileName] and [profileModel]
+/// Get arguments from profile page, and set to form
+/// through value [fileName], [profileModel] and [resumeFileUrl]
 ///
 /// using those two values, we can check if the user has uploaded a file or not
 ///
 class UpdateProfileController extends GetxController {
-  final _logger = Logger(printer: PrettyPrinter(methodCount: 0));
-
-  final formKey = GlobalKey<FormBuilderState>();
-
-  var userProfile = Get.arguments;
-
   late final AuthenUseCase _authUseCase;
-
-  Rxn<UserProfileModel?> profileModel = Rxn();
-
   UpdateProfileController(this._authUseCase);
 
+  final _logger = Logger(printer: PrettyPrinter(methodCount: 0));
+  final formKey = GlobalKey<FormBuilderState>();
+  var userProfile = Get.arguments;
+  Rxn<UserProfileModel?> profileModel = Rxn();
   RxDouble progress = 0.0.obs;
-
   RxBool isShowLoading = false.obs;
-
-  RxString fileName = "".obs;
-
   List<PlatformFile>? paths;
 
+  RxString fileName = "".obs;
   RxString directoryPath = ''.obs;
-
   RxString resumeFileUrl = ''.obs;
 
   @override
@@ -214,9 +205,11 @@ class UpdateProfileController extends GetxController {
 
       await ref.putFile(file, metadata).snapshotEvents.listen((event) async {
         isShowLoading.value = true;
-        // _logger.i('Task state: ${event.state}');
-        // _logger.i('Progress: ${(event.bytesTransferred / event.totalBytes) * 100} %');
-        progress.value = (event.bytesTransferred / event.totalBytes) * 100;
+        if (event.totalBytes != 0) {
+          progress.value = ((event.bytesTransferred / event.totalBytes) * 100).toDouble();
+        } else {
+          progress.value = 0.0;
+        }
         if (event.state == TaskState.success) {
           final urlDown = await _getResumeFileFormFirebaseStorage(name);
           resumeFileUrl.value = urlDown;
@@ -298,9 +291,11 @@ class UpdateProfileController extends GetxController {
 
       await newStorage.putFile(file, metadata).snapshotEvents.listen((event) async {
         isShowLoading.value = true;
-        // _logger.i('Task state: ${event.state}');
-        // _logger.i('Progress: ${(event.bytesTransferred / event.totalBytes) * 100} %');
-        progress.value = (event.bytesTransferred / event.totalBytes) * 100;
+        if (event.totalBytes != 0) {
+          progress.value = ((event.bytesTransferred / event.totalBytes) * 100).toDouble();
+        } else {
+          progress.value = 0.0;
+        }
         if (event.state == TaskState.success) {
           final urlDown = await _getResumeFileFormFirebaseStorage(newName);
           fileName.value = newName;
