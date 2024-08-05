@@ -1,27 +1,22 @@
+## iHunJobfindie
 
-## Updating...
+### Description
+This is a job finding app that allows users to search for jobs based on their location and job title. Users can also create an account and save jobs to their profile.
 
+### User Stories
+- As a user, I want to be able to search for jobs based on my location and job title.
+- Also as a user, I want to be able to edit my profile. Upload my resume file and update my contact information.
+- Set bookmarks for jobs that I am interested in.
 
-<!-- {
-    "_id": "667533cae7a28cf8cbabae7c",
-    "username": "Long Tran",
-    "email": "longtran@gmail.com",
-    "isAdmin": false,
-    "isAgent": false,
-    "skills": [
-        "Flutter",
-        "Swift",
-        "Firebase",
-        "Java",
-        "NodeJS",
-        "Python"
-    ],
-    "avatar": "https://bit.ly/4cWua0j",
-    "bio": "My name is Long Tran. I am a software engineer. I have been working in the software industry for 5 years. I have experience in developing mobile applications using Flutter, Swift, and Java. I also have experience in developing web applications using NodeJS and Python. I am passionate about technology and always eager to learn new things.",
-    "location": "Ho Chi Minh City, Vietnam",
-    "resumeFileName": "",
-    "socialList": []
-} -->
+### Technologies
 
 
-(my._resume.pdf)
+Using Flutter for building the app
+- Getx for state management
+- Dio for making API requests, getx serves as a wrapper for Dio
+- Shared preferences for storing user data locally
+
+
+For building the backend
+- Using express.js for the backend, build API endpoints for the app
+- MongoDB for storing user data and job data

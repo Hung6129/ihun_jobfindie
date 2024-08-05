@@ -44,6 +44,13 @@ class UserController extends GetxController {
     await _fetchData();
   }
 
+  void openJobDetailPage(String jobId) {
+    Get.toNamed(
+      AppRoutes.jobDetail,
+      arguments: jobId,
+    );
+  }
+
   void openUpdateProfilePage() async {
     await Get.to(
       () => UpdateProfilePage(),

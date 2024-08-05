@@ -18,7 +18,7 @@
 //  I also have experience in developing web applications using NodeJS and Python.
 //  I am passionate about technology and always eager to learn new things.",
 //     "location": "Ho Chi Minh City, Vietnam",
-//     "resumeFileName": "",
+//     "resumeFileName": "", "resumeFileUrl": "",
 //     "socialList": [],
 //     "phoneNum":"0336965267"
 // }

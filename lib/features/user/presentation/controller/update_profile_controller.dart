@@ -63,6 +63,7 @@ class UpdateProfileController extends GetxController {
       'phoneNum': userProfile.phoneNum,
       'resumeFileName': userProfile.resumeFileName,
       'resumeFileUrl': userProfile.resumeFileUrl,
+      'skills': userProfile.skill,
     });
   }
 
@@ -76,6 +77,8 @@ class UpdateProfileController extends GetxController {
         phoneNum: formKey.currentState!.fields['phoneNum']!.value as String,
         resumeFileName: fileName.value,
         resumeFileUrl: resumeFileUrl.value,
+        // convert the value to list of string
+        skills: (formKey.currentState!.fields['skills']!.value as String).split(', '),
       ));
     }
   }

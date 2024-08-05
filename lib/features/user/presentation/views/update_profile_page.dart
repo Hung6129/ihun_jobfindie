@@ -94,6 +94,14 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
               ),
               verticalMargin12,
               FormBuilderTextField(
+                name: 'skills',
+                decoration: const InputDecoration(labelText: 'Skills'),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
+              ),
+              verticalMargin12,
+              FormBuilderTextField(
                 name: 'location',
                 decoration: const InputDecoration(labelText: 'Your Location'),
                 validator: FormBuilderValidators.compose([

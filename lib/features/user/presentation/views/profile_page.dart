@@ -93,12 +93,14 @@ class ProfilePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final job = controller.listJobModel.value![index];
                     return ListTile(
-                      onTap: () {},
+                      onTap: () => controller.openJobDetailPage(job.id),
                       title: Text(
                         job.title,
                         style: TextStyles.defaultStyle.mediumText,
                       ),
-                      subtitle: Text('${job.date}'),
+                      subtitle: Text(
+                        'Posted: ${job.date}',
+                      ),
                     );
                   },
                 ),
